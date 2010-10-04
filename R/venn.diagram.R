@@ -1,0 +1,229 @@
+### UMBRELLA FUNCTION TO DRAW VENN DIAGRAMS #######################################################
+venn.diagram <- function(x, filename, height = 3000, width = 3000, resolution = 500, units = "px", compression = "lzw", na = "stop", main = "", sub = "", main.pos = c(0.5, 1.05), main.fontface = "plain", main.fontfamily = "serif", main.col = "black", main.cex = 1, main.just = c(0.5, 1), sub.pos = c(0.5, 1.05), sub.fontface = "plain", sub.fontfamily = "serif", sub.col = "black", sub.cex = 1, sub.just = c(0.5, 1), ...) {
+
+	# turn off warnings
+	options(warn = -1);
+
+	# check for the presence of NA's in the input list
+	if (na == "none") { x <- x }
+	if (na == "stop") {
+		for (i in 1:length(x)) {
+			if (length(x[[i]][is.na(x[[i]])]) > 0) { stop("NAs in dataset", call. = FALSE) }
+			}
+		}
+	if (na == "remove") {
+		for (i in length(x)) {
+			x[[i]] <- x[[i]][!is.na(x[[i]])]
+			}
+		}
+
+	# check the length of the given list
+	if (length(x) == 0 | length(x) > 4) { stop("Incorrect number of elements.", call. = FALSE) }
+
+	# draw a single-set Venn diagram
+	if (length(x) == 1) {
+	
+		list.names <- names(x);
+		if (is.null(list.names)) { list.names <- "" }
+		
+		grob.list <- draw.single.venn(length(x[[1]]), list.names, ind = FALSE, ...)
+		if (sub != "") {
+			grob.list <- add.title(
+				gList = grob.list,
+				x = sub,
+				pos = sub.pos,
+				fontface = sub.fontface, 
+				fontfamily = sub.fontfamily,
+				col = sub.col,
+				cex = sub.cex
+				)
+			}
+
+		if (main != "") {
+			grob.list <- add.title(
+				gList = grob.list,
+				x = main,
+				pos = main.pos,
+				fontface = main.fontface, 
+				fontfamily = main.fontfamily,
+				col = main.col,
+				cex = main.cex
+				);
+			}
+		}
+	
+	# draw a pairwise Venn diagram
+	else if (length(x) == 2) {
+	
+		a <- x[[1]];
+		b <- x[[2]];
+		intersect <- intersect(a, b);
+				
+		list.names <- c(names(x)[1], names(x)[2]);
+		if(length(a) < length(b)) { list.names <- rev(list.names) }
+		
+		grob.list <- draw.pairwise.venn(length(a), length(b), length(intersect), list.names, ind = FALSE, ...);
+		if (sub != "") {
+			grob.list <- add.title(
+				gList = grob.list,
+				x = sub,
+				pos = sub.pos,
+				fontface = sub.fontface, 
+				fontfamily = sub.fontfamily,
+				col = sub.col,
+				cex = sub.cex
+				);
+			}
+
+		if (main != "") {
+			grob.list <- add.title(
+				gList = grob.list,
+				x = main,
+				pos = main.pos,
+				fontface = main.fontface, 
+				fontfamily = main.fontfamily,
+				col = main.col,
+				cex = main.cex
+				);
+			}
+		}
+		
+	# draw a three-set Venn diagram
+	else if (length(x) == 3) {
+				
+		a <- x[[1]];
+		b <- x[[2]];
+		c <- x[[3]];
+		
+		list.names <- c(names(x)[1], names(x)[2], names(x)[3]);
+		
+		nab <- intersect(a, b);
+		nbc <- intersect(b, c);
+		nac <- intersect(a, c);
+		
+		nabc <- intersect(nab, c);
+		
+		grob.list <- draw.triple.venn(length(a), length(b), length(c), length(nab), length(nbc), length(nac), length(nabc), list.names, ind = FALSE, list.order = 1:3, ...);
+		if (sub != "") {
+			grob.list <- add.title(
+				gList = grob.list,
+				x = sub,
+				pos = sub.pos,
+				fontface = sub.fontface, 
+				fontfamily = sub.fontfamily,
+				col = sub.col,
+				cex = sub.cex
+				);
+			}
+
+		if (main != "") {
+			grob.list <- add.title(
+				gList = grob.list,
+				x = main,
+				pos = main.pos,
+				fontface = main.fontface, 
+				fontfamily = main.fontfamily,
+				col = main.col,
+				cex = main.cex
+				);
+			}
+		}
+		
+	# draw a four-set Venn diagram
+	else if (length(x) == 4) {
+				
+		a <- x[[1]];
+		b <- x[[2]];
+		c <- x[[3]];
+		d <- x[[4]];
+		
+		list.names <- c(names(x)[1], names(x)[2], names(x)[3], names(x)[4]);
+		
+		n12 <- intersect(a, b);
+		n13 <- intersect(a, c);
+		n14 <- intersect(a, d);
+		n23 <- intersect(b, c);
+		n24 <- intersect(b, d);
+		n34 <- intersect(c, d);
+		
+		n123 <- intersect(n12, c);
+		n124 <- intersect(n12, d);
+		n134 <- intersect(n13, d);
+		n234 <- intersect(n23, d);
+		
+		n1234 <- intersect(n123, d);
+		
+		grob.list <- draw.quad.venn(
+			area1 = length(a), 
+			area2 = length(b), 
+			area3 = length(c), 
+			area4 = length(d), 
+			n12 = length(n12), 
+			n13 = length(n13), 
+			n14 = length(n14), 
+			n23 = length(n23),
+			n24 = length(n24),
+			n34 = length(n34),
+			n123 = length(n123),
+			n124 = length(n124),
+			n134 = length(n134),
+			n234 = length(n234),
+			n1234 = length(n1234), 
+			category = list.names, 
+			ind = FALSE, 
+			...
+			);
+		if (sub != "") {
+			grob.list <- add.title(
+				gList = grob.list,
+				x = sub,
+				pos = sub.pos,
+				fontface = sub.fontface, 
+				fontfamily = sub.fontfamily,
+				col = sub.col,
+				cex = sub.cex
+				);
+			}
+
+		if (main != "") {
+			grob.list <- add.title(
+				gList = grob.list,
+				x = main,
+				pos = main.pos,
+				fontface = main.fontface, 
+				fontfamily = main.fontfamily,
+				col = main.col,
+				cex = main.cex
+				);
+			}
+		}
+
+	else {
+		stop('Invalid size of input object'); 
+		}
+
+	# if a filename is given, write a TIFF
+	if (!is.null(filename)) {
+
+		tiff(
+			filename = filename,
+			height = height,
+			width = width,
+			units = units,
+			res = resolution,
+			compression = compression
+			);
+
+		grid.draw(grob.list);
+
+		dev.off();
+
+		# return a success code
+		return(1);
+
+		}
+
+	# if file creation was not requested return the plotting object
+	return(grob.list);
+
+	}

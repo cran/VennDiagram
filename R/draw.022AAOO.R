@@ -1,0 +1,82 @@
+### FUNCTION TO DRAW SPECIAL CASE 022AAO #############################################################
+draw.022AAOO <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reverse = FALSE, reflection = FALSE, cat.default.pos = "outer", lwd = rep(2, 3), lty = rep("solid", 3), col = rep("black", 3), label.col = rep("black", 7), cex = rep(1, 7), fontface = rep("plain", 7), fontfamily = rep("serif", 7), cat.pos = c(-40, 40, 180), cat.dist = c(0.05, 0.05, 0.025), cat.col = rep("black", 3), cat.cex = rep(1, 3), cat.fontface = rep("plain", 3), cat.fontfamily = rep("serif", 3), cat.just = list(c(0.5, 1), c(0.5, 1), c(0.5, 0)), cat.prompts = FALSE, fill = NULL, alpha = rep(0.5, 3), scaled = TRUE, ...) {
+	
+	i <- 1;
+	while (i <= 3) {
+		tmp <- rotate.sp(c(a1, a2, a3, a4, a5, a6, a7), category, i, reverse);
+		if (tmp[[1]][1] == 0 & tmp[[1]][3] == 0 & tmp[[1]][4] == 0 & tmp[[1]][6] == 0) {i <- 4}
+		else {i <- i + 1}
+		}
+	a2 <- tmp[[1]][2];
+	a5 <- tmp[[1]][5];
+	a7 <- tmp[[1]][7];
+	category <- tmp[[2]];
+	
+	if (scaled) {
+		if (a2 >= a7) {	d <- find.dist((a2 + a5), (a7 + a5), a5) }
+		if (a2 < a7)  { d <- find.dist((a7 + a5), (a2 + a5), a5) }
+		r1 <- sqrt((a2 + a5) / pi);
+		r2 <- sqrt((a2 + a5) / pi);
+		r3 <- sqrt((a5 + a7) / pi);
+		shrink.factor <- 0.2 / max(r1, r2, r3);
+		r1 <- r1 * shrink.factor;
+		r2 <- r2 * shrink.factor;
+		r3 <- r3 * shrink.factor;
+		}
+		
+	if (!scaled) {
+		r1 <- 0.2;
+		r2 <- 0.2;
+		r3 <- 0.2;
+		d <- 0.2;
+		}
+		
+	x.centre.1 <- (1 + r1 - r2 - d) / 2;
+	y.centre.1 <- 0.5;
+	x.centre.2 <- x.centre.1;
+	y.centre.2 <- 0.5;
+	x.centre.3 <- x.centre.1 + d;
+	y.centre.3 <- 0.5;
+	
+	a2.x.pos <- (x.centre.1 + x.centre.3 - r1 - r3) / 2;
+	a2.y.pos <- 0.5;
+	a5.x.pos <- (x.centre.1 + x.centre.3 + r1 - r3) / 2;
+	a5.y.pos <- 0.5;
+	a7.x.pos <- (x.centre.1 + x.centre.3 + r1 + r3) / 2;
+	a7.y.pos <- 0.5;
+	
+	return(
+		draw.sp.case(
+			area.list = c(0, a2, 0, 0, a5, 0, a7),
+			enabled.areas = c(2, 5, 7),
+			area.x = c(0, a2.x.pos, 0, 0, a5.x.pos, 0, a7.x.pos),
+			area.y = c(0, a2.y.pos, 0, 0, a5.y.pos, 0, a7.y.pos),
+			attach.label.to = c(2, 2, 7),
+			x.centres = c(x.centre.1, x.centre.2, x.centre.3),
+			y.centres = c(y.centre.1, y.centre.2, y.centre.3),
+			a.list = c(r1, r2, r3),
+			b.list = c(r1, r2, r3),
+			straight.reverse = TRUE,
+			reverse = reflection,
+			category = category,
+			cat.default.pos = cat.default.pos, 
+			lwd = lwd, 
+			lty = lty, 
+			col = col, 
+			label.col = label.col, 
+			cex = cex, 
+			fontface = fontface, 
+			fontfamily = fontfamily, 
+			cat.pos = cat.pos, 
+			cat.dist = cat.dist, 
+			cat.col = cat.col, 
+			cat.cex = cat.cex, 
+			cat.fontface = cat.fontface, 
+			cat.fontfamily = cat.fontfamily, 
+			cat.just = cat.just,
+			fill = fill, 
+			alpha = alpha,
+			...
+		)
+	)
+}

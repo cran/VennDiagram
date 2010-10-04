@@ -1,0 +1,893 @@
+### FUNCTION TO DRAW VENN DIAGRAM WITH TWO SETS ###################################################
+draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), cat.default.pos = "outer", euler.d = TRUE, scaled = TRUE, inverted = FALSE, ext.text = TRUE, ext.pos = rep(0, 2), ext.dist = rep(0, 2), ext.line.lty = "solid", ext.l = rep(0.95, 2), lwd = rep(2, 2), lty = rep("solid", 2), col = rep("black", 2), label.col = rep("black", 3), cex = rep(1, 3), fontface = rep("plain", 3), fontfamily = rep("serif", 3), cat.pos = c(-50, 50), cat.dist = rep(0.025, 2), cat.col = rep("black", 2), cat.cex = rep(1, 2), cat.fontface = rep("plain", 2), cat.fontfamily = rep("serif", 2), cat.just = rep(list(c(0.5, 0.5)), 2), cat.prompts = FALSE, fill = NULL, alpha = rep(0.5, 2), rotation.degree = 0, rotation.centre = c(0.5, 0.5), ext.line.lwd = 1, ind = TRUE, sep.dist = 0.05, offset = 0, ...) {
+	# area1 > area2 OR area1 < area2 plots the same Venn diagram.  Invert using the "inverted" argument.
+	# check parameter lengths and plausibility of Venn diagram
+	if (length(category) == 1) {category = rep(category, 2)}
+	if (length(category) != 1 & length(category) != 2) { stop("Unexpected parameter length for 'category'.") }
+	if (length(ext.pos) == 1) {ext.pos = rep(ext.pos, 2)}
+	if (length(ext.pos) != 1 & length(ext.pos) != 2) { stop("Unexpected parameter length for 'ext.pos'.") }
+	if (length(ext.dist) == 1) {ext.dist = rep(ext.dist, 2)}
+	if (length(ext.dist) != 1 & length(ext.dist) != 2) { stop("Unexpected parameter length for 'ext.dist'.") }
+	if (length(ext.l) == 1) {ext.l = rep(ext.l, 2)}
+	if (length(ext.l) != 1 & length(ext.l) != 2) { stop("Unexpected parameter length for 'ext.l'.") }
+	if (length(lwd) == 1) {lwd = rep(lwd, 2)}
+	if (length(lwd) != 1 & length(lwd) != 2) { stop("Unexpected parameter length for 'lwd'.") }
+	if (length(lty) == 1) {lty = rep(lty, 2)}
+	if (length(lty) != 1 & length(lty) != 2) { stop("Unexpected parameter length for 'lty'.") }
+	if (length(col) == 1) {col = rep(col, 2)}
+	if (length(col) != 1 & length(col) != 2) { stop("Unexpected parameter length for 'col'.") }
+	if (length(label.col) == 1) {label.col = rep(label.col, 3)}
+	if (length(label.col) != 1 & length(label.col) != 3) { stop("Unexpected parameter length for 'label.col'.") }
+	if (length(cex) == 1) {cex = rep(cex, 3)}
+	if (length(cex) != 1 & length(cex) != 3) { stop("Unexpected parameter length for 'cex'.") }
+	if (length(fontface) == 1) {fontface = rep(fontface, 3)}
+	if (length(fontface) != 1 & length(fontface) != 3) { stop("Unexpected parameter length for 'fontface'.") }
+	if (length(fontfamily) == 1) {fontfamily = rep(fontfamily, 3)}
+	if (length(fontfamily) != 1 & length(fontfamily) != 3) { stop("Unexpected parameter length for 'fontfamily'.") }
+	if (length(fill) == 1) {fill = rep(fill, 2)}
+	if (length(fill) != 1 & length(fill) != 2 & length(fill) != 0) { stop("Unexpected parameter length for 'fill'.") }
+	if (length(alpha) == 1) {alpha = rep(alpha, 2)}
+	if (length(alpha) != 1 & length(alpha) != 2 & length(alpha) != 0) { stop("Unexpected parameter length for 'alpha'.") }
+	if (length(ext.line.lwd) != 1) { stop("Unexpected parameter length for 'ext.line.lwd'.") }
+	if (length(cat.pos) == 1) {cat.pos = rep(cat.pos, 2)}
+	if (length(cat.pos) != 1 & length(cat.pos) != 2 ) { stop("Unexpected parameter length for 'cat.pos'.") }
+	if (length(cat.dist) == 1) {cat.dist = rep(cat.dist, 2)}
+	if (length(cat.dist) != 1 & length(cat.dist) != 2) { stop("Unexpected parameter length for 'cat.dist'.") }
+	if (length(cat.col) == 1) {cat.col = rep(cat.col, 2)}
+	if (length(cat.col) != 1 & length(cat.col) != 2) { stop("Unexpected parameter length for 'cat.col'.") }
+	if (length(cat.cex) == 1) {cat.cex = rep(cat.cex, 2)}
+	if (length(cat.cex) != 1 & length(cat.cex) != 2) { stop("Unexpected parameter length for 'cat.cex'.") }
+	if (length(cat.fontface) == 1) {cat.fontface = rep(cat.fontface, 2)}
+	if (length(cat.fontface) != 1 & length(cat.fontface) != 2) { stop("Unexpected parameter length for 'cat.fontface'.") }
+	if (length(cat.fontfamily) == 1) {cat.fontfamily = rep(cat.fontfamily, 2)}
+	if (length(cat.fontfamily) != 1 & length(cat.fontfamily) != 2) { stop("Unexpected parameter length for 'cat.fontfamily'.") }
+	if (length(offset) != 1) { stop("Unexpected parameter length for 'cat.fontfamily'. Try using 'rotation.degree' to achieve non-vertical offsets.") }
+	if (!(class(cat.just) == "list" & length(cat.just) == 2 & length(cat.just[[1]]) == 2 & length(cat.just[[2]]) == 2)) { stop("Unexpected parameter format for 'cat.just'.") }
+	
+	# check uninterpretable parameters
+	if (euler.d == FALSE & scaled == TRUE) {
+		stop("Uninterpretable parameter combination\nPlease set both euler.d = FALSE and scaled = FALSE to force Venn diagrams.");
+		}
+	if (offset > 1 | offset < 0) {
+		stop("'Offset' must be between 0 and 1.  Try using 'rotation.degree = 180' to achieve offsets in the opposite direction.");
+		}
+	
+	if (cross.area > area1 | cross.area > area2) { stop("Impossible: cross section area too large.") }
+	cat.pos <- cat.pos + rotation.degree;
+	
+	# check category label defaults
+	if (cat.default.pos != "outer" & cat.default.pos != "text" & isTRUE(category != rep("", 2)) & cat.prompts) {
+		print("No default location recognized.  Automatically changing to 'outer'");
+		cat.default.pos <- "outer"
+		}
+	if (cat.default.pos == "outer" & isTRUE(category != rep("", 2)) & cat.prompts) {
+		print("Placing category labels at default outer locations.  Use 'cat.pos' and 'cat.dist' to modify location.");
+		print(paste("Current 'cat.pos':", cat.pos[1], "degrees,", cat.pos[2], "degrees"));
+		print(paste("Current 'cat.dist':", cat.dist[1], ",", cat.dist[2]));
+		}
+	if (cat.default.pos == "text" & isTRUE(category != rep("", 2)) & cat.prompts) {
+		print("Placing category labels at default text locations.  Use 'cat.pos' and 'cat.dist' to modify location.");
+		print(paste("Current 'cat.pos':", cat.pos[1], "degrees,", cat.pos[2], "degrees"));
+		print(paste("Current 'cat.dist':", cat.dist[1], ",", cat.dist[2]));
+		}
+		
+	max.circle.size = 0.2;
+	# initialize logical variables to hold special conditions
+	special.coincidental <- FALSE;
+	special.inclusion <- FALSE;
+	special.exclusion <- FALSE;
+	# initialize gList to hold all Grobs generated
+	grob.list <- gList();
+	
+	if (inverted == FALSE) {
+		tmp1 <- max(area1, area2);
+		tmp2 <- min(area1, area2);
+		area1 <- tmp1;
+		area2 <- tmp2;
+		r1 = sqrt(area1 / pi);
+		r2 = sqrt(area2 / pi);
+		shrink.factor <- max.circle.size / r1;
+		}
+	if (inverted == TRUE) {
+		tmp1 <- min(area1, area2);
+		tmp2 <- max(area1, area2);
+		area1 <- tmp1;
+		area2 <- tmp2;
+		category <- rev(category);
+		
+		r1 = sqrt(area1 / pi);
+		r2 = sqrt(area2 / pi);
+		shrink.factor <- max.circle.size / r2;
+		
+		ext.pos = rev(ext.pos);
+		ext.dist = rev(ext.dist);
+		lwd = rev(lwd);
+		lty = rev(lty);
+		col = rev(col);
+		label.col = rev(label.col);
+		cex = rev(cex);
+		fontface = rev(fontface);
+		fontfamily = rev(fontfamily);
+		cat.dist = rev(cat.dist);
+		cat.col = rev(cat.col);
+		cat.cex = rev(cat.cex);
+		cat.fontface = rev(cat.fontface);
+		cat.fontfamily = rev(cat.fontfamily);
+		fill = rev(fill);
+		alpha = rev(alpha);
+		}	
+		
+	# convert radii to Grid dimensions
+	r1 <- r1 * shrink.factor;
+	r2 <- r2 * shrink.factor;
+	# check special conditions
+	if (area1 == area2 & area2 == cross.area) { special.coincidental <- TRUE }		
+	if (cross.area == area2 | cross.area == area1) { special.inclusion <- TRUE }
+	if (cross.area == 0) { special.exclusion <- TRUE }
+	# plot scaled, generic pairwise Venn diagram with or without external texts
+	if (scaled & !special.inclusion & !special.exclusion & !special.coincidental) {
+		d <- find.dist(area1, area2, cross.area, inverted = inverted);
+		d <- d * shrink.factor;
+		x.centre.1 <- (1 + r1 - r2 - d) / 2;
+		x.centre.2 <- x.centre.1 + d;
+		
+		tmp <- circle(
+			x = x.centre.1, 
+			y = 0.5, 
+			r = r1,
+			gp = gpar(
+				lty = 0,
+				fill = fill[1],
+				alpha = alpha[1]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		tmp <- circle(
+			x = x.centre.2, 
+			y = 0.5, 
+			r = r2,
+			gp = gpar(
+				lty = 0,
+				fill = fill[2],
+				alpha = alpha[2]
+				)
+			); 
+		grob.list <- gList(grob.list, tmp);
+		tmp <- circle(
+			x = x.centre.1, 
+			y = 0.5, 
+			r = r1,
+			gp = gpar(
+				lwd = lwd[1],
+				lty = lty[1],
+				col = col[1],
+				fill = "transparent"
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		tmp <- circle(
+			x = x.centre.2, 
+			y = 0.5, 
+			r = r2,
+			gp = gpar(
+				lwd = lwd[2],
+				lty = lty[2],
+				col = col[2],
+				fill = "transparent"
+				)
+			); 
+		grob.list <- gList(grob.list, tmp);
+		
+		if (ext.text) {
+			if ( (area1 - cross.area) / area1 > 0.05 & (area1 - cross.area) / area2 > 0.05) { 
+				area.1.pos <- x.centre.1 - r1 + ( (2 * r1 - (r1 + r2 - d)) / 2);
+				tmp <- textGrob(
+					label = area1 - cross.area, 
+					x = area.1.pos, 
+					y = 0.5, 
+					gp = gpar(
+						col = label.col[1],
+						cex = cex[1],
+						fontface = fontface[1],
+						fontfamily = fontfamily[1]
+						)
+					);
+				grob.list <- gList(grob.list, tmp);
+				}
+			else { 
+				area.1.pos <- x.centre.1 - r1 + ( (2 * r1 - (r1 + r2 - d)) / 2)
+				label.pos <- find.cat.pos(area.1.pos, 0.5, ext.pos[1], ext.dist[1], r1);
+				area.1.xpos <- label.pos$x;
+				area.1.ypos <- label.pos$y
+				tmp <- textGrob(
+					label = area1 - cross.area, 
+					x = area.1.xpos, 
+					y = area.1.ypos, 
+					gp = gpar(
+						col = label.col[1],
+						cex = cex[1],
+						fontface = fontface[1],
+						fontfamily = fontfamily[1]
+						)
+					);
+				grob.list <- gList(grob.list, tmp);
+				tmp <- linesGrob(
+					x = c(area.1.pos + ext.l[1] * (area.1.xpos - area.1.pos), area.1.pos), 
+					y = c(0.5 + ext.l[1] * (area.1.ypos - 0.5), 0.5),
+					gp = gpar(
+						col = label.col[1],
+						lwd = ext.line.lwd,
+						lty = ext.line.lty
+						)
+					);
+				grob.list <- gList(grob.list, tmp);
+				}
+			if ( (area2 - cross.area) / area2 > 0.05 & (area2 - cross.area) / area1 > 0.05) { 
+				area.2.pos <- x.centre.2 + r2 - ( (2 * r2 - (r1 + r2 - d)) / 2);
+				tmp <- textGrob(
+					label = area2 - cross.area, 
+					x = area.2.pos, 
+					y = 0.5, 
+					gp = gpar(
+						col = label.col[3],
+						cex = cex[3],
+						fontface = fontface[3],
+						fontfamily = fontfamily[3]
+						)
+					);
+				grob.list <- gList(grob.list, tmp);
+				}
+			else { 
+				area.2.pos <- x.centre.2 + r2 - ( (2 * r2 - (r1 + r2 - d)) / 2);
+				label.pos <- find.cat.pos(area.2.pos, 0.5, ext.pos[2], ext.dist[2], r2);
+				area.2.xpos <- label.pos$x;
+				area.2.ypos <- label.pos$y;
+				tmp <- textGrob(
+					label = area2 - cross.area, 
+					x = area.2.xpos, 
+					y = area.2.ypos, 
+					gp = gpar(
+						col = label.col[3],
+						cex = cex[3],
+						fontface = fontface[3],
+						fontfamily = fontfamily[3]
+						)
+					);
+				grob.list <- gList(grob.list, tmp);
+				tmp <- linesGrob(
+					x = c(area.2.pos + ext.l[1] * (area.2.xpos - area.2.pos), area.2.pos), 
+					y = c(0.5 + ext.l[1] * (area.2.ypos - 0.5), 0.5), 
+					gp = gpar(
+						col = label.col[3],
+						lwd = ext.line.lwd,
+						lty = ext.line.lty
+						)
+					);
+				grob.list <- gList(grob.list, tmp);
+				}
+			if ( cross.area / area2 > 0.05 & cross.area / area1 > 0.05) { 
+				tmp <- textGrob(
+					label = cross.area, 
+					x = x.centre.1 + (d - r2) + (r1 + r2 - d) / 2, 
+					y = 0.5, 
+					gp = gpar(
+						col = label.col[2],
+						cex = cex[2],
+						fontface = fontface[2],
+						fontfamily = fontfamily[2]
+						)
+					);
+				grob.list <- gList(grob.list, tmp);
+				}
+			else {
+				cross.area.pos <- x.centre.1 + (d - r2) + (r1 + r2 - d) / 2;
+				cross.pos <- find.cat.pos(cross.area.pos, 0.5, ext.pos[1], ext.dist[1], r1 + r2);
+				cross.area.xpos <- cross.pos$x;
+				cross.area.ypos <- cross.pos$y
+				tmp <- textGrob(
+					label = cross.area, 
+					x = cross.area.xpos, 
+					y = cross.area.ypos, 
+					gp = gpar(
+						col = label.col[1],
+						cex = cex[1],
+						fontface = fontface[1],
+						fontfamily = fontfamily[1]
+						)
+					);
+				grob.list <- gList(grob.list, tmp);
+				tmp <- linesGrob(
+					x = c(cross.area.pos + ext.l[2] * (cross.area.xpos - cross.area.pos), cross.area.pos), 
+					y = c(0.5 + ext.l[2] * (cross.area.ypos - 0.5), 0.5), 
+					gp = gpar(
+						col = label.col[1],
+						lwd = ext.line.lwd,
+						lty = ext.line.lty
+						)
+					);
+				grob.list <- gList(grob.list, tmp);
+				}
+			}
+		if (!ext.text) {
+			area.1.pos <-  x.centre.1 - r1 + ( (2 * r1 - (r1 + r2 - d)) / 2);
+			tmp <- textGrob(
+				label = area1 - cross.area, 
+				x = area.1.pos, 
+				y = 0.5, 
+				gp = gpar(
+					col = label.col[1],
+					cex = cex[1],
+					fontface = fontface[1],
+					fontfamily = fontfamily[1]
+					)
+				);
+			grob.list <- gList(grob.list, tmp);
+			area.2.pos <- x.centre.2 + r2 - ( (2 * r2 - (r1 + r2 - d)) / 2)
+			tmp <- textGrob(
+				label = area2 - cross.area, 
+				x = area.2.pos, 
+				y = 0.5, 
+				gp = gpar(
+					col = label.col[3],
+					cex = cex[3],
+					fontface = fontface[3],
+					fontfamily = fontfamily[3]
+					)
+				);
+			grob.list <- gList(grob.list, tmp);
+			tmp <- textGrob(
+				label = cross.area, 
+				x = x.centre.1 + (d - r2) + (r1 + r2 - d) / 2, 
+				y = 0.5, 
+				gp = gpar(
+					col = label.col[2],
+					cex = cex[2],
+					fontface = fontface[2],
+					fontfamily = fontfamily[2]
+					)
+				);
+			grob.list <- gList(grob.list, tmp);
+			}	
+			
+		if (cat.default.pos == "outer") { cat.pos.1 <- find.cat.pos(x.centre.1, 0.5, cat.pos[1], cat.dist[1], r1) }
+		if (cat.default.pos == "text") { cat.pos.1 <- find.cat.pos(area.1.pos, 0.5, cat.pos[1], cat.dist[1]) }
+		tmp <- textGrob(
+			label = category[1],
+			x = cat.pos.1$x,
+			y = cat.pos.1$y,
+			just = cat.just[[1]],
+			gp = gpar(
+				col = cat.col[1],
+				cex = cat.cex[1],
+				fontface = cat.fontface[1],
+				fontfamily = cat.fontfamily[1]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		
+		if (cat.default.pos == "outer") { cat.pos.2 <- find.cat.pos(x.centre.2, 0.5, cat.pos[2], cat.dist[2], r2) }
+		if (cat.default.pos == "text") { cat.pos.2 <- find.cat.pos(area.2.pos, 0.5, cat.pos[2], cat.dist[2]) }
+		tmp <- textGrob(
+			label = category[2],
+			x = cat.pos.2$x,
+			y = cat.pos.2$y,
+			just = cat.just[[2]],
+			gp = gpar(
+				col = cat.col[2],
+				cex = cat.cex[2],
+				fontface = cat.fontface[2],
+				fontfamily = cat.fontfamily[2]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+	
+		}
+	# plot scaled Venn diagram when one set is completely included in (but not exactly coincidental with) the other set 
+	# with or without external texts
+	if (euler.d & special.inclusion & !special.coincidental) {
+	
+		if (inverted) {
+			tmp1 <- area1;
+			tmp2 <- area2;
+			area1 <- tmp2;
+			area2 <- tmp1;
+			}
+	
+		if (!scaled & !inverted) {
+			r1 <- 0.4;
+			r2 <- 0.2;
+			}
+			
+		if (!scaled & inverted) {
+			r1 <- 0.2;
+			r2 <- 0.4;
+			}
+			
+		tmp <- circle(
+			x = 0.5, 
+			y = 0.5, 
+			r = r1,
+			gp = gpar(
+				lty = 0,
+				fill = fill[1],
+				alpha = alpha[1]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		tmp <- circle(
+			x = 0.5 - offset * (r1 - r2), 
+			y = 0.5, 
+			r = r2,
+			gp = gpar(
+				lty = 0,
+				fill = fill[2],
+				alpha = alpha[2]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		tmp <- circle(
+			x = 0.5, 
+			y = 0.5, 
+			r = r1,
+			gp = gpar(
+				lwd = lwd[1],
+				lty = lty[1],
+				col = col[1],
+				fill = "transparent"
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		tmp <- circle(
+			x = 0.5 - offset * (r1 - r2), 
+			y = 0.5, 
+			r = r2,
+			gp = gpar(
+				lwd = lwd[2],
+				lty = lty[2],
+				col = col[2],
+				fill = "transparent"
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		area.2.pos <- 0.5 - offset * (r1 - r2);
+		tmp <- textGrob(
+			label = area2, 
+			x = area.2.pos, 
+			y = 0.5, 
+			gp = gpar(
+				col = label.col[2],
+				cex = cex[2],
+				fontface = fontface[2],
+				fontfamily = fontfamily[2]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		if (!ext.text | !scaled) {
+			area.1.pos <- (1 + r1 + r2 - offset * (r1 - r2)) / 2;
+			tmp <- textGrob(
+				label = area1 - area2, 
+				x = area.1.pos, 
+				y = 0.5, 
+				gp = gpar(
+					col = label.col[1],
+					cex = cex[1],
+					fontface = fontface[1],
+					fontfamily = fontfamily[1]
+					)
+				);
+			grob.list <- gList(grob.list, tmp);
+			}
+		if (ext.text & scaled) {
+			if (area2 / area1 > 0.5) {
+				area.1.pos <- (1 + r1 + r2 - offset * (r1 - r2)) / 2;
+				area.pos <- find.cat.pos(area.1.pos, 0.5, ext.pos[1], ext.dist[1], r1);
+				area.1.xpos <- area.pos$x;
+				area.1.ypos <- area.pos$y;
+				tmp <- textGrob(
+					label = area1 - area2, 
+					x = area.1.xpos, 
+					y = area.1.ypos, 
+					gp = gpar(
+						col = label.col[1],
+						cex = cex[1],
+						fontface = fontface[1],
+						fontfamily = fontfamily[1]
+						)
+					);
+				grob.list <- gList(grob.list, tmp);
+				tmp <- linesGrob(
+					x = c(area.1.pos + ext.l * (area.1.xpos - area.1.pos), area.1.pos), 
+					y = c(0.5 + ext.l * (area.1.ypos - 0.5), 0.5),
+					gp = gpar(
+						col = label.col[1],
+						lwd = ext.line.lwd,
+						lty = ext.line.lty
+						)
+					);
+				grob.list <- gList(grob.list, tmp);
+				}
+			else {
+				area.1.pos <- (1 + r1 + r2 - offset * (r1 - r2)) / 2;
+				tmp <- textGrob(
+					label = area1 - area2, 
+					x = area.1.pos, 
+					y = 0.5, 
+					gp = gpar(
+						col = label.col[1],
+						cex = cex[1],
+						fontface = fontface[1],
+						fontfamily = fontfamily[1]
+						)
+					);
+				grob.list <- gList(grob.list, tmp);
+				}
+			}
+		
+		if (cat.default.pos == "outer") { cat.pos.1 <- find.cat.pos(0.5, 0.5, cat.pos[1], cat.dist[1], r1) }
+		if (cat.default.pos == "text") { cat.pos.1 <- find.cat.pos(area.1.pos, 0.5, cat.pos[1], cat.dist[1]) }
+		tmp <- textGrob(
+			label = category[1],
+			x = cat.pos.1$x,
+			y = cat.pos.1$y,
+			just = cat.just[[1]],
+			gp = gpar(
+				col = cat.col[1],
+				cex = cat.cex[1],
+				fontface = cat.fontface[1],
+				fontfamily = cat.fontfamily[1]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		
+		if (cat.default.pos == "outer") { cat.pos.2 <- find.cat.pos(0.5 - offset * (r1 - r2), 0.5, cat.pos[2], cat.dist[2], r2) }
+		if (cat.default.pos == "text") { cat.pos.2 <- find.cat.pos(area.2.pos, 0.5, cat.pos[2], cat.dist[2]) }
+		tmp <- textGrob(
+			label = category[2],
+			x = cat.pos.2$x,
+			y = cat.pos.2$y,
+			just = cat.just[[2]],
+			gp = gpar(
+				col = cat.col[2],
+				cex = cat.cex[2],
+				fontface = cat.fontface[2],
+				fontfamily = cat.fontfamily[2]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+	
+		}
+	# plot scaled Venn diagrams when the two sets are coincidental
+	if (euler.d & special.coincidental) {
+		tmp <- circle(
+			x = 0.5, 
+			y = 0.5, 
+			r = max.circle.size,
+			gp = gpar(
+				lty = 0, 
+				fill = fill[1],
+				alpha = alpha[1]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		tmp <- circle(
+			x = 0.5, 
+			y = 0.5, 
+			r = max.circle.size,
+			gp = gpar(
+				lwd = lwd[1],
+				lty = lty[1], 
+				col = col[1],
+				fill = "transparent"
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		area.1.pos <- 0.46;
+		tmp <- textGrob(
+			label = area1, 
+			x = area.1.pos, 
+			y = 0.5, 
+			gp = gpar(
+				col = label.col[2],
+				cex = cex[2],
+				fontface = fontface[2],
+				fontfamily = fontfamily[2]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		area.2.pos <- 0.54
+		tmp <- textGrob(
+			label = area2, 
+			x = area.2.pos, 
+			y = 0.5, 
+			gp = gpar(
+				col = label.col[2],
+				cex = cex[2],
+				fontface = fontface[2],
+				fontfamily = fontfamily[2]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		tmp <- textGrob(
+			label = "(Coincidental)", 
+			x = 0.5, 
+			y = 0.45, 
+			gp = gpar(
+				col = label.col[2],
+				cex = cex[2],
+				fontface = fontface[2],
+				fontfamily = fontfamily[2]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		
+		if (cat.default.pos == "outer") { cat.pos.1 <- find.cat.pos(0.5, 0.5, cat.pos[1], cat.dist[1], max.circle.size) }
+		if (cat.default.pos == "text") { cat.pos.1 <- find.cat.pos(area.1.pos, 0.5, cat.pos[1], cat.dist[1]) }
+		tmp <- textGrob(
+			label = category[1],
+			x = cat.pos.1$x,
+			y = cat.pos.1$y,
+			just = cat.just[[1]],
+			gp = gpar(
+				col = cat.col[1],
+				cex = cat.cex[1],
+				fontface = cat.fontface[1],
+				fontfamily = cat.fontfamily[1]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		
+		if (cat.default.pos == "outer") { cat.pos.2 <- find.cat.pos(0.5, 0.5, cat.pos[2], cat.dist[2], max.circle.size) }
+		if (cat.default.pos == "text") { cat.pos.2 <- find.cat.pos(area.2.pos, 0.5, cat.pos[2], cat.dist[2]) }
+		tmp <- textGrob(
+			label = category[2],
+			x = cat.pos.2$x,
+			y = cat.pos.2$y,
+			just = cat.just[[2]],
+			gp = gpar(
+				col = cat.col[2],
+				cex = cat.cex[2],
+				fontface = cat.fontface[2],
+				fontfamily = cat.fontfamily[2]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+	
+		}
+	# plot scaled Venn diagrams when the two sets are mutually exclusive
+	if (euler.d & special.exclusion) {
+	
+		if (!scaled) {
+			r1 <- 0.2;
+			r2 <- 0.2;
+			}
+	
+		x.centre.1 <- r1;
+		tmp <- circle(
+			x = x.centre.1, 
+			y = 0.5, 
+			r = r1, 
+			gp = gpar(
+				lty = 0,
+				fill = fill[1],
+				alpha = alpha[1]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		x.centre.2 <- r1 + (1 + sep.dist) * (r1 + r2);
+		tmp <- circle(
+			x = x.centre.2, 
+			y = 0.5, 
+			r = r2,
+			gp = gpar(
+				lty = 0, 
+				fill = fill[2],
+				alpha = alpha[2]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		tmp <- circle(
+			x = x.centre.1, 
+			y = 0.5, 
+			r = r1, 
+			gp = gpar(
+				lwd = lwd[1],
+				lty = lty[1],
+				col = col[1],
+				fill = "transparent"
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		tmp <- circle(
+			x = x.centre.2, 
+			y = 0.5, 
+			r = r2,
+			gp = gpar(
+				lwd = lwd[2],
+				lty = lty[2], 
+				col = col[2],
+				fill = "transparent"
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		area.1.pos <- x.centre.1;
+		tmp <- textGrob(
+			label = area1, 
+			x = area.1.pos, 
+			y = 0.5, 
+			gp = gpar(
+				col = label.col[1],
+				cex = cex[1],
+				fontface = fontface[1],
+				fontfamily = fontfamily[1]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		area.2.pos <- x.centre.2;
+		tmp <- textGrob(
+			label = area2, 
+			x = area.2.pos, 
+			y = 0.5, 
+			gp = gpar(
+				col = label.col[3],
+				cex = cex[3],
+				fontface = fontface[3],
+				fontfamily = fontfamily[3]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		
+		if (cat.default.pos == "outer") { cat.pos.1 <- find.cat.pos(x.centre.1, 0.5, cat.pos[1], cat.dist[1], r1) }
+		if (cat.default.pos == "text") { cat.pos.1 <- find.cat.pos(area.1.pos, 0.5, cat.pos[1], cat.dist[1]) }
+		tmp <- textGrob(
+			label = category[1],
+			x = cat.pos.1$x,
+			y = cat.pos.1$y,
+			just = cat.just[[1]],
+			gp = gpar(
+				col = cat.col[1],
+				cex = cat.cex[1],
+				fontface = cat.fontface[1],
+				fontfamily = cat.fontfamily[1]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		if (cat.default.pos == "outer") { cat.pos.2 <- find.cat.pos(x.centre.2, 0.5, cat.pos[2], cat.dist[2], r2) }
+		if (cat.default.pos == "text") { cat.pos.2 <- find.cat.pos(area.2.pos, 0.5, cat.pos[2], cat.dist[2]) }
+		tmp <- textGrob(
+			label = category[2],
+			x = cat.pos.2$x,
+			y = cat.pos.2$y,
+			just = cat.just[[2]],
+			gp = gpar(
+				col = cat.col[2],
+				cex = cat.cex[2],
+				fontface = cat.fontface[2],
+				fontfamily = cat.fontfamily[2]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+	
+		}
+	# plot non-scaled Venn diagram
+	if ((!scaled & !euler.d) | (!scaled & euler.d & !special.inclusion & !special.exclusion & !special.coincidental)) {
+		tmp <- circle(
+			x = 0.4, 
+			y = 0.5, 
+			r = max.circle.size,
+			gp = gpar(
+				lty = 0,
+				fill = fill[1],
+				alpha = alpha[1]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		tmp <- circle(
+			x = 0.6, 
+			y = 0.5, 
+			r = max.circle.size,
+			gp = gpar(
+				lty = 0,
+				fill = fill[2],
+				alpha = alpha[2]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		tmp <- circle(
+			x = 0.4, 
+			y = 0.5, 
+			r = max.circle.size,
+			gp = gpar(
+				lwd = lwd[1],
+				lty = lty[1],
+				col = col[1],
+				fill = "transparent"
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		tmp <- circle(
+			x = 0.6, 
+			y = 0.5, 
+			r = max.circle.size,
+			gp = gpar(
+				lwd = lwd[2],
+				lty = lty[2],
+				col = col[2],
+				fill = "transparent"
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		tmp <- textGrob(
+			label = area1 - cross.area, 
+			x = 0.3, 
+			y = 0.5, 
+			gp = gpar(
+				col = label.col[1],
+				cex = cex[1],
+				fontface = fontface[1],
+				fontfamily = fontfamily[1]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		tmp <- textGrob(
+			label = area2 - cross.area, 
+			x = 0.7, 
+			y = 0.5, 
+			gp = gpar(
+				col = label.col[3],
+				cex = cex[3],
+				fontface = fontface[3],
+				fontfamily = fontfamily[3]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		tmp <- textGrob(
+			label = cross.area, 
+			x = 0.5, 
+			y = 0.5, 
+			gp = gpar(
+				col = label.col[2],
+				cex = cex[2],
+				fontface = fontface[2],
+				fontfamily = fontfamily[2]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		
+		if (cat.default.pos == "outer") { cat.pos.1 <- find.cat.pos(0.4, 0.5, cat.pos[1], cat.dist[1], max.circle.size) }
+		if (cat.default.pos == "text") { cat.pos.1 <- find.cat.pos(0.3, 0.5, cat.pos[1], cat.dist[1]) }
+		tmp <- textGrob(
+			label = category[1],
+			x = cat.pos.1$x,
+			y = cat.pos.1$y,
+			just = cat.just[[1]],
+			gp = gpar(
+				col = cat.col[1],
+				cex = cat.cex[1],
+				fontface = cat.fontface[1],
+				fontfamily = cat.fontfamily[1]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		
+		if (cat.default.pos == "outer") { cat.pos.2 <- find.cat.pos(0.6, 0.5, cat.pos[2], cat.dist[2], max.circle.size) }
+		if (cat.default.pos == "text") { cat.pos.2 <- find.cat.pos(0.7, 0.5, cat.pos[2], cat.dist[2]) }
+		tmp <- textGrob(
+			label = category[2],
+			x = cat.pos.2$x,
+			y = cat.pos.2$y,
+			just = cat.just[[2]],
+			gp = gpar(
+				col = cat.col[2],
+				cex = cat.cex[2],
+				fontface = cat.fontface[2],
+				fontfamily = cat.fontfamily[2]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+	
+		}
+	grob.list <- adjust.venn(rotate.venn.degrees(grob.list, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
+	if (ind) { grid.draw(grob.list) }
+	return(grob.list);
+		
+	}
