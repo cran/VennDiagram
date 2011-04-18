@@ -63,7 +63,7 @@ venn.diagram(x, filename, height = 3000, width = 3000, resolution = 500, units =
   \code{ext.text}       \tab 2                 \tab \var{logical}   \tab Allow external text labels when areas are small\cr
   \code{ext.line.lwd}   \tab 2                 \tab \var{numeric}   \tab lwd of line connecting to \code{ext.text}\cr
   \code{ext.dist}       \tab 2                 \tab \var{numeric}   \tab Vector of length 1 or 2 indicating length of external line (use negative values to shorten the line )\cr
-  \code{ext.l}          \tab 2                 \tab \var{numeric}   \tab Vector of length 1 or 2 indicating the proportion of the external line that is drawn from the anchor to the text\cr
+  \code{ext.length}     \tab 2                 \tab \var{numeric}   \tab Vector of length 1 or 2 indicating the proportion of the external line that is drawn from the anchor to the text\cr
   }
 }
 \value{Plots a figure to the file given by the \var{filename} argument.}
@@ -84,7 +84,7 @@ venn.diagram(
 	ext.text = TRUE,
 	ext.line.lwd = 2,
 	ext.dist = -0.15,
-	ext.l = 0.9,
+	ext.length = 0.9,
 	ext.pos = -4,
 	inverted = TRUE,
 	cex = 2.5,
@@ -246,7 +246,7 @@ venn.diagram(
 	ext.line.lwd = 2,
 	ext.pos = 12,
 	ext.dist = -0.12,
-	ext.l = 0.85
+	ext.length = 0.85
 	);
 
 # Figure 2-2

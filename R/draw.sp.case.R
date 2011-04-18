@@ -91,7 +91,7 @@ draw.sp.case <- function(area.list, enabled.areas, area.x, area.y, attach.label.
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
-	}
+		}
 	if (2 %in% enabled.areas) {
 		tmp <- textGrob(
 			label = area.list[2],
@@ -106,7 +106,7 @@ draw.sp.case <- function(area.list, enabled.areas, area.x, area.y, attach.label.
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
-	}
+		}
 	if (3 %in% enabled.areas) {
 		tmp <- textGrob(
 			label = area.list[3],
@@ -121,7 +121,7 @@ draw.sp.case <- function(area.list, enabled.areas, area.x, area.y, attach.label.
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
-	}
+		}
 	if (4 %in% enabled.areas) {
 		tmp <- textGrob(
 			label = area.list[4],
@@ -136,7 +136,7 @@ draw.sp.case <- function(area.list, enabled.areas, area.x, area.y, attach.label.
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
-	}
+		}
 	if (5 %in% enabled.areas) {
 		tmp <- textGrob(
 			label = area.list[5],
@@ -151,7 +151,7 @@ draw.sp.case <- function(area.list, enabled.areas, area.x, area.y, attach.label.
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
-	}
+		}
 	if (6 %in% enabled.areas) {
 		tmp <- textGrob(
 		label = area.list[6],
@@ -166,7 +166,7 @@ draw.sp.case <- function(area.list, enabled.areas, area.x, area.y, attach.label.
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
-	}
+		}
 	if (7 %in% enabled.areas) {
 		tmp <- textGrob(
 			label = area.list[7],
@@ -181,7 +181,7 @@ draw.sp.case <- function(area.list, enabled.areas, area.x, area.y, attach.label.
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
-	}
+		}
 	
 	if (cat.default.pos == "outer") { cat.pos.1 <- find.cat.pos(x.centres[1], y.centres[1], cat.pos[1], cat.dist[1], a.list[1]) }
 	if (cat.default.pos == "text") { cat.pos.1 <- find.cat.pos(area.x[attach.label.to[1]], area.y[attach.label.to[1]], cat.pos[1], cat.dist[1]) }
@@ -232,8 +232,8 @@ draw.sp.case <- function(area.list, enabled.areas, area.x, area.y, attach.label.
 	if (straight.reverse) { 
 		if (reverse) {
 			return(flip.venn(grob.list, axis = "v"))
+			}
 		}
-	}
+
 	return(grob.list);
-}
-	
+	}

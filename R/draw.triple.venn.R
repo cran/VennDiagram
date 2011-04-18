@@ -2,40 +2,40 @@
 draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category = rep("", 3), rotation = 1, reverse = FALSE, euler.d = TRUE, scaled = TRUE, cat.default.pos = "outer", lwd = rep(2, 3), lty = rep("solid", 3), col = rep("black", 3), label.col = rep("black", 7), cex = rep(1, 7), fontface = rep("plain", 7), fontfamily = rep("serif", 7), cat.pos = c(-40, 40, 180), cat.dist = c(0.05, 0.05, 0.025), cat.col = rep("black", 3), cat.cex = rep(1, 3), cat.fontface = rep("plain", 3), cat.fontfamily = rep("serif", 3), cat.just = list(c(0.5, 1), c(0.5, 1), c(0.5, 0)), cat.prompts = FALSE, fill = NULL, alpha = rep(0.5, 3), rotation.degree = 0, rotation.centre = c(0.5, 0.5), ind = TRUE, list.order = 1:3, offset = 0, ...) {
 #area1 must be greater than area2, which must be greater than area3	
 	# check parameter lengths
-	if (length(category) == 1) {cat = rep(category, 3)}
-	if (length(category) != 1 & length(category) != 3) { stop("Unexpected parameter length for 'category'.") }
-	if (length(lwd) == 1) {lwd = rep(lwd, 3)}
-	if (length(lwd) != 1 & length(lwd) != 3) { stop("Unexpected parameter length for 'lwd'.") }
-	if (length(lty) == 1) {lty = rep(lty, 3)}
-	if (length(lty) != 1 & length(lty) != 3) { stop("Unexpected parameter length for 'lty'.") }
-	if (length(col) == 1) {col = rep(col, 3)}
-	if (length(col) != 1 & length(col) != 3) { stop("Unexpected parameter length for 'col'.") }
-	if (length(label.col) == 1) {label.col = rep(label.col, 7)}
-	if (length(label.col) != 1 & length(label.col) != 7) { stop("Unexpected parameter length for 'label.col'.") }
-	if (length(cex) == 1) {cex = rep(cex, 7)}
-	if (length(cex) != 1 & length(cex) != 7) { stop("Unexpected parameter length for 'cex'.") }
-	if (length(fontface) == 1) {fontface = rep(fontface, 7)}
-	if (length(fontface) != 1 & length(fontface) != 7) { stop("Unexpected parameter length for 'fontface'.") }
-	if (length(fontfamily) == 1) {fontfamily = rep(fontfamily, 7)}
-	if (length(fontfamily) != 1 & length(fontfamily) != 7) { stop("Unexpected parameter length for 'fontfamily'.") }
-	if (length(fill) == 1) {fill = rep(fill, 3)}
-	if (length(fill) != 1 & length(fill) != 3 & length(fill) != 0) { stop("Unexpected parameter length for 'fill'.") }
-	if (length(alpha) == 1) {alpha = rep(alpha, 3)}
-	if (length(alpha) != 1 & length(alpha) != 3 & length(alpha) != 0) { stop("Unexpected parameter length for 'alpha'.") }
-	if (length(cat.pos) == 1) {cat.pos = rep(cat.pos, 3)}
-	if (length(cat.pos) != 1 & length(cat.pos) != 3) { stop("Unexpected parameter length for 'cat.pos'.") }
-	if (length(cat.dist) == 1) {cat.dist = rep(cat.dist, 3)}
-	if (length(cat.dist) != 1 & length(cat.dist) != 3) { stop("Unexpected parameter length for 'cat.dist'.") }
-	if (length(cat.col) == 1) {cat.col = rep(cat.col, 3)}
-	if (length(cat.col) != 1 & length(cat.col) != 3) { stop("Unexpected parameter length for 'cat.col'.") }
-	if (length(cat.cex) == 1) {cat.cex = rep(cat.cex, 3)}
-	if (length(cat.cex) != 1 & length(cat.cex) != 3) { stop("Unexpected parameter length for 'cat.cex'.") }
-	if (length(cat.fontface) == 1) {cat.fontface = rep(cat.fontface, 3)}
-	if (length(cat.fontface) != 1 & length(cat.fontface) != 3) { stop("Unexpected parameter length for 'cat.fontface'.") }
-	if (length(cat.fontfamily) == 1) {cat.fontfamily = rep(cat.fontfamily, 3)}
-	if (length(cat.fontfamily) != 1 & length(cat.fontfamily) != 3) { stop("Unexpected parameter length for 'cat.fontfamily'.") }
-	if (!(class(cat.just) == "list" & length(cat.just) == 3)) { stop("Unexpected parameter format for 'cat.just'.") }
-	else if (!(length(cat.just[[1]]) == 2 & length(cat.just[[2]]) == 2 & length(cat.just[[3]]) == 2)) { stop("Unexpected parameter format for 'cat.just'.") }
+	if (length(category) == 1) {cat <- rep(category, 3)}
+	if (length(category) != 1 & length(category) != 3) { stop("Unexpected parameter length for 'category'") }
+	if (length(lwd) == 1) {lwd <- rep(lwd, 3)}
+	if (length(lwd) != 1 & length(lwd) != 3) { stop("Unexpected parameter length for 'lwd'") }
+	if (length(lty) == 1) {lty <- rep(lty, 3)}
+	if (length(lty) != 1 & length(lty) != 3) { stop("Unexpected parameter length for 'lty'") }
+	if (length(col) == 1) {col <- rep(col, 3)}
+	if (length(col) != 1 & length(col) != 3) { stop("Unexpected parameter length for 'col'") }
+	if (length(label.col) == 1) {label.col <- rep(label.col, 7)}
+	if (length(label.col) != 1 & length(label.col) != 7) { stop("Unexpected parameter length for 'label.col'") }
+	if (length(cex) == 1) {cex <- rep(cex, 7)}
+	if (length(cex) != 1 & length(cex) != 7) { stop("Unexpected parameter length for 'cex'") }
+	if (length(fontface) == 1) {fontface <- rep(fontface, 7)}
+	if (length(fontface) != 1 & length(fontface) != 7) { stop("Unexpected parameter length for 'fontface'") }
+	if (length(fontfamily) == 1) {fontfamily <- rep(fontfamily, 7)}
+	if (length(fontfamily) != 1 & length(fontfamily) != 7) { stop("Unexpected parameter length for 'fontfamily'") }
+	if (length(fill) == 1) {fill <- rep(fill, 3)}
+	if (length(fill) != 1 & length(fill) != 3 & length(fill) != 0) { stop("Unexpected parameter length for 'fill'") }
+	if (length(alpha) == 1) {alpha <- rep(alpha, 3)}
+	if (length(alpha) != 1 & length(alpha) != 3 & length(alpha) != 0) { stop("Unexpected parameter length for 'alpha'") }
+	if (length(cat.pos) == 1) {cat.pos <- rep(cat.pos, 3)}
+	if (length(cat.pos) != 1 & length(cat.pos) != 3) { stop("Unexpected parameter length for 'cat.pos'") }
+	if (length(cat.dist) == 1) {cat.dist <- rep(cat.dist, 3)}
+	if (length(cat.dist) != 1 & length(cat.dist) != 3) { stop("Unexpected parameter length for 'cat.dist'") }
+	if (length(cat.col) == 1) {cat.col <- rep(cat.col, 3)}
+	if (length(cat.col) != 1 & length(cat.col) != 3) { stop("Unexpected parameter length for 'cat.col'") }
+	if (length(cat.cex) == 1) {cat.cex <- rep(cat.cex, 3)}
+	if (length(cat.cex) != 1 & length(cat.cex) != 3) { stop("Unexpected parameter length for 'cat.cex'") }
+	if (length(cat.fontface) == 1) {cat.fontface <- rep(cat.fontface, 3)}
+	if (length(cat.fontface) != 1 & length(cat.fontface) != 3) { stop("Unexpected parameter length for 'cat.fontface'") }
+	if (length(cat.fontfamily) == 1) {cat.fontfamily <- rep(cat.fontfamily, 3)}
+	if (length(cat.fontfamily) != 1 & length(cat.fontfamily) != 3) { stop("Unexpected parameter length for 'cat.fontfamily'") }
+	if (!(class(cat.just) == "list" & length(cat.just) == 3)) { stop("Unexpected parameter format for 'cat.just'") }
+	else if (!(length(cat.just[[1]]) == 2 & length(cat.just[[2]]) == 2 & length(cat.just[[3]]) == 2)) { stop("Unexpected parameter format for 'cat.just'") }
 	
 	# check uninterpretable parameter combination
 	if (euler.d == FALSE & scaled == TRUE) {
@@ -62,124 +62,73 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 	a5 <- n123;
 	a6 <- n23 - n123;
 	a7 <- area3 - n13 - n23 + n123;
-	# check special cases
+
+	# check for special cases and if necessary process them
 	if (euler.d) {
+
+		# figure out the special case code
 		special.code <- decide.special.case(a1, a2, a3, a4, a5, a6, a7);
-		if (special.code == "001") {
-			rst <- draw.001(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
+
+		# and convert into a proper function name
+		function.name <- paste('draw.', special.code, sep = '');
+
+		# did we define a special-case function for this case?
+		if (function.name %in% ls('package:VennDiagram')) {
+
+			# get the special-case function
+			f1 <- get(function.name);
+
+			# run it
+			rst <- f1(
+				a1 = a1,
+				a2 = a2,
+				a3 = a3,
+				a4 = a4,
+				a5 = a5,
+				a6 = a6,
+				a7 = a7,
+				category = category,
+				reverse = reverse,
+				cat.default.pos = cat.default.pos,
+				lwd = lwd,
+				lty = lty,
+				col = col,
+				label.col = label.col,
+				cex = cex,
+				fontface = fontface,
+				fontfamily = fontfamily,
+				cat.pos = cat.pos,
+				cat.dist = cat.dist,
+				cat.col = cat.col,
+				cat.cex = cat.cex,
+				cat.fontface = cat.fontface,
+				cat.fontfamily = cat.fontfamily,
+				cat.just = cat.just,
+				cat.prompts = cat.prompts,
+				fill = fill,
+				alpha = alpha,
+				...
+				);
+
+			# rotate the Venn diagram as needed
+			rst <- adjust.venn(
+				rotate.venn.degrees(
+					gList1 = rst,
+					angle = rotation.degree,
+					x.centre = rotation.centre[1],
+					y.centre = rotation.centre[2]
+					),
+				...
+				);
+
+			# TO COMMENT
+			if (ind) { grid.draw(rst); }
+
+			# exit the function here
 			return(rst);
+			}
+
 		}
-		if (special.code == "010") {
-			rst <- draw.010(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
-			return(rst);
-		}
-		if (special.code == "011A") {
-			rst <- draw.011A(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
-			return(rst);
-		}
-		if (special.code == "011O") {
-			rst <- draw.011O(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
-			return(rst);
-		}
-		if (special.code == "012AA") {
-			rst <- draw.012AA(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
-			return(rst);
-		}
-		if (special.code == "112AA") {
-			rst <- draw.112AA(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
-			return(rst);
-		}
-		if (special.code == "111A") {
-			rst <- draw.111A(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
-			return(rst);
-		}
-		if (special.code == "021AA") {
-			rst <- draw.021AA(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
-			return(rst);
-		}
-		if (special.code == "022AAAO") {
-			rst <- draw.022AAAO(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
-			return(rst);
-		}
-		if (special.code == "022AAOO") {
-			rst <- draw.022AAOO(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
-			return(rst);
-		}
-		if (special.code == "023") {
-			rst <- draw.023(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
-			return(rst);
-		}
-		if (special.code == "032") {
-			rst <- draw.032(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
-			return(rst);
-		}
-		if (special.code == "033") {
-			rst <- draw.033(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
-			return(rst);
-		}
-		if (special.code == "100") {
-			rst <- draw.100(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
-			return(rst);
-		}
-		if (special.code == "110") {
-			rst <- draw.110(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
-			return(rst);
-		}
-		if (special.code == "120") {
-			rst <- draw.120(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
-			return(rst);
-		}
-		if (special.code == "121AO") {
-			rst <- draw.121AO(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
-			return(rst);
-		}
-		if (special.code == "122AAOO") {
-			rst <- draw.122AAOO(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
-			return(rst);
-		}
-		if (special.code == "130") {
-			rst <- draw.130(a1, a2, a3, a4, a5, a6, a7, category = category, reverse = reverse, cat.default.pos = cat.default.pos, lwd = lwd, lty = lty, col = col, label.col = label.col, cex = cex, fontface = fontface, fontfamily = fontfamily, cat.pos = cat.pos, cat.dist = cat.dist, cat.col = cat.col, cat.cex = cat.cex, cat.fontface = cat.fontface, cat.fontfamily = cat.fontfamily, cat.just = cat.just, cat.prompts = cat.prompts, fill = fill, alpha = alpha, ...);
-			rst <- adjust.venn(rotate.venn.degrees(rst, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-			if (ind) { grid.draw(rst) }				
-			return(rst);
-		}
-	}
 	
 	rotated <- rotate(c(a1, a2, a3, a4, a5, a6, a7), category, lwd, lty, col, label.col, cex, fontface, fontfamily, cat.col, cat.cex, cat.fontface, cat.fontfamily, alpha, rotation, reverse, fill);
 	a1 <- rotated[[1]][1];
@@ -206,11 +155,12 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 	
 	# check plausibility and 0 partial areas
 	if (any(a1 < 0, a2 < 0, a3 < 0, a4 < 0, a5 < 0, a6 < 0, a7 < 0)) { stop("Impossible: partial areas negative") }
-	if (any(a1 == 0, a2 == 0, a3 == 0, a4 == 0, a5 == 0, a6 == 0, a7 == 0)) { scaled <- FALSE }
+	if (any(a1 == 0, a2 == 0, a3 == 0, a4 == 0, a5 == 0, a6 == 0, a7 == 0)) { scaled <- FALSE; }
+
 	# check category label defaults
 	if (cat.default.pos != "outer" & cat.default.pos != "text" & isTRUE(category != rep("", 2)) & cat.prompts) {
 		print("No default location recognized.  Automatically changing to 'outer'");
-		cat.default.pos <- "outer"
+		cat.default.pos <- "outer";
 		}
 	if (cat.default.pos == "outer" & isTRUE(category != rep("", 2)) & cat.prompts) {
 		print("Placing category labels at default outer locations.  Use 'cat.pos' and 'cat.dist' to modify location.");
@@ -245,10 +195,11 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 	r1 <- r1 * shrink.factor;
 	r2 <- r2 * shrink.factor;
 	r3 <- r3 * shrink.factor;
+
 	if (!exists("overrideTriple")) {
 		a <- find.dist(100, 100, 40) * shrink.factor;
 		b <- a;
-		c <- a
+		c <- a;
 		}
 		
 	if (exists("overrideTriple")) {
@@ -279,6 +230,7 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
+
 	tmp <- circle(
 		x = x.centre.2, 
 		y = y.centre.2, 
@@ -290,6 +242,7 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
+
 	tmp <- circle(
 		x = x.centre.3, 
 		y = y.centre.3, 
@@ -301,6 +254,7 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
+
 	tmp <- circle(
 		x = x.centre.1, 
 		y = y.centre.1, 
@@ -313,6 +267,7 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
+
 	tmp <- circle(
 		x = x.centre.2, 
 		y = y.centre.2, 
@@ -325,6 +280,7 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
+
 	tmp <- circle(
 		x = x.centre.3, 
 		y = y.centre.3, 
@@ -337,6 +293,7 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
+
 	# calculate the location of the text labels of the Venn diagram and plot
 	x.cept.12 <- (r1^2 - r2^2 - x.centre.1^2 + x.centre.2^2) / (2 * (x.centre.2 - x.centre.1))
 	y.cept.12.1 <- sqrt(r1^2 - (x.cept.12 - x.centre.1)^2) + y.centre.1
@@ -491,9 +448,23 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	# find the location and plot all the category names
-	if (cat.default.pos == "outer") { cat.pos.1 <- find.cat.pos(x.centre.1, y.centre.1, cat.pos[1], cat.dist[1], r1) }
-	if (cat.default.pos == "text") { cat.pos.1 <- find.cat.pos(a1.x.pos, a1.y.pos, cat.pos[1], cat.dist[1]) }
+
+	# find the location of category names
+	if (cat.default.pos == "outer") {
+		cat.pos.1 <- find.cat.pos(x.centre.1, y.centre.1, cat.pos[1], cat.dist[1], r1);
+		cat.pos.2 <- find.cat.pos(x.centre.2, y.centre.2, cat.pos[2], cat.dist[2], r2);
+		cat.pos.3 <- find.cat.pos(x.centre.3, y.centre.3, cat.pos[3], cat.dist[3], r3);
+		}
+	else if (cat.default.pos == "text") {
+		cat.pos.1 <- find.cat.pos(a1.x.pos, a1.y.pos, cat.pos[1], cat.dist[1]);
+		cat.pos.2 <- find.cat.pos(a3.x.pos, a3.y.pos, cat.pos[2], cat.dist[2]);
+		cat.pos.3 <- find.cat.pos(a7.x.pos, a7.y.pos, cat.pos[3], cat.dist[3]);
+		}
+	else {
+		stop("Invalid setting of 'cat.default.pos' -- should be 'outer' or 'text'");
+		}
+
+	# plot all category names
 	tmp <- textGrob(
 		label = category[1],
 		x = cat.pos.1$x,
@@ -508,8 +479,6 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 		);
 	grob.list <- gList(grob.list, tmp);
 	
-	if (cat.default.pos == "outer") { cat.pos.2 <- find.cat.pos(x.centre.2, y.centre.2, cat.pos[2], cat.dist[2], r2) }
-	if (cat.default.pos == "text") { cat.pos.2 <- find.cat.pos(a3.x.pos, a3.y.pos, cat.pos[2], cat.dist[2]) }
 	tmp <- textGrob(
 		label = category[2],
 		x = cat.pos.2$x,
@@ -523,9 +492,7 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	
-	if (cat.default.pos == "outer") { cat.pos.3 <- find.cat.pos(x.centre.3, y.centre.3, cat.pos[3], cat.dist[3], r3) }
-	if (cat.default.pos == "text") { cat.pos.3 <- find.cat.pos(a7.x.pos, a7.y.pos, cat.pos[3], cat.dist[3]) }
+
 	tmp <- textGrob(
 		label = category[3],
 		x = cat.pos.3$x,
@@ -539,9 +506,20 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	
-	grob.list <- adjust.venn(rotate.venn.degrees(grob.list, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
-	if (ind) { grid.draw(grob.list) }
+
+	# if requested, rotate the Venn Diagram
+	grob.list <- adjust.venn(
+		rotate.venn.degrees(
+			gList1 = grob.list,
+			angle = rotation.degree,
+			x.centre = rotation.centre[1],
+			y.centre = rotation.centre[2]
+			),
+		...
+		);
+
+	if (ind) { grid.draw(grob.list); }
+
 	return(grob.list);
 	
 	}
