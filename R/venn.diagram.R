@@ -1,10 +1,10 @@
 ### UMBRELLA FUNCTION TO DRAW VENN DIAGRAMS #######################################################
-venn.diagram <- function(x, filename, height = 3000, width = 3000, resolution = 500, units = "px", compression = "lzw", na = "stop", main = "", sub = "", main.pos = c(0.5, 1.05), main.fontface = "plain", main.fontfamily = "serif", main.col = "black", main.cex = 1, main.just = c(0.5, 1), sub.pos = c(0.5, 1.05), sub.fontface = "plain", sub.fontfamily = "serif", sub.col = "black", sub.cex = 1, sub.just = c(0.5, 1), ...) {
+venn.diagram <- function(x, filename, height = 3000, width = 3000, resolution = 500, units = "px", compression = "lzw", na = "stop", main = NULL, sub = NULL, main.pos = c(0.5, 1.05), main.fontface = "plain", main.fontfamily = "serif", main.col = "black", main.cex = 1, main.just = c(0.5, 1), sub.pos = c(0.5, 1.05), sub.fontface = "plain", sub.fontfamily = "serif", sub.col = "black", sub.cex = 1, sub.just = c(0.5, 1), category.names = names(x), ...) {
 
 	# turn off warnings
 	options(warn = -1);
 
-	# check for the presence of NA's in the input list
+	# check for the presence of NAs in the input list
 	if (na == "none") { x <- x }
 	if (na == "stop") {
 		for (i in 1:length(x)) {
@@ -23,11 +23,11 @@ venn.diagram <- function(x, filename, height = 3000, width = 3000, resolution = 
 	# draw a single-set Venn diagram
 	if (length(x) == 1) {
 	
-		list.names <- names(x);
+		list.names <- category.names;
 		if (is.null(list.names)) { list.names <- "" }
 		
-		grob.list <- draw.single.venn(length(x[[1]]), list.names, ind = FALSE, ...)
-		if (sub != "") {
+		grob.list <- VennDiagram::draw.single.venn(length(x[[1]]), list.names, ind = FALSE, ...)
+		if (!is.null(sub)) {
 			grob.list <- add.title(
 				gList = grob.list,
 				x = sub,
@@ -39,7 +39,7 @@ venn.diagram <- function(x, filename, height = 3000, width = 3000, resolution = 
 				)
 			}
 
-		if (main != "") {
+		if (!is.null(main)) {
 			grob.list <- add.title(
 				gList = grob.list,
 				x = main,
@@ -59,11 +59,11 @@ venn.diagram <- function(x, filename, height = 3000, width = 3000, resolution = 
 		b <- x[[2]];
 		intersect <- intersect(a, b);
 				
-		list.names <- c(names(x)[1], names(x)[2]);
+		list.names <- category.names;
 		if(length(a) < length(b)) { list.names <- rev(list.names) }
 		
-		grob.list <- draw.pairwise.venn(length(a), length(b), length(intersect), list.names, ind = FALSE, ...);
-		if (sub != "") {
+		grob.list <- VennDiagram::draw.pairwise.venn(length(a), length(b), length(intersect), list.names, ind = FALSE, ...);
+		if (!is.null(sub)) {
 			grob.list <- add.title(
 				gList = grob.list,
 				x = sub,
@@ -75,7 +75,7 @@ venn.diagram <- function(x, filename, height = 3000, width = 3000, resolution = 
 				);
 			}
 
-		if (main != "") {
+		if (!is.null(main)) {
 			grob.list <- add.title(
 				gList = grob.list,
 				x = main,
@@ -95,7 +95,7 @@ venn.diagram <- function(x, filename, height = 3000, width = 3000, resolution = 
 		b <- x[[2]];
 		c <- x[[3]];
 		
-		list.names <- c(names(x)[1], names(x)[2], names(x)[3]);
+		list.names <- category.names;
 		
 		nab <- intersect(a, b);
 		nbc <- intersect(b, c);
@@ -103,8 +103,8 @@ venn.diagram <- function(x, filename, height = 3000, width = 3000, resolution = 
 		
 		nabc <- intersect(nab, c);
 		
-		grob.list <- draw.triple.venn(length(a), length(b), length(c), length(nab), length(nbc), length(nac), length(nabc), list.names, ind = FALSE, list.order = 1:3, ...);
-		if (sub != "") {
+		grob.list <- VennDiagram::draw.triple.venn(length(a), length(b), length(c), length(nab), length(nbc), length(nac), length(nabc), list.names, ind = FALSE, list.order = 1:3, ...);
+		if (!is.null(sub)) {
 			grob.list <- add.title(
 				gList = grob.list,
 				x = sub,
@@ -116,7 +116,7 @@ venn.diagram <- function(x, filename, height = 3000, width = 3000, resolution = 
 				);
 			}
 
-		if (main != "") {
+		if (!is.null(main)) {
 			grob.list <- add.title(
 				gList = grob.list,
 				x = main,
@@ -137,7 +137,7 @@ venn.diagram <- function(x, filename, height = 3000, width = 3000, resolution = 
 		c <- x[[3]];
 		d <- x[[4]];
 		
-		list.names <- c(names(x)[1], names(x)[2], names(x)[3], names(x)[4]);
+		list.names <- category.names;
 		
 		n12 <- intersect(a, b);
 		n13 <- intersect(a, c);
@@ -153,7 +153,7 @@ venn.diagram <- function(x, filename, height = 3000, width = 3000, resolution = 
 		
 		n1234 <- intersect(n123, d);
 		
-		grob.list <- draw.quad.venn(
+		grob.list <- VennDiagram::draw.quad.venn(
 			area1 = length(a), 
 			area2 = length(b), 
 			area3 = length(c), 
@@ -173,7 +173,7 @@ venn.diagram <- function(x, filename, height = 3000, width = 3000, resolution = 
 			ind = FALSE, 
 			...
 			);
-		if (sub != "") {
+		if (!is.null(sub)) {
 			grob.list <- add.title(
 				gList = grob.list,
 				x = sub,
@@ -185,7 +185,7 @@ venn.diagram <- function(x, filename, height = 3000, width = 3000, resolution = 
 				);
 			}
 
-		if (main != "") {
+		if (!is.null(main)) {
 			grob.list <- add.title(
 				gList = grob.list,
 				x = main,

@@ -3,10 +3,10 @@
 \title{Make a Venn Diagram}
 \description{This function takes a list and creates a publication-quality TIFF Venn Diagram}
 \usage{
-venn.diagram(x, filename, height = 3000, width = 3000, resolution = 500, units = "px", compression = "lzw", na = "stop", main = "", sub = "", main.pos = c(0.5, 1.05), main.fontface = "plain", main.fontfamily = "serif", main.col = "black", main.cex = 1, main.just = c(0.5, 1), sub.pos = c(0.5, 1.05), sub.fontface = "plain", sub.fontfamily = "serif", sub.col = "black", sub.cex = 1, sub.just = c(0.5, 1), ...);
+venn.diagram(x, filename, height = 3000, width = 3000, resolution = 500, units = "px", compression = "lzw", na = "stop", main = "", sub = "", main.pos = c(0.5, 1.05), main.fontface = "plain", main.fontfamily = "serif", main.col = "black", main.cex = 1, main.just = c(0.5, 1), sub.pos = c(0.5, 1.05), sub.fontface = "plain", sub.fontfamily = "serif", sub.col = "black", sub.cex = 1, sub.just = c(0.5, 1), category.names = names(x), ...);
 }
 \arguments{
-  \item{x}{A list of vectors, with each component corresponding to a separate circle in the Venn diagram}
+  \item{x}{A list of vectors (e.g., integers, chars), with each component corresponding to a separate circle in the Venn diagram}
   \item{filename}{Filename for tiff output, or if NULL returns the grid object itself}
   \item{height}{Integer giving the height of the output figure in units}
   \item{width}{Integer giving the width of the output figure in units}
@@ -28,6 +28,7 @@ venn.diagram(x, filename, height = 3000, width = 3000, resolution = 500, units =
   \item{sub.col}{Character Colour of the subtitle}
   \item{sub.cex}{Number giving the cex (font size) of the subtitle}
   \item{sub.just}{Vector of length 2 indicating horizontal and vertical justification of the subtitle}
+  \item{category.names}{Allow specification of category names using plotmath syntax}
   \item{...}{A series of graphical parameters tweaking the plot. See below for details}
   }
 \details{
@@ -98,14 +99,13 @@ venn.diagram(
 	
 venn.diagram(
 	x = list(
-		A = c(1:100),
-		B = c(61:70, 71:100),
-		C = c(41:60, 61:70)
-		),
+		"Num A" = paste("Num", 1:100),
+		"Num B" = c(paste("Num", 61:70), paste("Num", 71:100)),
+		"Num C" = c(paste("Num", 41:60), paste("Num", 61:70))),
 	euler.d = TRUE,
 	filename = "Euler_3set_simple.tiff",
-	cat.pos = c(-25, 0, 30),
-	cat.dist = c(0.05, 0.05, 0.02),,
+	cat.pos = c(-20, 0, 20),
+	cat.dist = c(0.05, 0.05, 0.02),
 	cex = 2.5,
 	cat.cex = 2.5,
 	reverse = TRUE
@@ -362,5 +362,60 @@ venn.diagram(
 	cat.dist = c(0.04, 0.04, 0.02),
 	reverse = TRUE
 	);
+	
+# Figure 3-1	
+venn.diagram(
+	x = list(
+			I = c(1:60, 61:105, 106:140, 141:160, 166:175, 176:180, 181:205, 206:220),
+			II = c(531:605, 476:530, 336:375, 376:405, 181:205, 206:220, 166:175, 176:180),
+			III = c(61:105, 106:140, 181:205, 206:220, 221:285, 286:335, 336:375, 376:405)
+			),
+	category.names = c(
+		expression( bold('A'['1: subscript']) ),
+		expression( bold('B'^'2: going up') ),
+		expression( paste(bold('C'^'3'), bold('X'['i' <= 'r'^'2']^'2') ) )
+		),
+	filename = 'Fig3-1_triple_labels_sub_and_superscripts.tiff',
+	output = TRUE,
+	height = 3000,
+	width = 3000,
+	resolution = 300,
+	compression = 'lzw',
+	units = 'px',
+	lwd = 6,
+	lty = 'blank',
+	fill = c('yellow', 'purple', 'green'),
+	cex = 3.5,
+	fontface = "bold",
+	fontfamily = "sans",
+	cat.cex = 3,
+	cat.fontface = "bold",
+	cat.default.pos = "outer",
+	cat.pos = c(-27, 27, 135),
+	cat.dist = c(0.055, 0.055, 0.085),
+	cat.fontfamily = "sans",
+	rotation = 1
+	);	
+
+# Figure 3-2	 
+venn.diagram(
+   x = list(
+		"Num A" = paste("Num", 1:100),
+		"Num B" = c(paste("Num", 61:70), paste("Num", 71:100)),
+		"Num C" = c(paste("Num", 41:60), paste("Num", 61:70))),
+	category.names = c(
+		expression( bold('A'['1']) ),
+		expression( bold('A'['2']) ),
+		expression( bold('A'['3']) )
+		),
+	euler.d = TRUE,
+	filename = "Fig3-2_Euler_3set_simple_with_subscripts.tiff",
+	cat.pos = c(-20, 0, 20),
+	cat.dist = c(0.05, 0.05, 0.02),
+	cex = 2.5,
+	cat.cex = 2.5,
+	reverse = TRUE
+	);
+        
 }
 \keyword{hplot}

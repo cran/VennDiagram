@@ -53,15 +53,15 @@ draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, 
 	a14 <- area2 - a6 - a7 - a8 - a11 - a12 - a13 - a15;
 	a1  <- area3 - a2 - a4 - a5 - a6 - a7 - a12 - a13;
 	a3  <- area4 - a2 - a5 - a6 - a7 - a8 - a10 - a11;
-		
-		
+
 	# check plausibility and 0 partial areas
 	if (any(a1 < 0, a2 < 0, a3 < 0, a4 < 0, a5 < 0, a6 < 0, a7 < 0, a8 < 0, a9 < 0, a10 < 0, a11 < 0, a12 < 0, a13 < 0, a14 < 0, a15 < 0)) { stop("Impossible: partial areas negative") }
+
 	# initialize gList to hold all Grobs generated
 	grob.list <- gList();
 	
 	# plot the ellipses of the Venn diagram
-	tmp <- ellipse(
+	tmp <- VennDiagram::ellipse(
 		x = 0.65, 
 		y = 0.47, 
 		a = 0.35,
@@ -74,7 +74,7 @@ draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	tmp <- ellipse(
+	tmp <- VennDiagram::ellipse(
 		x = 0.35, 
 		y = 0.47, 
 		a = 0.35,
@@ -87,7 +87,7 @@ draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	tmp <- ellipse(
+	tmp <- VennDiagram::ellipse(
 		x = 0.5, 
 		y = 0.57, 
 		a = 0.33,
@@ -100,7 +100,7 @@ draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	tmp <- ellipse(
+	tmp <- VennDiagram::ellipse(
 		x = 0.5, 
 		y = 0.57, 
 		a = 0.33,
@@ -127,7 +127,7 @@ draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	tmp <- ellipse(
+	tmp <- VennDiagram::ellipse(
 		x = 0.35, 
 		y = 0.47, 
 		a = 0.35,
@@ -141,7 +141,7 @@ draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	tmp <- ellipse(
+	tmp <- VennDiagram::ellipse(
 		x = 0.5, 
 		y = 0.57, 
 		a = 0.33,
@@ -155,7 +155,7 @@ draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	tmp <- ellipse(
+	tmp <- VennDiagram::ellipse(
 		x = 0.5, 
 		y = 0.57, 
 		a = 0.33,
@@ -427,7 +427,7 @@ draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, 
 	grob.list <- gList(grob.list, tmp);
 	
 	# adjust grob.list to fit and return grob.list
-	grob.list <- adjust.venn(rotate.venn.degrees(grob.list, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
+	grob.list <- VennDiagram::adjust.venn(VennDiagram::rotate.venn.degrees(grob.list, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
 	if (ind) { grid.draw(grob.list); }
 	return(grob.list);
 	

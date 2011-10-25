@@ -16,7 +16,7 @@ add.title <- function(gList, x, pos = c(0.5, 1.05), cex = 1, fontface = "plain",
 	
 	grob.list <- gList(gList, tmp);
 	
-	return(adjust.venn(grob.list, ...))
+	return(VennDiagram::adjust.venn(grob.list, ...))
 	
 	}
 		

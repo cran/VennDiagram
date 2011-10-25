@@ -67,7 +67,7 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 	if (euler.d) {
 
 		# figure out the special case code
-		special.code <- decide.special.case(a1, a2, a3, a4, a5, a6, a7);
+		special.code <- VennDiagram::decide.special.case(a1, a2, a3, a4, a5, a6, a7);
 
 		# and convert into a proper function name
 		function.name <- paste('draw.', special.code, sep = '');
@@ -111,8 +111,8 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 				);
 
 			# rotate the Venn diagram as needed
-			rst <- adjust.venn(
-				rotate.venn.degrees(
+			rst <- VennDiagram::adjust.venn(
+				VennDiagram::rotate.venn.degrees(
 					gList1 = rst,
 					angle = rotation.degree,
 					x.centre = rotation.centre[1],
@@ -130,7 +130,7 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 
 		}
 	
-	rotated <- rotate(c(a1, a2, a3, a4, a5, a6, a7), category, lwd, lty, col, label.col, cex, fontface, fontfamily, cat.col, cat.cex, cat.fontface, cat.fontfamily, alpha, rotation, reverse, fill);
+	rotated <- VennDiagram::rotate(c(a1, a2, a3, a4, a5, a6, a7), category, lwd, lty, col, label.col, cex, fontface, fontfamily, cat.col, cat.cex, cat.fontface, cat.fontfamily, alpha, rotation, reverse, fill);
 	a1 <- rotated[[1]][1];
 	a2 <- rotated[[1]][2];
 	a3 <- rotated[[1]][3];
@@ -157,17 +157,21 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 	if (any(a1 < 0, a2 < 0, a3 < 0, a4 < 0, a5 < 0, a6 < 0, a7 < 0)) { stop("Impossible: partial areas negative") }
 	if (any(a1 == 0, a2 == 0, a3 == 0, a4 == 0, a5 == 0, a6 == 0, a7 == 0)) { scaled <- FALSE; }
 
+	# check if defaults are being used
+	is.defaults <- TRUE;
+	if (is.expression(category)) { is.defaults <- FALSE; }
+
 	# check category label defaults
-	if (cat.default.pos != "outer" & cat.default.pos != "text" & isTRUE(category != rep("", 2)) & cat.prompts) {
+	if (cat.default.pos != "outer" & cat.default.pos != "text" & !is.defaults & cat.prompts) { # PCB: removed this check from the if, needs verification: & isTRUE(category != rep("", 2))
 		print("No default location recognized.  Automatically changing to 'outer'");
 		cat.default.pos <- "outer";
 		}
-	if (cat.default.pos == "outer" & isTRUE(category != rep("", 2)) & cat.prompts) {
+	if (cat.default.pos == "outer" & !is.defaults & cat.prompts) {
 		print("Placing category labels at default outer locations.  Use 'cat.pos' and 'cat.dist' to modify location.");
 		print(paste("Current 'cat.pos':", cat.pos[1], "degrees,", cat.pos[2], "degrees"));
 		print(paste("Current 'cat.dist':", cat.dist[1], ",", cat.dist[2]));
 		}
-	if (cat.default.pos == "text" & isTRUE(category != rep("", 2)) & cat.prompts) {
+	if (cat.default.pos == "text" & !is.defaults & cat.prompts) {
 		print("Placing category labels at default text locations.  Use 'cat.pos' and 'cat.dist' to modify location.");
 		print(paste("Current 'cat.pos':", cat.pos[1], "degrees,", cat.pos[2], "degrees"));
 		print(paste("Current 'cat.dist':", cat.dist[1], ",", cat.dist[2]));
@@ -231,7 +235,7 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 		);
 	grob.list <- gList(grob.list, tmp);
 
-	tmp <- circle(
+	tmp <- VennDiagram::circle(
 		x = x.centre.2, 
 		y = y.centre.2, 
 		r = r2,
@@ -243,7 +247,7 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 		);
 	grob.list <- gList(grob.list, tmp);
 
-	tmp <- circle(
+	tmp <- VennDiagram::circle(
 		x = x.centre.3, 
 		y = y.centre.3, 
 		r = r3,
@@ -508,8 +512,8 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 	grob.list <- gList(grob.list, tmp);
 
 	# if requested, rotate the Venn Diagram
-	grob.list <- adjust.venn(
-		rotate.venn.degrees(
+	grob.list <- VennDiagram::adjust.venn(
+		VennDiagram::rotate.venn.degrees(
 			gList1 = grob.list,
 			angle = rotation.degree,
 			x.centre = rotation.centre[1],

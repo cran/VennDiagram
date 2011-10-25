@@ -1,7 +1,7 @@
 ### FUNCTION TO DRAW ELLIPSE (IN FACT A POLYGON) ###################################################
 ellipse <- function(x, y, a, b, rotation = 0, gp = NULL) {
 	
-	poly <- ell2poly(x, y, a, b, rotation, 3000);
+	poly <- VennDiagram::ell2poly(x, y, a, b, rotation, 3000);
 	
 	return(
 		polygonGrob(

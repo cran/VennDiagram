@@ -56,16 +56,16 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 	cat.pos <- cat.pos + rotation.degree;
 	
 	# check category label defaults
-	if (cat.default.pos != "outer" & cat.default.pos != "text" & isTRUE(category != rep("", 2)) & cat.prompts) {
+	if (cat.default.pos != "outer" & cat.default.pos != "text" & cat.prompts) { # PHH: removed this check from the if, so that code works with expressions: & isTRUE(category != rep("", 2))
 		print("No default location recognized.  Automatically changing to 'outer'");
 		cat.default.pos <- "outer"
 		}
-	if (cat.default.pos == "outer" & isTRUE(category != rep("", 2)) & cat.prompts) {
+	if (cat.default.pos == "outer" & cat.prompts) {
 		print("Placing category labels at default outer locations.  Use 'cat.pos' and 'cat.dist' to modify location.");
 		print(paste("Current 'cat.pos':", cat.pos[1], "degrees,", cat.pos[2], "degrees"));
 		print(paste("Current 'cat.dist':", cat.dist[1], ",", cat.dist[2]));
 		}
-	if (cat.default.pos == "text" & isTRUE(category != rep("", 2)) & cat.prompts) {
+	if (cat.default.pos == "text" & cat.prompts) {
 		print("Placing category labels at default text locations.  Use 'cat.pos' and 'cat.dist' to modify location.");
 		print(paste("Current 'cat.pos':", cat.pos[1], "degrees,", cat.pos[2], "degrees"));
 		print(paste("Current 'cat.dist':", cat.dist[1], ",", cat.dist[2]));

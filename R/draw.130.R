@@ -3,7 +3,7 @@ draw.130 <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reverse 
 	if (length(sep.dist) == 1) { sep.dist <- rep(sep.dist, 3) }
 	i <- 1;
 	while (i <= 3) {
-		tmp <- rotate.sp(c(a1, a2, a3, a4, a5, a6, a7), category, i, reverse);
+		tmp <- VennDiagram::rotate.sp(c(a1, a2, a3, a4, a5, a6, a7), category, i, reverse);
 		if (tmp[[1]][2] == 0 & tmp[[1]][4] == 0 & tmp[[1]][5] == 0 & tmp[[1]][6] == 0) {i <- 4}
 		else {i <- i + 1}
 		}
@@ -49,7 +49,7 @@ draw.130 <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reverse 
 	a7.y.pos <- y.centre.3;
 	
 	return(
-		draw.sp.case(
+		VennDiagram::draw.sp.case(
 			area.list = c(a1, 0, a3, 0, 0, 0, a7),
 			enabled.areas = c(1, 3, 7),
 			area.x = c(a1.x.pos, 0, a3.x.pos, 0, 0, 0, a7.x.pos),

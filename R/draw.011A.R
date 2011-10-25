@@ -2,7 +2,7 @@
 draw.011A <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reverse = FALSE, cat.default.pos = "outer", lwd = rep(2, 3), lty = rep("solid", 3), col = rep("black", 3), label.col = rep("black", 7), cex = rep(1, 7), fontface = rep("plain", 7), fontfamily = rep("serif", 7), cat.pos = c(-40, 40, 180), cat.dist = c(0.05, 0.05, 0.025), cat.col = rep("black", 3), cat.cex = rep(1, 3), cat.fontface = rep("plain", 3), cat.fontfamily = rep("serif", 3), cat.just = list(c(0.5, 1), c(0.5, 1), c(0.5, 0)), cat.prompts = FALSE, fill = NULL, alpha = rep(0.5, 3), ...) {
 	i <- 1;
 	while (i <= 3) {
-		tmp <- rotate.sp(c(a1, a2, a3, a4, a5, a6, a7), category, i, reverse);
+		tmp <- VennDiagram::rotate.sp(c(a1, a2, a3, a4, a5, a6, a7), category, i, reverse);
 		if (tmp[[1]][7] == 0 & tmp[[1]][4] == 0) {i <- 4}
 		if (tmp[[1]][7] == 0 & tmp[[1]][6] == 0) {i <- 5}
 		if (tmp[[1]][7] != 0 & (tmp[[1]][4] != 0 | tmp[[1]][6] != 0)) {i <- i + 1}
@@ -38,7 +38,7 @@ draw.011A <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reverse
 	a6.y.pos <- 0.5;
 	
 	return(
-		draw.sp.case(
+		VennDiagram::draw.sp.case(
 			area.list = c(a1, a2, a3, 0, a5, a6, 0),
 			enabled.areas = c(1, 2, 3, 5, 6),
 			area.x = c(a1.x.pos, a2.x.pos, a3.x.pos, 0, a5.x.pos, a6.x.pos, 0),

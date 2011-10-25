@@ -1,7 +1,7 @@
 ### FUNCTION TO DRAW SPECIAL CASES ################################################################
 draw.sp.case <- function(area.list, enabled.areas, area.x, area.y, attach.label.to, x.centres, y.centres, a.list, b.list, straight.reverse, reverse = FALSE, category, cat.default.pos = "outer", lwd = rep(2, 3), lty = rep("solid", 3), col = rep("black", 3), label.col = rep("black", 7), cex = rep(1, 7), fontface = rep("plain", 7), fontfamily = rep("serif", 7), cat.pos = c(-40, 40, 0), cat.dist = c(0.05, 0.05, 0.025), cat.col = rep("black", 3), cat.cex = rep(1, 3), cat.fontface = rep("plain", 3), cat.fontfamily = rep("serif", 3), cat.just = list(c(0.5, 1), c(0.5, 1), c(0.5, 0)), cat.prompts = FALSE, fill = NULL, alpha = rep(0.5, 3), ...) {
 	grob.list <- gList();
-	tmp <- ellipse(
+	tmp <- VennDiagram::ellipse(
 		x = x.centres[1], 
 		y = y.centres[1], 
 		a = a.list[1],
@@ -13,7 +13,7 @@ draw.sp.case <- function(area.list, enabled.areas, area.x, area.y, attach.label.
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	tmp <- ellipse(
+	tmp <- VennDiagram::ellipse(
 		x = x.centres[2], 
 		y = y.centres[2], 
 		a = a.list[2],
@@ -25,7 +25,7 @@ draw.sp.case <- function(area.list, enabled.areas, area.x, area.y, attach.label.
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	tmp <- ellipse(
+	tmp <- VennDiagram::ellipse(
 		x = x.centres[3], 
 		y = y.centres[3], 
 		a = a.list[3],
@@ -37,7 +37,7 @@ draw.sp.case <- function(area.list, enabled.areas, area.x, area.y, attach.label.
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	tmp <- ellipse(
+	tmp <- VennDiagram::ellipse(
 		x = x.centres[3], 
 		y = y.centres[3], 
 		a = a.list[3],
@@ -50,7 +50,7 @@ draw.sp.case <- function(area.list, enabled.areas, area.x, area.y, attach.label.
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	tmp <- ellipse(
+	tmp <- VennDiagram::ellipse(
 		x = x.centres[1], 
 		y = y.centres[1], 
 		a = a.list[1],
@@ -63,7 +63,7 @@ draw.sp.case <- function(area.list, enabled.areas, area.x, area.y, attach.label.
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	tmp <- ellipse(
+	tmp <- VennDiagram::ellipse(
 		x = x.centres[2], 
 		y = y.centres[2], 
 		a = a.list[2],
@@ -183,8 +183,8 @@ draw.sp.case <- function(area.list, enabled.areas, area.x, area.y, attach.label.
 		grob.list <- gList(grob.list, tmp);
 		}
 	
-	if (cat.default.pos == "outer") { cat.pos.1 <- find.cat.pos(x.centres[1], y.centres[1], cat.pos[1], cat.dist[1], a.list[1]) }
-	if (cat.default.pos == "text") { cat.pos.1 <- find.cat.pos(area.x[attach.label.to[1]], area.y[attach.label.to[1]], cat.pos[1], cat.dist[1]) }
+	if (cat.default.pos == "outer") { cat.pos.1 <- VennDiagram::find.cat.pos(x.centres[1], y.centres[1], cat.pos[1], cat.dist[1], a.list[1]) }
+	if (cat.default.pos == "text") { cat.pos.1 <- VennDiagram::find.cat.pos(area.x[attach.label.to[1]], area.y[attach.label.to[1]], cat.pos[1], cat.dist[1]) }
 	tmp <- textGrob(
 		label = category[1],
 		x = cat.pos.1$x,
@@ -198,8 +198,8 @@ draw.sp.case <- function(area.list, enabled.areas, area.x, area.y, attach.label.
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	if (cat.default.pos == "outer") { cat.pos.2 <- find.cat.pos(x.centres[2], y.centres[2], cat.pos[2], cat.dist[2], a.list[2]) }
-	if (cat.default.pos == "text") { cat.pos.2 <- find.cat.pos(area.x[attach.label.to[2]], area.y[attach.label.to[2]], cat.pos[2], cat.dist[2]) }
+	if (cat.default.pos == "outer") { cat.pos.2 <- VennDiagram::find.cat.pos(x.centres[2], y.centres[2], cat.pos[2], cat.dist[2], a.list[2]) }
+	if (cat.default.pos == "text") { cat.pos.2 <- VennDiagram::find.cat.pos(area.x[attach.label.to[2]], area.y[attach.label.to[2]], cat.pos[2], cat.dist[2]) }
 	tmp <- textGrob(
 		label = category[2],
 		x = cat.pos.2$x,
@@ -213,8 +213,8 @@ draw.sp.case <- function(area.list, enabled.areas, area.x, area.y, attach.label.
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	if (cat.default.pos == "outer") { cat.pos.3 <- find.cat.pos(x.centres[3], y.centres[3], cat.pos[3], cat.dist[3], a.list[3]) }
-	if (cat.default.pos == "text") { cat.pos.3 <- find.cat.pos(area.x[attach.label.to[3]], area.y[attach.label.to[3]], cat.pos[3], cat.dist[3]) }
+	if (cat.default.pos == "outer") { cat.pos.3 <- VennDiagram::find.cat.pos(x.centres[3], y.centres[3], cat.pos[3], cat.dist[3], a.list[3]) }
+	if (cat.default.pos == "text") { cat.pos.3 <- VennDiagram::find.cat.pos(area.x[attach.label.to[3]], area.y[attach.label.to[3]], cat.pos[3], cat.dist[3]) }
 	tmp <- textGrob(
 		label = category[3],
 		x = cat.pos.3$x,
@@ -228,10 +228,10 @@ draw.sp.case <- function(area.list, enabled.areas, area.x, area.y, attach.label.
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	grob.list <- adjust.venn(grob.list, ...);
+	grob.list <- VennDiagram::adjust.venn(grob.list, ...);
 	if (straight.reverse) { 
 		if (reverse) {
-			return(flip.venn(grob.list, axis = "v"))
+			return(VennDiagram::flip.venn(grob.list, axis = "v"))
 			}
 		}
 

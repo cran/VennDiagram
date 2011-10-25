@@ -3,7 +3,7 @@ draw.112AA <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), revers
 	
 	i <- 1;
 	while (i <= 3) {
-		tmp <- rotate.sp(c(a1, a2, a3, a4, a5, a6, a7), category, i, reverse);
+		tmp <- VennDiagram::rotate.sp(c(a1, a2, a3, a4, a5, a6, a7), category, i, reverse);
 		if (tmp[[1]][1] == 0 & tmp[[1]][4] == 0 & tmp[[1]][5] == 0 & tmp[[1]][7] == 0) {i <- 4}
 		else {i <- i + 1}
 		}
@@ -30,7 +30,7 @@ draw.112AA <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), revers
 	a6.y.pos <- 0.5;
 	
 	return(
-		draw.sp.case(
+		VennDiagram::draw.sp.case(
 			area.list = c(0, a2, a3, 0, 0, a6, 0),
 			enabled.areas = c(2, 3, 6),
 			area.x = c(0, a2.x.pos, a3.x.pos, 0, 0, a6.x.pos, 0),

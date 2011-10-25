@@ -47,7 +47,7 @@ draw.single.venn <- function(area, category = "", cat.default.pos = "outer", lwd
 	# initialize gList to hold all Grobs generated
 	grob.list <- gList();
 	# plot Venn diagram
-	tmp <- circle(
+	tmp <- VennDiagram::circle(
 		x = 0.5, 
 		y = 0.5, 
 		r = r1,
@@ -58,7 +58,7 @@ draw.single.venn <- function(area, category = "", cat.default.pos = "outer", lwd
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	tmp <- circle(
+	tmp <- VennDiagram::circle(
 		x = 0.5, 
 		y = 0.5, 
 		r = r1,
@@ -99,7 +99,7 @@ draw.single.venn <- function(area, category = "", cat.default.pos = "outer", lwd
 		);
 	grob.list <- gList(grob.list, tmp);
 	
-	grob.list <- adjust.venn(rotate.venn.degrees(grob.list, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
+	grob.list <- VennDiagram::adjust.venn(VennDiagram::rotate.venn.degrees(grob.list, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
 	if (ind) { grid.draw(grob.list); }
 	return(grob.list);
 	
