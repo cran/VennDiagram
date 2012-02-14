@@ -1,4 +1,4 @@
-7a03ad7946a07c14a33880841645424b *DESCRIPTION
+1216623d6bf2bcda08e6001cfa248a7b *DESCRIPTION
 e26ea3a401355203f80592e48c8a5517 *NAMESPACE
 23e7fb0b7a90abd5890cf0c8df257585 *R/add.title.R
 7b039a707ca4dca88441e93841347ecd *R/adjust.venn.R
@@ -37,7 +37,7 @@ c5cd7c922988eab3644f6ca49e7d126d *R/find.dist.R
 0cbe0e86d7d491ec01a2778038147626 *R/rotate.R
 e4789b6ca32f57eb43ed153fe646b8a4 *R/rotate.sp.R
 548e42ec3cee6c0b30a4a368afd3dd15 *R/rotate.venn.degrees.R
-fe288162166965e7f8aa2640c6c152f8 *R/venn.diagram.R
+0b8f30b01c3f52659be5bc0ebf2d5756 *R/venn.diagram.R
 9965207469e6281c5a2832d42309afa1 *man/VennDiagram-internal.Rd
 e27ae8b9fcc3fbddeb2272209decb39b *man/VennDiagram-package.Rd
-0b2dd667e987c5f5eeacd2d9a83502c0 *man/venn.diagram.Rd
+193dc26f85a42fd44760e818bceee936 *man/venn.diagram.Rd

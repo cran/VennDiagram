@@ -205,6 +205,10 @@ venn.diagram <- function(x, filename, height = 3000, width = 3000, resolution = 
 	# if a filename is given, write a TIFF
 	if (!is.null(filename)) {
 
+		# set the graphics driver
+		current.type <- getOption("bitmapType");
+		options(bitmapType = "cairo");
+
 		tiff(
 			filename = filename,
 			height = height,
@@ -217,6 +221,8 @@ venn.diagram <- function(x, filename, height = 3000, width = 3000, resolution = 
 		grid.draw(grob.list);
 
 		dev.off();
+
+		options(bitmapType = current.type);
 
 		# return a success code
 		return(1);

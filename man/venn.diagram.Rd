@@ -417,5 +417,18 @@ venn.diagram(
 	reverse = TRUE
 	);
         
+\dontrun{
+# Example to print to screen 
+venn.plot <- venn.diagram(
+	x = list(
+        	sample1 = c(1:40),
+               	sample2 = c(30:60)
+               	),
+       	filename = NULL
+       	);
+
+grid.draw(venn.plot);
+}
+
 }
 \keyword{hplot}
