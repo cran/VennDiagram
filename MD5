@@ -1,5 +1,5 @@
-3e5dc115e63ba8c462ea2ccdf17190bf *DESCRIPTION
-e26ea3a401355203f80592e48c8a5517 *NAMESPACE
+b9722ccc52540c079b9660133037bd23 *DESCRIPTION
+8e4710a85dabe29f28d4e9424304965a *NAMESPACE
 23e7fb0b7a90abd5890cf0c8df257585 *R/add.title.R
 7b039a707ca4dca88441e93841347ecd *R/adjust.venn.R
 9b6340e4f954ececd68fdc25999a62c0 *R/circle.R
@@ -39,7 +39,7 @@ e4789b6ca32f57eb43ed153fe646b8a4 *R/rotate.sp.R
 548e42ec3cee6c0b30a4a368afd3dd15 *R/rotate.venn.degrees.R
 0b8f30b01c3f52659be5bc0ebf2d5756 *R/venn.diagram.R
 51c27295c1490b3283c9aa928f5295b7 *man/VennDiagram-internal.Rd
-626f284a022f383311ab376b3825a5d3 *man/VennDiagram-package.Rd
+3c2447031cf2292232f5f140e0a78356 *man/VennDiagram-package.Rd
 a87c595e772e205e75bc94fc25ac44ee *man/draw.pairwise.venn.Rd
 cb0f607c4289cd23faa850dde22a03e8 *man/draw.quad.venn.Rd
 f019041ea6b5fb80fb6dfd8c8117119c *man/draw.single.venn.Rd

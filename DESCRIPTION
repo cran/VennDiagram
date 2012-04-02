@@ -1,5 +1,5 @@
 Package: VennDiagram
-Version: 1.2.0
+Version: 1.2.1
 Type: Package
 Title: Generate high-resolution Venn and Euler plots
 Date: 2012-04-02
@@ -12,6 +12,6 @@ Description: A set of functions to generate high-resolution Venn and
         shape and structure.
 License: GPL-2
 LazyLoad: yes
-Packaged: 2012-04-29 18:39:34 UTC; pboutros
+Packaged: 2012-06-06 15:39:17 UTC; pboutros
 Repository: CRAN
-Date/Publication: 2012-04-29 20:58:09
+Date/Publication: 2012-06-06 16:44:25

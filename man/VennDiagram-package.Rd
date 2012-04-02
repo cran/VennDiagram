@@ -8,7 +8,7 @@
 \tabular{ll}{
 Package: \tab VennDiagram\cr
 Type: \tab Package\cr
-Version: \tab 1.2.0\cr
+Version: \tab 1.2.1\cr
 Date: \tab 2010-03-23\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr

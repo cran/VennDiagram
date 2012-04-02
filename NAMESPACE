@@ -19,6 +19,7 @@ export(
 	draw.111A,
 	draw.112AA,
 	draw.120,
+	draw.121AO,
 	draw.122AAOO,
 	draw.130,
 	draw.quad.venn,
