@@ -27,11 +27,7 @@
 \alias{draw.121AO}
 \alias{draw.122AAOO}
 \alias{draw.130}
-\alias{draw.pairwise.venn}
-\alias{draw.quad.venn}
-\alias{draw.single.venn}
 \alias{draw.sp.case}
-\alias{draw.triple.venn}
 \alias{ell2poly}
 \alias{ellipse}
 \alias{find.cat.pos}

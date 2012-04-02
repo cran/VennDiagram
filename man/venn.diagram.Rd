@@ -43,7 +43,7 @@ venn.diagram(x, filename, height = 3000, width = 3000, resolution = 500, units =
   \code{cex}            \tab 1,2,3,4           \tab \var{numeric}   \tab Vector giving the \code{cex} for each area label (length = 1/3/7/15 based on set-number)\cr
   \code{fontface}       \tab 1,2,3,4           \tab \var{character} \tab Vector giving the \code{fontface} for each area label (length = 1/3/7/15 based on set-number)\cr
   \code{fontfamily}     \tab 1,2,3,4           \tab \var{character} \tab Vector giving the \code{fontfamily} for each area label (length = 1/3/7/15 based on set-number)\cr
-  \code{cat.pos}        \tab 1,2,3,4           \tab \var{numeric}   \tab Vector giving the position (in degrees) of each category name along the circle, with 0 at (x1, y1 + r)\cr
+  \code{cat.pos}        \tab 1,2,3,4           \tab \var{numeric}   \tab Vector giving the position (in degrees) of each category name along the circle, with 0 at the 12 o'clock location\cr
   \code{cat.dist}       \tab 1,2,3,4           \tab \var{numeric}   \tab Vector giving the distance (in npc units) of each category name from the edge of the circle (can be negative)\cr
   \code{cat.cex}        \tab 1,2,3,4           \tab \var{numeric}   \tab Vector giving the \code{cex} for each category name\cr
   \code{cat.col}        \tab 1,2,3,4           \tab \var{character} \tab Vector giving the colour for each category name\cr
@@ -68,7 +68,10 @@ venn.diagram(x, filename, height = 3000, width = 3000, resolution = 500, units =
   }
 }
 \value{Plots a figure to the file given by the \var{filename} argument.}
-\author{Hanbert Chen}
+\author{Hanbo Chen}
+\seealso{
+\code{\link{draw.single.venn}}, \code{\link{draw.pairwise.venn}}, \code{\link{draw.triple.venn}}, \code{\link{draw.quad.venn}}
+}
 \examples{
 # compact and minimal notation
 venn.diagram(list(A = 1:150, B = 121:170), "Venn_2set_simple.tiff");

@@ -1,5 +1,5 @@
 ### FUNCTION TO DRAW SPECIAL CASE 120 #############################################################
-draw.121AO <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reverse = FALSE, cat.default.pos = "outer", lwd = rep(2, 3), lty = rep("solid", 3), col = rep("black", 3), label.col = rep("black", 7), cex = rep(1, 7), fontface = rep("plain", 7), fontfamily = rep("serif", 7), cat.pos = c(-40, 40, 180), cat.dist = c(0.05, 0.05, 0.025), cat.col = rep("black", 3), cat.cex = rep(1, 3), cat.fontface = rep("plain", 3), cat.fontfamily = rep("serif", 3), cat.just = list(c(0.5, 1), c(0.5, 1), c(0.5, 0)), cat.prompts = FALSE, fill = NULL, alpha = rep(0.5, 3), scaled = TRUE, sep.dist = 0.05, ...) {
+draw.121AO <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reverse = FALSE, cat.default.pos = "outer", lwd = rep(2, 3), lty = rep("solid", 3), col = rep("black", 3), label.col = rep("black", 7), cex = rep(1, 7), fontface = rep("plain", 7), fontfamily = rep("serif", 7), cat.pos = c(-40, 40, 180), cat.dist = c(0.05, 0.05, 0.025), cat.col = rep("black", 3), cat.cex = rep(1, 3), cat.fontface = rep("plain", 3), cat.fontfamily = rep("serif", 3), cat.just = list(c(0.5, 1), c(0.5, 1), c(0.5, 0)), cat.prompts = FALSE, fill = NULL, alpha = rep(0.5, 3), scaled = TRUE, sep.dist = 0.05, offset = 0, ...) {
 	i <- 1;
 	while (i <= 3) {
 		tmp <- VennDiagram::rotate.sp(c(a1, a2, a3, a4, a5, a6, a7), category, i, reverse = FALSE);
@@ -28,12 +28,12 @@ draw.121AO <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), revers
 	
 	x.centre.1 <- r1;
 	y.centre.1 <- 0.5;
-	x.centre.2 <- x.centre.1;
+	x.centre.2 <- x.centre.1 - offset * (r1 - r2);
 	y.centre.2 <- 0.5;
 	x.centre.3 <- x.centre.1 + (1 + sep.dist) * (r1 + r3);
 	y.centre.3 <- 0.5;
 	
-	a1.x.pos <- (2 * x.centre.1 - r1 - r2) / 2;
+	a1.x.pos <- ((x.centre.1 - r1) + (x.centre.2 - r2)) / 2;
 	a1.y.pos <- 0.5;
 	a2.x.pos <- x.centre.1;
 	a2.y.pos <- 0.5;

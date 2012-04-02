@@ -1,5 +1,5 @@
 ### FUNCTION TO DRAW VENN DIAGRAM WITH A SINGLE SET ###############################################
-draw.single.venn <- function(area, category = "", cat.default.pos = "outer", lwd = 2, lty = "solid", col = "black", label.col = "black", cex = 1, fontface = "plain", fontfamily = "serif", cat.pos = 0, cat.dist = 0.025, cat.col = "black", cat.cex = 1, cat.fontface = "plain", cat.fontfamily = "serif", cat.just = list(c(0.5, 0.5)), cat.prompts = FALSE, fill = NULL, alpha = 0.5, rotation.degree = 0, rotation.centre = c(0.5, 0.5), ind = TRUE, ...) {
+draw.single.venn <- function(area, category = "", lwd = 2, lty = "solid", col = "black", fill = NULL, alpha = 0.5, label.col = "black", cex = 1, fontface = "plain", fontfamily = "serif", cat.pos = 0, cat.dist = 0.025, cat.cex = 1, cat.col = "black", cat.fontface = "plain", cat.fontfamily = "serif", cat.just = list(c(0.5, 0.5)), cat.default.pos = "outer", cat.prompts = FALSE, rotation.degree = 0, rotation.centre = c(0.5, 0.5), ind = TRUE, ...) {
 	
 	# check parameter lengths
 	if (length(category) != 1) { stop("Unexpected parameter length for 'category'") }

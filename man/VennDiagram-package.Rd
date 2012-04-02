@@ -8,14 +8,14 @@
 \tabular{ll}{
 Package: \tab VennDiagram\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
+Version: \tab 1.2.0\cr
 Date: \tab 2010-03-23\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }
 }
 \author{
-Author: Hanbo Chen <Hanbert.Chen@utoronto.ca>
+Author: Hanbo Chen <Hanbert.Chen@mail.utoronto.ca>
 Maintainer: Dr. Paul C. Boutros <Paul.Boutros@utoronto.ca>
 }
 \keyword{ package }

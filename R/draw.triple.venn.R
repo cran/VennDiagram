@@ -1,5 +1,6 @@
 ### FUNCTION TO DRAW VENN DIAGRAM WITH THREE SETS #################################################
-draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category = rep("", 3), rotation = 1, reverse = FALSE, euler.d = TRUE, scaled = TRUE, cat.default.pos = "outer", lwd = rep(2, 3), lty = rep("solid", 3), col = rep("black", 3), label.col = rep("black", 7), cex = rep(1, 7), fontface = rep("plain", 7), fontfamily = rep("serif", 7), cat.pos = c(-40, 40, 180), cat.dist = c(0.05, 0.05, 0.025), cat.col = rep("black", 3), cat.cex = rep(1, 3), cat.fontface = rep("plain", 3), cat.fontfamily = rep("serif", 3), cat.just = list(c(0.5, 1), c(0.5, 1), c(0.5, 0)), cat.prompts = FALSE, fill = NULL, alpha = rep(0.5, 3), rotation.degree = 0, rotation.centre = c(0.5, 0.5), ind = TRUE, list.order = 1:3, offset = 0, ...) {
+draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category = rep("", 3), rotation = 1, reverse = FALSE, euler.d = TRUE, scaled = TRUE, lwd = rep(2, 3), lty = rep("solid", 3), col = rep("black", 3), fill = NULL, alpha = rep(0.5, 3), label.col = rep("black", 7), cex = rep(1, 7), fontface = rep("plain", 7), fontfamily = rep("serif", 7), cat.pos = c(-40, 40, 180), cat.dist = c(0.05, 0.05, 0.025), cat.col = rep("black", 3), cat.cex = rep(1, 3), cat.fontface = rep("plain", 3), cat.fontfamily = rep("serif", 3), cat.just = list(c(0.5, 1), c(0.5, 1), c(0.5, 0)), cat.default.pos = "outer", cat.prompts = FALSE, rotation.degree = 0, rotation.centre = c(0.5, 0.5), ind = TRUE, sep.dist = 0.05, offset = 0, list.order = 1:3, ...) {
+
 #area1 must be greater than area2, which must be greater than area3	
 	# check parameter lengths
 	if (length(category) == 1) {cat <- rep(category, 3)}
@@ -37,9 +38,15 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 	if (!(class(cat.just) == "list" & length(cat.just) == 3)) { stop("Unexpected parameter format for 'cat.just'") }
 	else if (!(length(cat.just[[1]]) == 2 & length(cat.just[[2]]) == 2 & length(cat.just[[3]]) == 2)) { stop("Unexpected parameter format for 'cat.just'") }
 	
+	# turn off warnings
+	options(warn = -1);
+	
 	# check uninterpretable parameter combination
 	if (euler.d == FALSE & scaled == TRUE) {
 		stop("Uninterpretable parameter combination\nPlease set both euler.d = FALSE and scaled = FALSE to force Venn diagrams.");
+		}
+	if (offset > 1 | offset < 0) {
+		stop("'Offset' must be between 0 and 1.  Try using 'rotation.degree = 180' to achieve offsets in the opposite direction.");
 		}
 	
 	lwd <- lwd[list.order];
@@ -162,16 +169,16 @@ draw.triple.venn <- function(area1, area2, area3, n12, n23, n13, n123, category 
 	if (is.expression(category)) { is.defaults <- FALSE; }
 
 	# check category label defaults
-	if (cat.default.pos != "outer" & cat.default.pos != "text" & !is.defaults & cat.prompts) { # PCB: removed this check from the if, needs verification: & isTRUE(category != rep("", 2))
+	if (all(cat.default.pos != "outer", cat.default.pos != "text", !is.defaults, cat.prompts)) {
 		print("No default location recognized.  Automatically changing to 'outer'");
 		cat.default.pos <- "outer";
 		}
-	if (cat.default.pos == "outer" & !is.defaults & cat.prompts) {
+	if (all(cat.default.pos == "outer", !is.defaults, cat.prompts)) {
 		print("Placing category labels at default outer locations.  Use 'cat.pos' and 'cat.dist' to modify location.");
 		print(paste("Current 'cat.pos':", cat.pos[1], "degrees,", cat.pos[2], "degrees"));
 		print(paste("Current 'cat.dist':", cat.dist[1], ",", cat.dist[2]));
 		}
-	if (cat.default.pos == "text" & !is.defaults & cat.prompts) {
+	if (all(cat.default.pos == "text", !is.defaults, cat.prompts)) {
 		print("Placing category labels at default text locations.  Use 'cat.pos' and 'cat.dist' to modify location.");
 		print(paste("Current 'cat.pos':", cat.pos[1], "degrees,", cat.pos[2], "degrees"));
 		print(paste("Current 'cat.dist':", cat.dist[1], ",", cat.dist[2]));

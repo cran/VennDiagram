@@ -21,6 +21,7 @@ draw.120 <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reverse 
 		r1 <- r1 * shrink.factor;
 		r2 <- r2 * shrink.factor;
 		r3 <- r3 * shrink.factor;
+		d <- d * shrink.factor;
 		}
 		
 	if (!scaled) {

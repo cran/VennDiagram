@@ -1,5 +1,6 @@
 ### FUNCTION TO DRAW VENN DIAGRAM WITH FOUR SETS #################################################
-draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, n34, n123, n124, n134, n234, n1234, category = rep("", 4), lwd = rep(2, 4), lty = rep("solid", 4), col = rep("black", 4), label.col = rep("black", 15), cex = rep(1, 15), fontface = rep("plain", 15), fontfamily = rep("serif", 15), cat.default.pos = "outer", cat.pos = c(-15, 15, 0, 0), cat.dist = c(0.22, 0.22, 0.11, 0.11), cat.col = rep("black", 4), cat.cex = rep(1, 4), cat.fontface = rep("plain", 4), cat.fontfamily = rep("serif", 4), cat.just = rep(list(c(0.5, 0.5)), 4), cat.prompts = FALSE, fill = NULL, alpha = rep(0.5, 4), rotation.degree = 0, rotation.centre = c(0.5, 0.5), ind = TRUE, ...) {
+draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, n34, n123, n124, n134, n234, n1234, category = rep("", 4), lwd = rep(2, 4), lty = rep("solid", 4), col = rep("black", 4), fill = NULL, alpha = rep(0.5, 4), label.col = rep("black", 15), cex = rep(1, 15), fontface = rep("plain", 15), fontfamily = rep("serif", 15), cat.pos = c(-15, 15, 0, 0), cat.dist = c(0.22, 0.22, 0.11, 0.11), cat.col = rep("black", 4), cat.cex = rep(1, 4), cat.fontface = rep("plain", 4), cat.fontfamily = rep("serif", 4), cat.just = rep(list(c(0.5, 0.5)), 4), cat.default.pos = "outer", cat.prompts = FALSE, rotation.degree = 0, rotation.centre = c(0.5, 0.5), ind = TRUE, ...) {
+
 #area1 > area2 > area3 > area4
 	# check parameter lengths
 	if (length(category) == 1) {cat <- rep(category, 4)}

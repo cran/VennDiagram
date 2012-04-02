@@ -1,5 +1,6 @@
 ### FUNCTION TO DRAW VENN DIAGRAM WITH TWO SETS ###################################################
-draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), cat.default.pos = "outer", euler.d = TRUE, scaled = TRUE, inverted = FALSE, ext.text = TRUE, ext.pos = rep(0, 2), ext.dist = rep(0, 2), ext.line.lty = "solid", ext.length = rep(0.95, 2), lwd = rep(2, 2), lty = rep("solid", 2), col = rep("black", 2), label.col = rep("black", 3), cex = rep(1, 3), fontface = rep("plain", 3), fontfamily = rep("serif", 3), cat.pos = c(-50, 50), cat.dist = rep(0.025, 2), cat.col = rep("black", 2), cat.cex = rep(1, 2), cat.fontface = rep("plain", 2), cat.fontfamily = rep("serif", 2), cat.just = rep(list(c(0.5, 0.5)), 2), cat.prompts = FALSE, fill = NULL, alpha = rep(0.5, 2), rotation.degree = 0, rotation.centre = c(0.5, 0.5), ext.line.lwd = 1, ind = TRUE, sep.dist = 0.05, offset = 0, ...) {
+draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), euler.d = TRUE, scaled = TRUE, inverted = FALSE, ext.text = TRUE, lwd = rep(2, 2), lty = rep("solid", 2), col = rep("black", 2), fill = NULL, alpha = rep(0.5, 2), label.col = rep("black", 3), cex = rep(1, 3), fontface = rep("plain", 3), fontfamily = rep("serif", 3), cat.pos = c(-50, 50), cat.dist = rep(0.025, 2), cat.cex = rep(1, 2), cat.col = rep("black", 2), cat.fontface = rep("plain", 2), cat.fontfamily = rep("serif", 2), cat.just = rep(list(c(0.5, 0.5)), 2), cat.default.pos = "outer", cat.prompts = FALSE, ext.pos = rep(0, 2), ext.dist = rep(0, 2), ext.line.lty = "solid", ext.length = rep(0.95, 2), ext.line.lwd = 1, rotation.degree = 0, rotation.centre = c(0.5, 0.5), ind = TRUE, sep.dist = 0.05, offset = 0, ...) {
+
 	# area1 > area2 OR area1 < area2 plots the same Venn diagram.  Invert using the "inverted" argument.
 	# check parameter lengths and plausibility of Venn diagram
 	if (length(category) == 1) {category <- rep(category, 2)}
@@ -41,7 +42,7 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 	if (length(cat.fontface) != 1 & length(cat.fontface) != 2) { stop("Unexpected parameter length for 'cat.fontface'") }
 	if (length(cat.fontfamily) == 1) {cat.fontfamily <- rep(cat.fontfamily, 2)}
 	if (length(cat.fontfamily) != 1 & length(cat.fontfamily) != 2) { stop("Unexpected parameter length for 'cat.fontfamily'") }
-	if (length(offset) != 1) { stop("Unexpected parameter length for 'cat.fontfamily'. Try using 'rotation.degree' to achieve non-vertical offsets") }
+	if (length(offset) != 1) { stop("Unexpected parameter length for 'offset'. Try using 'rotation.degree' to achieve non-vertical offsets") }
 	if (!(class(cat.just) == "list" & length(cat.just) == 2 & length(cat.just[[1]]) == 2 & length(cat.just[[2]]) == 2)) { stop("Unexpected parameter format for 'cat.just'") }
 	
 	# check uninterpretable parameters
@@ -56,16 +57,16 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 	cat.pos <- cat.pos + rotation.degree;
 	
 	# check category label defaults
-	if (cat.default.pos != "outer" & cat.default.pos != "text" & cat.prompts) { # PHH: removed this check from the if, so that code works with expressions: & isTRUE(category != rep("", 2))
+	if (((cat.default.pos != "outer") & (cat.default.pos != "text")) & cat.prompts) { # PHH: removed this check from the if, so that code works with expressions: & isTRUE(category != rep("", 2))
 		print("No default location recognized.  Automatically changing to 'outer'");
 		cat.default.pos <- "outer"
 		}
-	if (cat.default.pos == "outer" & cat.prompts) {
+	if ((cat.default.pos == "outer") & cat.prompts) {
 		print("Placing category labels at default outer locations.  Use 'cat.pos' and 'cat.dist' to modify location.");
 		print(paste("Current 'cat.pos':", cat.pos[1], "degrees,", cat.pos[2], "degrees"));
 		print(paste("Current 'cat.dist':", cat.dist[1], ",", cat.dist[2]));
 		}
-	if (cat.default.pos == "text" & cat.prompts) {
+	if ((cat.default.pos == "text") & cat.prompts) {
 		print("Placing category labels at default text locations.  Use 'cat.pos' and 'cat.dist' to modify location.");
 		print(paste("Current 'cat.pos':", cat.pos[1], "degrees,", cat.pos[2], "degrees"));
 		print(paste("Current 'cat.dist':", cat.dist[1], ",", cat.dist[2]));
@@ -705,7 +706,7 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 			r2 <- 0.2;
 			}
 	
-		x.centre.1 <- r1;
+		x.centre.1 <- (1 - 2 * (r1 + r2)) / 2 + r1 - sep.dist / 2;
 		tmp <- circle(
 			x = x.centre.1, 
 			y = 0.5, 
@@ -718,7 +719,7 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 			);
 		grob.list <- gList(grob.list, tmp);
 
-		x.centre.2 <- r1 + (1 + sep.dist) * (r1 + r2);
+		x.centre.2 <- 1 - (1 - 2 * (r1 + r2)) / 2 - r2 + sep.dist / 2;
 		tmp <- circle(
 			x = x.centre.2, 
 			y = 0.5, 
