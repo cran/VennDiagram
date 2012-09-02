@@ -21,31 +21,33 @@ draw.single.venn <- function(area, category = "", lwd = 2, lty = "solid", col = 
 	if (!(class(cat.just) == "list" & length(cat.just) == 1 & length(cat.just[[1]]) == 2)) { stop("Unexpected parameter format for 'cat.just'") }
 	
 	cat.pos <- cat.pos + rotation.degree;
-	
+
 	# check category label defaults
-	if (cat.default.pos != "outer" & cat.default.pos != "text" & category != "" & cat.prompts) {
+	if (cat.default.pos != 'outer' & cat.default.pos != 'text' & category != '' & cat.prompts) {
 		print("No default location recognized.  Automatically changing to 'outer'");
-		cat.default.pos <- "outer";
+		cat.default.pos <- 'outer';
 		}
 	if (cat.default.pos == "outer" & category != "" & cat.prompts) {
 		print("Placing category labels at default outer locations.  Use 'cat.pos' and 'cat.dist' to modify location.");
-		print(paste("Current 'cat.pos':", cat.pos, "degrees"));
+		print(paste("Current 'cat.pos':", cat.pos, 'degrees'));
 		print(paste("Current 'cat.dist':", cat.dist));
 		}
 	if (cat.default.pos == "text" & category != "" & cat.prompts) {
 		print("Placing category labels at default text locations.  Use 'cat.pos' and 'cat.dist' to modify location.");
-		print(paste("Current 'cat.pos':", cat.pos, "degrees"));
+		print(paste("Current 'cat.pos':", cat.pos, 'degrees'));
 		print(paste("Current 'cat.dist':", cat.dist));
 		}
-		
+
 	max.circle.size = 0.2;
+
 	# obtain radius corresponding to the circle with given area and convert it to Grid dimensions
 	r1 <- sqrt(area / pi);
 	shrink.factor <- max.circle.size / r1;
 	r1 <- r1 * shrink.factor;
-	
+
 	# initialize gList to hold all Grobs generated
 	grob.list <- gList();
+
 	# plot Venn diagram
 	tmp <- VennDiagram::circle(
 		x = 0.5, 
@@ -66,7 +68,7 @@ draw.single.venn <- function(area, category = "", lwd = 2, lty = "solid", col = 
 			lwd = lwd,
 			lty = lty,
 			col = col,
-			fill = "transparent"
+			fill = 'transparent'
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
@@ -83,8 +85,8 @@ draw.single.venn <- function(area, category = "", lwd = 2, lty = "solid", col = 
 		);
 	grob.list <- gList(grob.list, tmp);
 		
-	if (cat.default.pos == "outer") { cat.pos.1 <- find.cat.pos(0.5, 0.5, cat.pos, cat.dist, r1) }
-	if (cat.default.pos == "text") { cat.pos.1 <- find.cat.pos(0.5, 0.5, cat.pos, cat.dist) }
+	if (cat.default.pos == 'outer') { cat.pos.1 <- find.cat.pos(0.5, 0.5, cat.pos, cat.dist, r1) }
+	if (cat.default.pos == 'text') { cat.pos.1 <- find.cat.pos(0.5, 0.5, cat.pos, cat.dist) }
 	tmp <- textGrob(
 		label = category,
 		x = cat.pos.1$x,
@@ -98,9 +100,9 @@ draw.single.venn <- function(area, category = "", lwd = 2, lty = "solid", col = 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	
+
 	grob.list <- VennDiagram::adjust.venn(VennDiagram::rotate.venn.degrees(grob.list, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
 	if (ind) { grid.draw(grob.list); }
 	return(grob.list);
-	
+
 	}

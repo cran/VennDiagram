@@ -1,7 +1,7 @@
 ### FUNCTION TO DRAW VENN DIAGRAM WITH FOUR SETS #################################################
-draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, n34, n123, n124, n134, n234, n1234, category = rep("", 4), lwd = rep(2, 4), lty = rep("solid", 4), col = rep("black", 4), fill = NULL, alpha = rep(0.5, 4), label.col = rep("black", 15), cex = rep(1, 15), fontface = rep("plain", 15), fontfamily = rep("serif", 15), cat.pos = c(-15, 15, 0, 0), cat.dist = c(0.22, 0.22, 0.11, 0.11), cat.col = rep("black", 4), cat.cex = rep(1, 4), cat.fontface = rep("plain", 4), cat.fontfamily = rep("serif", 4), cat.just = rep(list(c(0.5, 0.5)), 4), cat.default.pos = "outer", cat.prompts = FALSE, rotation.degree = 0, rotation.centre = c(0.5, 0.5), ind = TRUE, ...) {
+draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, n34, n123, n124, n134, n234, n1234, category = rep("", 4), lwd = rep(2, 4), lty = rep("solid", 4), col = rep("black", 4), fill = NULL, alpha = rep(0.5, 4), label.col = rep("black", 15), cex = rep(1, 15), fontface = rep("plain", 15), fontfamily = rep("serif", 15), cat.pos = c(-15, 15, 0, 0), cat.dist = c(0.22, 0.22, 0.11, 0.11), cat.col = rep("black", 4), cat.cex = rep(1, 4), cat.fontface = rep("plain", 4), cat.fontfamily = rep("serif", 4), cat.just = rep(list(c(0.5, 0.5)), 4), rotation.degree = 0, rotation.centre = c(0.5, 0.5), ind = TRUE, ...) {
 
-#area1 > area2 > area3 > area4
+	#area1 > area2 > area3 > area4
 	# check parameter lengths
 	if (length(category) == 1) {cat <- rep(category, 4)}
 	if (length(category) != 1 & length(category) != 4) { stop("Unexpected parameter length for 'category'") }
@@ -124,7 +124,7 @@ draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, 
 			lwd = lwd[4],
 			lty = lty[4],
 			col = col[4],
-			fill = "transparent"
+			fill = 'transparent'
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
@@ -138,7 +138,7 @@ draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, 
 			lwd = lwd[1],
 			lty = lty[1],
 			col = col[1],
-			fill = "transparent"
+			fill = 'transparent'
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
@@ -152,7 +152,7 @@ draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, 
 				lwd = lwd[3],
 				lty = lty[3],
 				col = col[3],
-				fill = "transparent"
+				fill = 'transparent'
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
@@ -166,206 +166,48 @@ draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, 
 				lwd = lwd[2],
 				lty = lty[2],
 				col = col[2],
-				fill = "transparent"
+				fill = 'transparent'
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	# add area labels
-	tmp <- textGrob(
-		label = a1, 
-		x = 0.35, 
-		y = 0.77,
-		gp = gpar(
-			col = label.col[1],
-			cex = cex[1],
-			fontface = fontface[1],
-			fontfamily = fontfamily[1]
-			)
+
+	label.matrix <- matrix(
+		nrow = 15,
+		ncol = 3
 		);
-	grob.list <- gList(grob.list, tmp);
+	colnames(label.matrix) <- c('label', 'x', 'y');
+
+	label.matrix[ 1,] <- c(a1,  0.350, 0.77);
+	label.matrix[ 2,] <- c(a2,  0.500, 0.69);
+	label.matrix[ 3,] <- c(a3,  0.650, 0.77);
+	label.matrix[ 4,] <- c(a4,  0.310, 0.67);
+	label.matrix[ 5,] <- c(a5,  0.400, 0.58);
+	label.matrix[ 6,] <- c(a6,  0.500, 0.47);
+	label.matrix[ 7,] <- c(a7,  0.600, 0.58);
+	label.matrix[ 8,] <- c(a8,  0.690, 0.67);
+	label.matrix[ 9,] <- c(a9,  0.180, 0.58);
+	label.matrix[10,] <- c(a10, 0.320, 0.42);
+	label.matrix[11,] <- c(a11, 0.425, 0.38);
+	label.matrix[12,] <- c(a12, 0.575, 0.38);
+	label.matrix[13,] <- c(a13, 0.680, 0.42);
+	label.matrix[14,] <- c(a14, 0.820, 0.58);
+	label.matrix[15,] <- c(a15, 0.500, 0.28);
 	
-	tmp <- textGrob(
-		label = a2, 
-		x = 0.5, 
-		y = 0.69,
-		gp = gpar(
-			col = label.col[2],
-			cex = cex[2],
-			fontface = fontface[2],
-			fontfamily = fontfamily[2]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
-	
-	tmp <- textGrob(
-		label = a3, 
-		x = 0.65, 
-		y = 0.77,
-		gp = gpar(
-			col = label.col[3],
-			cex = cex[3],
-			fontface = fontface[3],
-			fontfamily = fontfamily[3]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
-	
-	tmp <- textGrob(
-		label = a4, 
-		x = 0.31, 
-		y = 0.67,
-		gp = gpar(
-			col = label.col[4],
-			cex = cex[4],
-			fontface = fontface[4],
-			fontfamily = fontfamily[4]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
-	
-	tmp <- textGrob(
-		label = a5, 
-		x = 0.40, 
-		y = 0.58,
-		gp = gpar(
-			col = label.col[5],
-			cex = cex[5],
-			fontface = fontface[5],
-			fontfamily = fontfamily[5]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
-	
-	tmp <- textGrob(
-		label = a6, 
-		x = 0.50, 
-		y = 0.47,
-		gp = gpar(
-			col = label.col[6],
-			cex = cex[6],
-			fontface = fontface[6],
-			fontfamily = fontfamily[6]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
-	
-	tmp <- textGrob(
-		label = a7, 
-		x = 0.60, 
-		y = 0.58,
-		gp = gpar(
-			col = label.col[7],
-			cex = cex[7],
-			fontface = fontface[7],
-			fontfamily = fontfamily[7]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
-	
-	tmp <- textGrob(
-		label = a8, 
-		x = 0.69, 
-		y = 0.67,
-		gp = gpar(
-			col = label.col[8],
-			cex = cex[8],
-			fontface = fontface[8],
-			fontfamily = fontfamily[8]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
-	
-	tmp <- textGrob(
-		label = a9, 
-		x = 0.18, 
-		y = 0.58,
-		gp = gpar(
-			col = label.col[9],
-			cex = cex[9],
-			fontface = fontface[9],
-			fontfamily = fontfamily[9]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
-	
-	tmp <- textGrob(
-		label = a10, 
-		x = 0.32, 
-		y = 0.42,
-		gp = gpar(
-			col = label.col[10],
-			cex = cex[10],
-			fontface = fontface[10],
-			fontfamily = fontfamily[10]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
-	
-	tmp <- textGrob(
-		label = a11, 
-		x = 0.425, 
-		y = 0.38,
-		gp = gpar(
-			col = label.col[11],
-			cex = cex[11],
-			fontface = fontface[11],
-			fontfamily = fontfamily[11]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
-	
-	tmp <- textGrob(
-		label = a12, 
-		x = 0.575, 
-		y = 0.38,
-		gp = gpar(
-			col = label.col[12],
-			cex = cex[12],
-			fontface = fontface[12],
-			fontfamily = fontfamily[12]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
-	
-	tmp <- textGrob(
-		label = a13, 
-		x = 0.68, 
-		y = 0.42,
-		gp = gpar(
-			col = label.col[13],
-			cex = cex[13],
-			fontface = fontface[13],
-			fontfamily = fontfamily[13]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
-	
-	tmp <- textGrob(
-		label = a14, 
-		x = 0.82, 
-		y = 0.58,
-		gp = gpar(
-			col = label.col[14],
-			cex = cex[14],
-			fontface = fontface[14],
-			fontfamily = fontfamily[14]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
-	
-	tmp <- textGrob(
-		label = a15, 
-		x = 0.50, 
-		y = 0.28,
-		gp = gpar(
-			col = label.col[15],
-			cex = cex[15],
-			fontface = fontface[15],
-			fontfamily = fontfamily[15]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
-	
+	for (i in 1:nrow(label.matrix)) {
+		tmp <- textGrob(
+			label = label.matrix[i,'label'],
+			x = label.matrix[i,'x'],
+			y = label.matrix[i,'y'],
+			gp = gpar(
+				col = label.col[i],
+				cex = cex[i],
+				fontface = fontface[i],
+				fontfamily = fontfamily[i]
+				)
+			);
+		grob.list <- gList(grob.list, tmp);
+		}
+
 	# find the location and plot all the category names
 	cat.pos.1 <- find.cat.pos(0.18, 0.58, cat.pos[1], cat.dist[1])
 	tmp <- textGrob(
@@ -381,7 +223,7 @@ draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	
+
 	cat.pos.2 <- find.cat.pos(0.82, 0.58, cat.pos[2], cat.dist[2])
 	tmp <- textGrob(
 		label = category[2],
@@ -396,7 +238,7 @@ draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	
+
 	cat.pos.3 <- find.cat.pos(0.35, 0.77, cat.pos[3], cat.dist[3])
 	tmp <- textGrob(
 		label = category[3],
@@ -411,7 +253,7 @@ draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	
+
 	cat.pos.4 <- find.cat.pos(0.65, 0.77, cat.pos[4], cat.dist[4])
 	tmp <- textGrob(
 		label = category[4],
@@ -426,11 +268,10 @@ draw.quad.venn <- function(area1, area2, area3, area4, n12, n13, n14, n23, n24, 
 			)
 		);
 	grob.list <- gList(grob.list, tmp);
-	
+
 	# adjust grob.list to fit and return grob.list
 	grob.list <- VennDiagram::adjust.venn(VennDiagram::rotate.venn.degrees(grob.list, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
 	if (ind) { grid.draw(grob.list); }
 	return(grob.list);
-	
+
 	}
-	

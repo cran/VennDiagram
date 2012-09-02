@@ -83,10 +83,8 @@ venn.plot <- draw.triple.venn(
 venn.plot <- draw.triple.venn(20, 40, 60, 0, 0, 0, 0, c("First", "Second", "Third"), sep.dist = 0.1, rotation.degree = 30);
 
 # Writing to file
-tiff(filename = "Single-set Venn diagram.tiff", compression = "lzw");
+tiff(filename = "Three-set Venn diagram.tiff", compression = "lzw");
 	
-venn.plot <- draw.triple.venn(65, 75, 85, 35, 15, 25, 5, c("First", "Second", "Third"));
-
 grid.draw(venn.plot);
 
 dev.off();

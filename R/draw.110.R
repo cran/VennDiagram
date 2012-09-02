@@ -1,18 +1,18 @@
 ### FUNCTION TO DRAW SPECIAL CASE 110 #############################################################
 draw.110 <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reverse = FALSE, cat.default.pos = "outer", lwd = rep(2, 3), lty = rep("solid", 3), col = rep("black", 3), label.col = rep("black", 7), cex = rep(1, 7), fontface = rep("plain", 7), fontfamily = rep("serif", 7), cat.pos = c(-40, 40, 180), cat.dist = c(0.05, 0.05, 0.025), cat.col = rep("black", 3), cat.cex = rep(1, 3), cat.fontface = rep("plain", 3), cat.fontfamily = rep("serif", 3), cat.just = list(c(0.5, 1), c(0.5, 1), c(0.5, 0)), cat.prompts = FALSE, fill = NULL, alpha = rep(0.5, 3), ...) {
-	i <- 1;
-	while (i <= 3) {
+
+	for (i in 1:3) {
 		tmp <- VennDiagram::rotate.sp(c(a1, a2, a3, a4, a5, a6, a7), category, i, reverse);
-		if (tmp[[1]][4] == 0 & tmp[[1]][5] == 0) {i <- 4}
-		else {i <- i + 1}
+		if (0 == tmp[[1]][4] & 0 == tmp[[1]][5]) { break; }
 		}
+
 	a1 <- tmp[[1]][1];
 	a2 <- tmp[[1]][2];
 	a3 <- tmp[[1]][3];
 	a6 <- tmp[[1]][6];
 	a7 <- tmp[[1]][7];
 	category <- tmp[[2]];
-	#print(c(a1, a2, a3, a5, a6, category));
+
 	x.centre.1 <- 0.25;
 	y.centre.1 <- 0.5;
 	r1 <- 0.2;
@@ -65,6 +65,6 @@ draw.110 <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reverse 
 			fill = fill, 
 			alpha = alpha,
 			...
-		)
-	)
-}
+			)
+		);
+	}

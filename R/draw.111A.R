@@ -4,11 +4,12 @@ draw.111A <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reverse
 	i <- 1;
 	while (i <= 3) {
 		tmp <- VennDiagram::rotate.sp(c(a1, a2, a3, a4, a5, a6, a7), category, i, reverse);
-		if (tmp[[1]][7] == 0 & tmp[[1]][4] == 0) {i <- 4}
-		if (tmp[[1]][7] == 0 & tmp[[1]][6] == 0) {i <- 5}
-		if (tmp[[1]][7] != 0) {i <- i + 1}
+		if (tmp[[1]][7] == 0 & tmp[[1]][4] == 0) { i <- 4; }
+		if (tmp[[1]][7] == 0 & tmp[[1]][6] == 0) { i <- 5; }
+		if (tmp[[1]][7] != 0) { i <- i + 1; }
 		}
-	if (i == 5) { tmp <- rotate.sp(tmp[[1]], tmp[[2]], 1, reverse = TRUE) }
+
+	if (5 == i ) { tmp <- rotate.sp(tmp[[1]], tmp[[2]], 1, reverse = TRUE) }
 	a1 <- tmp[[1]][1];
 	a2 <- tmp[[1]][2];
 	a3 <- tmp[[1]][3];
@@ -66,6 +67,6 @@ draw.111A <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reverse
 			fill = fill, 
 			alpha = alpha,
 			...
-		)
-	)
-}
+			)
+		);
+	}

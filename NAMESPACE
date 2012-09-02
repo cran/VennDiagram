@@ -27,6 +27,7 @@ export(
 	draw.pairwise.venn,
 	draw.sp.case,
 	draw.triple.venn,
+	draw.quintuple.venn,
 	ell2poly,
 	ellipse,
 	find.cat.pos,

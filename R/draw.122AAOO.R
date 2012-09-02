@@ -1,14 +1,15 @@
 ### FUNCTION TO DRAW SPECIAL CASE 122AAOO #############################################################
 draw.122AAOO <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reverse = FALSE, reflection = FALSE, cat.default.pos = "outer", lwd = rep(2, 3), lty = rep("solid", 3), col = rep("black", 3), label.col = rep("black", 7), cex = rep(1, 7), fontface = rep("plain", 7), fontfamily = rep("serif", 7), cat.pos = c(-40, 40, 180), cat.dist = c(0.05, 0.05, 0.025), cat.col = rep("black", 3), cat.cex = rep(1, 3), cat.fontface = rep("plain", 3), cat.fontfamily = rep("serif", 3), cat.just = list(c(0.5, 1), c(0.5, 1), c(0.5, 0)), cat.prompts = FALSE, fill = NULL, alpha = rep(0.5, 3), scaled = TRUE, sep.dist = 0.05, ...) {
-	i <- 1;
-	while (i <= 3) {
+
+	for (i in 1:3) {
 		tmp <- VennDiagram::rotate.sp(c(a1, a2, a3, a4, a5, a6, a7), category, i, reverse);
-		if (tmp[[1]][1] == 0 & tmp[[1]][3] == 0 & tmp[[1]][4] == 0 & tmp[[1]][5] == 0 & tmp[[1]][6] == 0) {i <- 4}
-		else {i <- i + 1}
+		if (0 == tmp[[1]][1] & 0 == tmp[[1]][3] & 0 == tmp[[1]][4] & 0 == tmp[[1]][5] & 0 == tmp[[1]][6]) { break; }
 		}
+
 	a2 <- tmp[[1]][2];
 	a7 <- tmp[[1]][7];
 	category <- tmp[[2]];
+
 	if (scaled) {
 		r1 <- sqrt(a2 / pi);
 		r2 <- sqrt(a2 / pi);
@@ -18,7 +19,7 @@ draw.122AAOO <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reve
 		r2 <- r2 * shrink.factor;
 		r3 <- r3 * shrink.factor;
 		}
-	if (!scaled) {
+	else {
 		r1 <- 0.2;
 		r2 <- 0.2;
 		r3 <- 0.2;
@@ -68,6 +69,6 @@ draw.122AAOO <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reve
 			fill = fill, 
 			alpha = alpha,
 			...
-		)
-	)
-}
+			)
+		);
+	}

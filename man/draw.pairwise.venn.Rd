@@ -3,7 +3,7 @@
 \title{Draw a Venn Diagram with Two Sets}
 \description{Creates a Venn diagram with two sets.  Creates Euler diagrams when the dataset meets certain conditions.}
 \usage{
-draw.pairwise.venn(area1, area2, cross.area, category = rep("", 2), euler.d = TRUE, scaled = TRUE, inverted = FALSE, ext.text = TRUE, 
+draw.pairwise.venn(area1, area2, cross.area, category = rep("", 2), euler.d = TRUE, scaled = TRUE, inverted = FALSE, ext.text = TRUE, ext.percent = rep(0.05, 3),
 lwd = rep(2, 2), lty = rep("solid", 2), col = rep("black", 2), fill = NULL, alpha = rep(0.5, 2), label.col = rep("black", 3), cex = rep(1, 3), 
 fontface = rep("plain", 3), fontfamily = rep("serif", 3), cat.pos = c(-50, 50), cat.dist = rep(0.025, 2), cat.cex = rep(1, 2), 
 cat.col = rep("black", 2), cat.fontface = rep("plain", 2), cat.fontfamily = rep("serif", 2), cat.just = rep(list(c(0.5, 0.5)), 2), 
@@ -19,6 +19,7 @@ ext.line.lwd = 1, rotation.degree = 0, rotation.centre = c(0.5, 0.5), ind = TRUE
   \item{scaled}{Boolean indicating whether to scale circle sizes in the diagram according to set sizes or not}
   \item{inverted}{Boolean indicating whether the diagram should be mirrored long the vertical axis or not}
   \item{ext.text}{Boolean indicating whether to place area labels outside the circles in case of small partial areas or not}
+  \item{ext.percent}{A vector (length 3) indicating the proportion that a partial area has to be smaller than to trigger external text placement.  The elements allow for individual control of the areas in the order of area1, area2 and intersect area.}
   \item{lwd}{A vector (length 2) of numbers giving the \code{lwd} of the circles' circumferences}
   \item{lty}{A vector (length 2) giving the \code{lty} of the circles' circumferences}
   \item{col}{A vector (length 2) giving the colours of the circles' circumferences}
@@ -98,10 +99,8 @@ venn.plot <- draw.pairwise.venn(
 	);
 
 # Writing to file
-tiff(filename = "Single-set Venn diagram.tiff", compression = "lzw");
+tiff(filename = "Two-set Venn diagram.tiff", compression = "lzw");
 	
-venn.plot <- draw.pairwise.venn(100, 70, 30, c("First", "Second"));
-
 grid.draw(venn.plot);
 
 dev.off();

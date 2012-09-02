@@ -1,19 +1,20 @@
 ### FUNCTION TO DRAW SPECIAL CASE 120 #############################################################
 draw.120 <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reverse = FALSE, reflection = FALSE, cat.default.pos = "outer", lwd = rep(2, 3), lty = rep("solid", 3), col = rep("black", 3), label.col = rep("black", 7), cex = rep(1, 7), fontface = rep("plain", 7), fontfamily = rep("serif", 7), cat.pos = c(-40, 40, 180), cat.dist = c(0.05, 0.05, 0.025), cat.col = rep("black", 3), cat.cex = rep(1, 3), cat.fontface = rep("plain", 3), cat.fontfamily = rep("serif", 3), cat.just = list(c(0.5, 1), c(0.5, 1), c(0.5, 0)), cat.prompts = FALSE, fill = NULL, alpha = rep(0.5, 3), scaled = TRUE, sep.dist = 0.05, ...) {
-	i <- 1;
-	while (i <= 3) {
+
+	for (i in 1:3) {
 		tmp <- VennDiagram::rotate.sp(c(a1, a2, a3, a4, a5, a6, a7), category, i, reverse);
-		if (tmp[[1]][4] == 0 & tmp[[1]][5] == 0 & tmp[[1]][6] == 0) {i <- 4}
-		else {i <- i + 1}
+		if (0 == tmp[[1]][4] & 0 == tmp[[1]][5] & 0 == tmp[[1]][6]) { break; }
 		}
+
 	a1 <- tmp[[1]][1];
 	a2 <- tmp[[1]][2];
 	a3 <- tmp[[1]][3];
 	a7 <- tmp[[1]][7];
 	category <- tmp[[2]];
+
 	if (scaled) {
-		if (a1 >= a3) {	d <- find.dist(a1 + a2, a3 + a2, a2) }
-		if (a1 < a3)  { d <- find.dist(a3 + a2, a1 + a2, a2) }
+		if (a1 >= a3) {	d <- find.dist(a1 + a2, a3 + a2, a2); }
+		if (a1 < a3)  { d <- find.dist(a3 + a2, a1 + a2, a2); }
 		r1 <- sqrt((a1 + a2) / pi);
 		r2 <- sqrt((a3 + a2) / pi);
 		r3 <- sqrt(a7 / pi);
@@ -23,8 +24,7 @@ draw.120 <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reverse 
 		r3 <- r3 * shrink.factor;
 		d <- d * shrink.factor;
 		}
-		
-	if (!scaled) {
+	else {
 		r1 <- 0.2;
 		r2 <- 0.2;
 		r3 <- 0.2;
@@ -39,20 +39,21 @@ draw.120 <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reverse 
 	y.centre.1 <- upper.y;
 	y.centre.2 <- upper.y;
 	x.centre.3 <- lower.x;
+
 	if (scaled) {
 		if (a1 >= a3) {
-			y.centre.3 <- y.centre.1 - sqrt(((r1 + r3) * (1 + sep.dist))^ 2 - (x.centre.1 - x.centre.3) ^2)
+			y.centre.3 <- y.centre.1 - sqrt(((r1 + r3) * (1 + sep.dist))^ 2 - (x.centre.1 - x.centre.3) ^2);
 			}
 		if (a1 < a3) {
-			y.centre.3 <- y.centre.2 - sqrt(((r2 + r3) * (1 + sep.dist)) ^ 2 - (x.centre.2 - x.centre.3) ^2)
+			y.centre.3 <- y.centre.2 - sqrt(((r2 + r3) * (1 + sep.dist)) ^ 2 - (x.centre.2 - x.centre.3) ^2);
 			}
 		}
-	if (!scaled) {
+	else {
 		if (a1 >= a3) {
-			y.centre.3 <- y.centre.1 - sqrt((r1 + r3 + 0.03) ^ 2 - (x.centre.1 - x.centre.3) ^2)
+			y.centre.3 <- y.centre.1 - sqrt((r1 + r3 + 0.03) ^ 2 - (x.centre.1 - x.centre.3) ^2);
 			}
 		if (a1 < a3) {
-			y.centre.3 <- y.centre.2 - sqrt((r2 + r3 + 0.03) ^ 2 - (x.centre.2 - x.centre.3) ^2)
+			y.centre.3 <- y.centre.2 - sqrt((r2 + r3 + 0.03) ^ 2 - (x.centre.2 - x.centre.3) ^2);
 			}
 		}
 	
@@ -97,6 +98,6 @@ draw.120 <- function(a1, a2, a3, a4, a5, a6, a7, category = rep("", 3), reverse 
 			fill = fill, 
 			alpha = alpha,
 			...
-		)
-	)
-}
+			)
+		);
+	}
