@@ -3,10 +3,11 @@
 \title{Draw a Venn Diagram with Five Sets}
 \description{Creates a Venn diagram with five sets.}
 \usage{
-draw.quintuple.venn(area1, area2, area3, area4, area5, n12, n13, n14, n15, n23, n24, n25, n34, n35, n45, n123, n124, n125, n134, n135, n145, n234, n235, n245, n345, 
-n1234, n1235, n1245, n1345, n2345, n12345, category = rep("", 5), lwd = rep(2, 5), lty = rep("solid", 5), col = rep("black", 5), fill = NULL, alpha = rep(0.5, 5), label.col = rep("black", 31), 
-cex = rep(1, 31), fontface = rep("plain", 31), fontfamily = rep("serif", 31), cat.pos = c(0, 287.5, 215, 145, 70), cat.dist = rep(0.2, 5), cat.col = rep("black", 5), cat.cex = rep(1, 5), 
-cat.fontface = rep("plain", 5), cat.fontfamily = rep("serif", 5), cat.just = rep(list(c(0.5, 0.5)), 5), rotation.degree = 0, rotation.centre = c(0.5, 0.5), ind = TRUE, ...)
+draw.quintuple.venn(area1, area2, area3, area4, area5, n12, n13, n14, n15, n23, n24, n25, n34, n35, n45, n123, n124, n125, n134, n135, n145, n234, n235,
+	n245, n345, n1234, n1235, n1245, n1345, n2345, n12345, category = rep("", 5), lwd = rep(2, 5), lty = rep("solid", 5), col = rep("black", 5),
+	fill = NULL, alpha = rep(0.5, 5), label.col = rep("black", 31), cex = rep(1, 31), fontface = rep("plain", 31), fontfamily = rep("serif", 31),
+	cat.pos = c(0, 287.5, 215, 145, 70), cat.dist = rep(0.2, 5), cat.col = rep("black", 5), cat.cex = rep(1, 5), cat.fontface = rep("plain", 5),
+	cat.fontfamily = rep("serif", 5), cat.just = rep(list(c(0.5, 0.5)), 5), rotation.degree = 0, rotation.centre = c(0.5, 0.5), ind = TRUE, ...)
 }
 \arguments{
   \item{area1}{The size of the first set}
@@ -41,26 +42,26 @@ cat.fontface = rep("plain", 5), cat.fontfamily = rep("serif", 5), cat.just = rep
   \item{n2345}{The size of the intersection between the second, third, fourth and fifth sets}
   \item{n12345}{The size of the intersection between all five sets}
   \item{category}{A vector (length 5) of strings giving the category names of the sets}
-  \item{lwd}{A vector (length 5) of numbers giving the \code{lwd} of the circles' circumferences}
-  \item{lty}{A vector (length 5) giving the \code{lty} of the circles' circumferences}
+  \item{lwd}{A vector (length 5) of numbers giving the line width of the circles' circumferences}
+  \item{lty}{A vector (length 5) giving the dash pattern of the circles' circumferences}
   \item{col}{A vector (length 5) giving the colours of the circles' circumferences}
   \item{fill}{A vector (length 5) giving the colours of the circles' areas}
   \item{alpha}{A vector (length 5) giving the alpha transparency of the circles' areas}
   \item{label.col}{A vector (length 31) giving the colours of the areas' labels}
-  \item{cex}{A vector (length 31) giving the \code{cex} of the areas' labels}
-  \item{fontface}{A vector (length 31) giving the \code{fontface} of the areas' labels}
-  \item{fontfamily}{A vector (length 31) givibg the \code{fontfamily} of the areas' labels}
-  \item{cat.pos}{A vector (length 5) giving the positions (in degrees) of the category names along the circles, with 0 (default) at the 12 o'clock location}
+  \item{cex}{A vector (length 31) giving the size of the areas' labels}
+  \item{fontface}{A vector (length 31) giving the fontface of the areas' labels}
+  \item{fontfamily}{A vector (length 31) giving the fontfamily of the areas' labels}
+  \item{cat.pos}{A vector (length 5) giving the positions (in degrees) of the category names along the circles, with 0 (default) at 12 o'clock}
   \item{cat.dist}{A vector (length 5) giving the distances (in npc units) of the category names from the edges of the circles (can be negative)}
-  \item{cat.cex}{A vector (length 5) giving the \code{cex} of the category names}
+  \item{cat.cex}{A vector (length 5) giving the size of the category names}
   \item{cat.col}{A vector (length 5) giving the colours of the category names}
-  \item{cat.fontface}{A vector (length 5) giving the \code{fontface} of the category names}
-  \item{cat.fontfamily}{A vector (length 5) giving the \code{fontfamily} of the category names}
+  \item{cat.fontface}{A vector (length 5) giving the fontface of the category names}
+  \item{cat.fontfamily}{A vector (length 5) giving the fontfamily of the category names}
   \item{cat.just}{List of 5 vectors of length 2 indicating horizontal and vertical justification of each category name}
   \item{rotation.degree}{Number of degrees to rotate the entire diagram}
   \item{rotation.centre}{A vector (length 2) indicating (x,y) of the rotation centre}
   \item{ind}{Boolean indicating whether the function is to automatically draw the diagram before returning the gList object or not}
-  \item{...}{Additional arguments to be passed to or from other methods, including \code{margin}, which indicates amount of whitespace around the final diagram in npc units}
+  \item{...}{Additional arguments to be passed, including \code{margin}, which indicates amount of whitespace around the final diagram in npc units}
   }
 \details{
 The function defaults to placing the ellipses representing the areas 1 to 5 in a counterclockwise fashion.  Refer to the example below to see how the 31 partial areas are
@@ -74,39 +75,39 @@ Grid::grid.draw can be used to draw the gList object in a graphical device.
 \examples{
 # Reference five-set diagram
 venn.plot <- draw.quintuple.venn(
-	area1 = 301, 
-	area2 = 321, 
-	area3 = 311, 
-	area4 = 321, 
-	area5 = 301, 
-	n12 = 188, 
-	n13 = 191, 
-	n14 = 184, 
-	n15 = 177, 
-	n23 = 194, 
-	n24 = 197, 
-	n25 = 190, 
-	n34 = 190, 
-	n35 = 173, 
-	n45 = 186, 
-	n123 = 112, 
-	n124 = 108, 
-	n125 = 108, 
-	n134 = 111, 
-	n135 = 104, 
-	n145 = 104, 
-	n234 = 111, 
-	n235 = 107, 
-	n245 = 110, 
-	n345 = 100, 
-	n1234 = 61, 
-	n1235 = 60, 
-	n1245 = 59, 
-	n1345 = 58, 
-	n2345 = 57, 
-	n12345 = 31, 
-	category = c("A", "B", "C", "D", "E"), 
-	fill = c("dodgerblue", "goldenrod1", "darkorange1", "seagreen3", "orchid3"), 
+	area1 = 301,
+	area2 = 321,
+	area3 = 311,
+	area4 = 321,
+	area5 = 301,
+	n12 = 188,
+	n13 = 191,
+	n14 = 184,
+	n15 = 177,
+	n23 = 194,
+	n24 = 197,
+	n25 = 190,
+	n34 = 190,
+	n35 = 173,
+	n45 = 186,
+	n123 = 112,
+	n124 = 108,
+	n125 = 108,
+	n134 = 111,
+	n135 = 104,
+	n145 = 104,
+	n234 = 111,
+	n235 = 107,
+	n245 = 110,
+	n345 = 100,
+	n1234 = 61,
+	n1235 = 60,
+	n1245 = 59,
+	n1345 = 58,
+	n2345 = 57,
+	n12345 = 31,
+	category = c("A", "B", "C", "D", "E"),
+	fill = c("dodgerblue", "goldenrod1", "darkorange1", "seagreen3", "orchid3"),
 	cat.col = c("dodgerblue", "goldenrod1", "darkorange1", "seagreen3", "orchid3"),
 	cat.cex = 2,
 	margin = 0.05,
@@ -115,10 +116,8 @@ venn.plot <- draw.quintuple.venn(
 	);
 
 # Writing to file
-tiff(filename = "Five-set Venn diagram.tiff", compression = "lzw");
-	
+tiff(filename = "Quintuple_Venn_diagram.tiff", compression = "lzw");
 grid.draw(venn.plot);
-
 dev.off();
 }
 \keyword{hplot}

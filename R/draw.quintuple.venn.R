@@ -1,43 +1,123 @@
-### FUNCTION TO DRAW VENN DIAGRAM WITH FIVE SETS #################################################
-draw.quintuple.venn <- function(area1, area2, area3, area4, area5, n12, n13, n14, n15, n23, n24, n25, n34, n35, n45, n123, n124, n125, n134, n135, n145, n234, n235, n245, n345, n1234, n1235, n1245, n1345, n2345, n12345, category = rep("", 5), lwd = rep(2, 5), lty = rep("solid", 5), col = rep("black", 5), fill = NULL, alpha = rep(0.5, 5), label.col = rep("black", 31), cex = rep(1, 31), fontface = rep("plain", 31), fontfamily = rep("serif", 31), cat.pos = c(0, 287.5, 215, 145, 70), cat.dist = rep(0.2, 5), cat.col = rep("black", 5), cat.cex = rep(1, 5), cat.fontface = rep("plain", 5), cat.fontfamily = rep("serif", 5), cat.just = rep(list(c(0.5, 0.5)), 5), rotation.degree = 0, rotation.centre = c(0.5, 0.5), ind = TRUE, ...) {
+# The VennDiagram package is copyright (c) 2012 Ontario Institute for Cancer Research (OICR)
+# This package and its accompanying libraries is free software; you can redistribute it and/or modify it under the terms of the GPL
+# (either version 1, or at your option, any later version) or the Artistic License 2.0.  Refer to LICENSE for the full license text.
+# OICR makes no representations whatsoever as to the SOFTWARE contained herein.  It is experimental in nature and is provided WITHOUT
+# WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE OR ANY OTHER WARRANTY, EXPRESS OR IMPLIED. OICR MAKES NO REPRESENTATION
+# OR WARRANTY THAT THE USE OF THIS SOFTWARE WILL NOT INFRINGE ANY PATENT OR OTHER PROPRIETARY RIGHT.
+# By downloading this SOFTWARE, your Institution hereby indemnifies OICR against any loss, claim, damage or liability, of whatsoever kind or
+# nature, which may arise from your Institution's respective use, handling or storage of the SOFTWARE.
+# If publications result from research using this SOFTWARE, we ask that the Ontario Institute for Cancer Research be acknowledged and/or
+# credit be given to OICR scientists, as scientifically appropriate.
 
-#area1 > area2 > area3 > area4 > area5
+### FUNCTION TO DRAW VENN DIAGRAM WITH FIVE SETS #################################################
+draw.quintuple.venn <- function(
+	area1,
+	area2,
+	area3,
+	area4,
+	area5,
+	n12,
+	n13,
+	n14,
+	n15,
+	n23,
+	n24,
+	n25,
+	n34,
+	n35,
+	n45,
+	n123,
+	n124,
+	n125,
+	n134,
+	n135,
+	n145,
+	n234,
+	n235,
+	n245,
+	n345,
+	n1234,
+	n1235,
+	n1245,
+	n1345,
+	n2345,
+	n12345,
+	category = rep("", 5),
+	lwd = rep(2, 5),
+	lty = rep("solid", 5),
+	col = rep("black", 5),
+	fill = NULL,
+	alpha = rep(0.5, 5),
+	label.col = rep("black", 31),
+	cex = rep(1, 31),
+	fontface = rep("plain", 31),
+	fontfamily = rep("serif", 31),
+	cat.pos = c(0, 287.5, 215, 145, 70),
+	cat.dist = rep(0.2, 5),
+	cat.col = rep("black", 5),
+	cat.cex = rep(1, 5),
+	cat.fontface = rep("plain", 5),
+	cat.fontfamily = rep("serif", 5),
+	cat.just = rep(list(c(0.5, 0.5)), 5),
+	rotation.degree = 0,
+	rotation.centre = c(0.5, 0.5),
+	ind = TRUE,
+	...
+	) {
+
+	#area1 > area2 > area3 > area4 > area5
 	# check parameter lengths
-	if (length(category) == 1) {cat <- rep(category, 5)}
-	if (length(category) != 1 & length(category) != 5) { stop("Unexpected parameter length for 'category'") }
-	if (length(lwd) == 1) {lwd <- rep(lwd, 5)}
-	if (length(lwd) != 1 & length(lwd) != 5) { stop("Unexpected parameter length for 'lwd'") }
-	if (length(lty) == 1) {lty <- rep(lty, 5)}
-	if (length(lty) != 1 & length(lty) != 5) { stop("Unexpected parameter length for 'lty'") }
-	if (length(col) == 1) {col <- rep(col, 5)}
-	if (length(col) != 1 & length(col) != 5) { stop("Unexpected parameter length for 'col'") }
-	if (length(label.col) == 1) {label.col <- rep(label.col, 31)}
-	if (length(label.col) != 1 & length(label.col) != 31) { stop("Unexpected parameter length for 'label.col'") }
-	if (length(cex) == 1) {cex <- rep(cex, 31)}
-	if (length(cex) != 1 & length(cex) != 31) { stop("Unexpected parameter length for 'cex'") }
-	if (length(fontface) == 1) {fontface <- rep(fontface, 31)}
-	if (length(fontface) != 1 & length(fontface) != 31) { stop("Unexpected parameter length for 'fontface'") }
-	if (length(fontfamily) == 1) {fontfamily <- rep(fontfamily, 31)}
-	if (length(fontfamily) != 1 & length(fontfamily) != 31) { stop("Unexpected parameter length for 'fontfamily'") }
-	if (length(fill) == 1) {fill <- rep(fill, 5)}
-	if (length(fill) != 1 & length(fill) != 5 & length(fill) != 0) { stop("Unexpected parameter length for 'fill'") }
-	if (length(alpha) == 1) {alpha <- rep(alpha, 5)}
-	if (length(alpha) != 1 & length(alpha) != 5 & length(alpha) != 0) { stop("Unexpected parameter length for 'alpha'") }
-	if (length(cat.pos) == 1) {cat.pos <- rep(cat.pos, 5)}
-	if (length(cat.pos) != 1 & length(cat.pos) != 5) { stop("Unexpected parameter length for 'cat.pos'") }
-	if (length(cat.dist) == 1) {cat.dist <- rep(cat.dist, 5)}
-	if (length(cat.dist) != 1 & length(cat.dist) != 5) { stop("Unexpected parameter length for 'cat.dist'") }
-	if (length(cat.col) == 1) {cat.col <- rep(cat.col, 5)}
-	if (length(cat.col) != 1 & length(cat.col) != 5) { stop("Unexpected parameter length for 'cat.col'") }
-	if (length(cat.cex) == 1) {cat.cex <- rep(cat.cex, 5)}
-	if (length(cat.cex) != 1 & length(cat.cex) != 5) { stop("Unexpected parameter length for 'cat.cex'") }
-	if (length(cat.fontface) == 1) {cat.fontface <- rep(cat.fontface, 5)}
-	if (length(cat.fontface) != 1 & length(cat.fontface) != 5) { stop("Unexpected parameter length for 'cat.fontface'") }
-	if (length(cat.fontfamily) == 1) {cat.fontfamily <- rep(cat.fontfamily, 5)}
-	if (length(cat.fontfamily) != 1 & length(cat.fontfamily) != 5) { stop("Unexpected parameter length for 'cat.fontfamily'") }
-	if (!(class(cat.just) == "list" & length(cat.just) == 5 & length(cat.just[[1]]) == 2 & length(cat.just[[2]]) == 2 & length(cat.just[[3]]) == 2 & length(cat.just[[4]]) == 2 & length(cat.just[[5]]) == 2)) { stop("Unexpected parameter format for 'cat.just'") }
+	if (length(category) == 1) { cat <- rep(category, 5); }
+	else if (length(category) != 5) { stop("Unexpected parameter length for 'category'"); }
+
+	if (length(lwd) == 1) { lwd <- rep(lwd, 5); }
+	else if (length(lwd) != 5) { stop("Unexpected parameter length for 'lwd'"); }
+
+	if (length(lty) == 1) { lty <- rep(lty, 5); }
+	else if (length(lty) != 5) { stop("Unexpected parameter length for 'lty'"); }
+
+	if (length(col) == 1) { col <- rep(col, 5); }
+	else if (length(col) != 5) { stop("Unexpected parameter length for 'col'"); }
+
+	if (length(label.col) == 1) { label.col <- rep(label.col, 31); }
+	else if (length(label.col) != 31) { stop("Unexpected parameter length for 'label.col'"); }
+
+	if (length(cex) == 1) { cex <- rep(cex, 31); }
+	else if (length(cex) != 31) { stop("Unexpected parameter length for 'cex'"); }
+
+	if (length(fontface) == 1) { fontface <- rep(fontface, 31); }
+	else if (length(fontface) != 31) { stop("Unexpected parameter length for 'fontface'"); }
+
+	if (length(fontfamily) == 1) { fontfamily <- rep(fontfamily, 31); }
+	else if (length(fontfamily) != 31) { stop("Unexpected parameter length for 'fontfamily'"); }
+
+	if (length(fill) == 1) { fill <- rep(fill, 5); }
+	else if (length(fill) != 5 & length(fill) != 0) { stop("Unexpected parameter length for 'fill'"); }
+
+	if (length(alpha) == 1) { alpha <- rep(alpha, 5); }
+	else if (length(alpha) != 5 & length(alpha) != 0) { stop("Unexpected parameter length for 'alpha'"); }
+
+	if (length(cat.pos) == 1) { cat.pos <- rep(cat.pos, 5); }
+	else if (length(cat.pos) != 5) { stop("Unexpected parameter length for 'cat.pos'"); }
+
+	if (length(cat.dist) == 1) { cat.dist <- rep(cat.dist, 5); }
+	else if (length(cat.dist) != 5) { stop("Unexpected parameter length for 'cat.dist'"); }
+
+	if (length(cat.col) == 1) { cat.col <- rep(cat.col, 5); }
+	else if (length(cat.col) != 5) { stop("Unexpected parameter length for 'cat.col'"); }
+
+	if (length(cat.cex) == 1) { cat.cex <- rep(cat.cex, 5); }
+	else if (length(cat.cex) != 5) { stop("Unexpected parameter length for 'cat.cex'"); }
+
+	if (length(cat.fontface) == 1) { cat.fontface <- rep(cat.fontface, 5); }
+	else if (length(cat.fontface) != 5) { stop("Unexpected parameter length for 'cat.fontface'"); }
+
+	if (length(cat.fontfamily) == 1) { cat.fontfamily <- rep(cat.fontfamily, 5); }
+	else if (length(cat.fontfamily) != 5) { stop("Unexpected parameter length for 'cat.fontfamily'"); }
+
+	if (!(class(cat.just) == "list" & length(cat.just) == 5 & length(cat.just[[1]]) == 2 & length(cat.just[[2]]) == 2 & length(cat.just[[3]]) == 2 & length(cat.just[[4]]) == 2 & length(cat.just[[5]]) == 2)) { stop("Unexpected parameter format for 'cat.just'"); }
 	cat.pos <- cat.pos + rotation.degree;
-	
+
 	# generate partial areas from given arguments
 	a31 <- n12345;
 	a30 <- n1234 - a31;
@@ -72,7 +152,9 @@ draw.quintuple.venn <- function(area1, area2, area3, area4, area5, n12, n13, n14
 	a1 <- area1 - a7 - a8 - a18 - a17 - a19 - a9 - a27 - a28 - a31 - a20 - a30 - a29 - a22 - a23 - a12;
 
 	# check plausibility and 0 partial areas
-	if (any(a1 < 0, a2 < 0, a3 < 0, a4 < 0, a5 < 0, a6 < 0, a7 < 0, a8 < 0, a9 < 0, a10 < 0, a11 < 0, a12 < 0, a13 < 0, a14 < 0, a15 < 0, a16 < 0, a17 < 0, a18 < 0, a19 < 0, a20 < 0, a21 < 0, a22 < 0, a23 < 0, a24 < 0, a25 < 0, a26 < 0, a27 < 0, a28 < 0, a29 < 0, a30 < 0, a31 < 0)) { stop("Impossible: partial areas negative") }
+	if (any(a1 < 0, a2 < 0, a3 < 0, a4 < 0, a5 < 0, a6 < 0, a7 < 0, a8 < 0, a9 < 0, a10 < 0, a11 < 0, a12 < 0, a13 < 0, a14 < 0, a15 < 0, a16 < 0, a17 < 0, a18 < 0, a19 < 0, a20 < 0, a21 < 0, a22 < 0, a23 < 0, a24 < 0, a25 < 0, a26 < 0, a27 < 0, a28 < 0, a29 < 0, a30 < 0, a31 < 0)) {
+		stop("Impossible: partial areas negative")
+		}
 
 	# initialize gList to hold all Grobs generated
 	grob.list <- gList();
@@ -81,142 +163,82 @@ draw.quintuple.venn <- function(area1, area2, area3, area4, area5, n12, n13, n14
 	dist <- 0.13;
 	a <- 0.24;
 	b <- 0.46;
-	init.angle <- -20
-	tmp <- VennDiagram::ellipse(
-		x = 0.5 + dist * sin(init.angle * pi / 180), 
-		y = 0.5 + dist * cos(init.angle * pi / 180), 
-		a = a,
-		b = b,
-		rotation = 0,
-		gp = gpar(
-			lty = 0,
-			fill = fill[1],
-			alpha = alpha[1]
-			)
+	init.angle <- -20;
+
+	ellipse.positions <- matrix(
+		nrow = 5,
+		ncol = 3
 		);
-	grob.list <- gList(grob.list, tmp);
-	tmp <- VennDiagram::ellipse(
-		x = 0.5 + dist * cos((init.angle + 72 - 90) * pi / 180), 
-		y = 0.5 - dist * sin((init.angle + 72 - 90) * pi / 180),
-		a = a,
-		b = b,
-		rotation = -72.5,
-		gp = gpar(
-			lty = 0,
-			fill = fill[5],
-			alpha = alpha[5]
-			)
+	colnames(ellipse.positions) <- c('x', 'y', 'rotation');
+
+	ellipse.positions[1,] <- c(
+		0.5 + dist * sin(init.angle * pi / 180),
+		0.5 + dist * cos(init.angle * pi / 180),
+		0
 		);
-	grob.list <- gList(grob.list, tmp);
-	tmp <- VennDiagram::ellipse(
-		x = 0.5 + dist * sin((180 - 144 - init.angle) * pi / 180), 
-		y = 0.5 - dist * cos((180 - 144 - init.angle) * pi / 180), 
-		a = a,
-		b = b,
-		rotation = 35,
-		gp = gpar(
-			lty = 0,
-			fill = fill[4],
-			alpha = alpha[4]
-			)
+
+	ellipse.positions[2,] <- c(
+		0.5 - dist * cos((288 + init.angle - 270) * pi / 180),
+		0.5 + dist * sin((288 + init.angle - 270) * pi / 180),
+		-110
 		);
-	grob.list <- gList(grob.list, tmp);
-	tmp <- VennDiagram::ellipse(
-		x = 0.5 - dist * sin((216 + init.angle - 180) * pi / 180), 
-		y = 0.5 - dist * cos((216 + init.angle - 180) * pi / 180), 
-		a = a,
-		b = b,
-		rotation = 145,
-		gp = gpar(
-			lty = 0,
-			fill = fill[3],
-			alpha = alpha[3]
-			)
+
+	ellipse.positions[3,] <- c(
+		0.5 - dist * sin((216 + init.angle - 180) * pi / 180),
+		0.5 - dist * cos((216 + init.angle - 180) * pi / 180),
+		145
 		);
-	grob.list <- gList(grob.list, tmp);
-	tmp <- VennDiagram::ellipse(
-		x = 0.5 - dist * cos((288 + init.angle - 270) * pi / 180), 
-		y = 0.5 + dist * sin((288 + init.angle - 270) * pi / 180), 
-		a = a,
-		b = b,
-		rotation = -110,
-		gp = gpar(
-			lty = 0,
-			fill = fill[2],
-			alpha = alpha[2]
-			)
+
+	ellipse.positions[4,] <- c(
+		0.5 + dist * sin((180 - 144 - init.angle) * pi / 180),
+		0.5 - dist * cos((180 - 144 - init.angle) * pi / 180),
+		35
 		);
-	grob.list <- gList(grob.list, tmp);
-	tmp <- VennDiagram::ellipse(
-		x = 0.5 + dist * sin(init.angle * pi / 180), 
-		y = 0.5 + dist * cos(init.angle * pi / 180), 
-		a = a,
-		b = b,
-		rotation = 0,
-		gp = gpar(
-			lwd = lwd[1],
-			lty = lty[1],
-			col = col[1],
-			fill = 'transparent'
-			)
+
+	ellipse.positions[5,] <- c(
+		0.5 + dist * cos((init.angle + 72 - 90) * pi / 180),
+		0.5 - dist * sin((init.angle + 72 - 90) * pi / 180),
+		-72.5
 		);
-	grob.list <- gList(grob.list, tmp);
-	tmp <- VennDiagram::ellipse(
-		x = 0.5 + dist * cos((init.angle + 72 - 90) * pi / 180), 
-		y = 0.5 - dist * sin((init.angle + 72 - 90) * pi / 180),
-		a = a,
-		b = b,
-		rotation = -72.5,
-		gp = gpar(
-			lwd = lwd[5],
-			lty = lty[5],
-			col = col[5],
-			fill = 'transparent'
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
-	tmp <- VennDiagram::ellipse(
-		x = 0.5 + dist * sin((180 - 144 - init.angle) * pi / 180), 
-		y = 0.5 - dist * cos((180 - 144 - init.angle) * pi / 180), 
-		a = a,
-		b = b,
-		rotation = 35,
-		gp = gpar(
-			lwd = lwd[4],
-			lty = lty[4],
-			col = col[4],
-			fill = 'transparent'
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
-	tmp <- VennDiagram::ellipse(
-		x = 0.5 - dist * sin((216 + init.angle - 180) * pi / 180), 
-		y = 0.5 - dist * cos((216 + init.angle - 180) * pi / 180), 
-		a = a,
-		b = b,
-		rotation = 145,
-		gp = gpar(
-			lwd = lwd[3],
-			lty = lty[3],
-			col = col[3],
-			fill = 'transparent'
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
-	tmp <- VennDiagram::ellipse(
-		x = 0.5 - dist * cos((288 + init.angle - 270) * pi / 180), 
-		y = 0.5 + dist * sin((288 + init.angle - 270) * pi / 180), 
-		a = a,
-		b = b,
-		rotation = -110,
-		gp = gpar(
-			lwd = lwd[2],
-			lty = lty[2],
-			col = col[2],
-			fill = 'transparent'
-			)
-		);
-	grob.list <- gList(grob.list, tmp);	
+
+	# create the ellipses
+	for (i in 1:5) {
+		grob.list <- gList(
+			grob.list,
+			VennDiagram::ellipse(
+				x = ellipse.positions[i,'x'],
+				y = ellipse.positions[i,'y'],
+				a = a,
+				b = b,
+				rotation = ellipse.positions[i,'rotation'],
+				gp = gpar(
+					lty = 0,
+					fill = fill[i],
+					alpha = alpha[i]
+					)
+				)
+			);
+		}
+
+	# create the ellipse borders
+	for (i in 1:5) {
+		grob.list <- gList(
+			grob.list,
+			VennDiagram::ellipse(
+				x = ellipse.positions[i,'x'],
+				y = ellipse.positions[i,'y'],
+				a = a,
+				b = b,
+				rotation = ellipse.positions[i,'rotation'],
+				gp = gpar(
+					lwd = lwd[i],
+					lty = lty[i],
+					col = col[i],
+					fill = 'transparent'
+					)
+				)
+			);
+		}
 
 	# add area labels
 	label.matrix <- matrix(
@@ -273,80 +295,36 @@ draw.quintuple.venn <- function(area1, area2, area3, area4, area5, n12, n13, n14
 		}
 
 	# find the location and plot all the category names
-	cat.pos.1 <- find.cat.pos(0.4555, 0.9322, cat.pos[1], cat.dist[1])
-	tmp <- textGrob(
-		label = category[1],
-		x = cat.pos.1$x,
-		y = cat.pos.1$y,
-		just = cat.just[[1]],
-		gp = gpar(
-			col = cat.col[1],
-			cex = cat.cex[1],
-			fontface = cat.fontface[1],
-			fontfamily = cat.fontfamily[1]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
+	cat.pos.x <- c(0.4555, 0.08, 0.3, 0.79, 0.90);
+	cat.pos.y <- c(0.9322, 0.60, 0.1, 0.17, 0.68);
 
-	cat.pos.2 <- find.cat.pos(0.08, 0.60, cat.pos[2], cat.dist[2])
-	tmp <- textGrob(
-		label = category[2],
-		x = cat.pos.2$x,
-		y = cat.pos.2$y,
-		just = cat.just[[2]],
-		gp = gpar(
-			col = cat.col[2],
-			cex = cat.cex[2],
-			fontface = cat.fontface[2],
-			fontfamily = cat.fontfamily[2]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
+	for (i in 1:5) {
 
-	cat.pos.3 <- find.cat.pos(0.3, 0.1, cat.pos[3], cat.dist[3])
-	tmp <- textGrob(
-		label = category[3],
-		x = cat.pos.3$x,
-		y = cat.pos.3$y,
-		just = cat.just[[3]],
-		gp = gpar(
-			col = cat.col[3],
-			cex = cat.cex[3],
-			fontface = cat.fontface[3],
-			fontfamily = cat.fontfamily[3]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
+		# find the label position
+		this.cat.pos <- find.cat.pos(
+			x = cat.pos.x[i],
+			y = cat.pos.y[i],
+			pos = cat.pos[i],
+			dist = cat.dist[i]
+			);
 
-	cat.pos.4 <- find.cat.pos(0.79, 0.17, cat.pos[4], cat.dist[4])
-	tmp <- textGrob(
-		label = category[4],
-		x = cat.pos.4$x,
-		y = cat.pos.4$y,
-		just = cat.just[[4]],
-		gp = gpar(
-			col = cat.col[4],
-			cex = cat.cex[4],
-			fontface = cat.fontface[4],
-			fontfamily = cat.fontfamily[4]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
-
-	cat.pos.5 <- find.cat.pos(0.9, 0.68, cat.pos[5], cat.dist[5])
-	tmp <- textGrob(
-		label = category[5],
-		x = cat.pos.5$x,
-		y = cat.pos.5$y,
-		just = cat.just[[5]],
-		gp = gpar(
-			col = cat.col[5],
-			cex = cat.cex[5],
-			fontface = cat.fontface[5],
-			fontfamily = cat.fontfamily[5]
-			)
-		);
-	grob.list <- gList(grob.list, tmp);
+		# and plot it
+		grob.list <- gList(
+			grob.list,
+			textGrob(
+				label = category[i],
+				x = this.cat.pos$x,
+				y = this.cat.pos$y,
+				just = cat.just[[i]],
+				gp = gpar(
+					col = cat.col[i],
+					cex = cat.cex[i],
+					fontface = cat.fontface[i],
+					fontfamily = cat.fontfamily[i]
+					)
+				)
+			);
+		}
 
 	#if (exists("margin")) {margin <- margin + 0.05} else {margin <- 0.05}
 
@@ -354,5 +332,4 @@ draw.quintuple.venn <- function(area1, area2, area3, area4, area5, n12, n13, n14
 	grob.list <- VennDiagram::adjust.venn(VennDiagram::rotate.venn.degrees(grob.list, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
 	if (ind) { grid.draw(grob.list); }
 	return(grob.list);
-
 	}

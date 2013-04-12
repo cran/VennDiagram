@@ -1,7 +1,6 @@
 export(
 	add.title,
 	adjust.venn,
-	circle,
 	decide.special.case,
 	draw.001,
 	draw.010,

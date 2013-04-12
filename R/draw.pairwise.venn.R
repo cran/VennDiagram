@@ -1,52 +1,126 @@
+# The VennDiagram package is copyright (c) 2012 Ontario Institute for Cancer Research (OICR)
+# This package and its accompanying libraries is free software; you can redistribute it and/or modify it under the terms of the GPL
+# (either version 1, or at your option, any later version) or the Artistic License 2.0.  Refer to LICENSE for the full license text.
+# OICR makes no representations whatsoever as to the SOFTWARE contained herein.  It is experimental in nature and is provided WITHOUT
+# WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE OR ANY OTHER WARRANTY, EXPRESS OR IMPLIED. OICR MAKES NO REPRESENTATION
+# OR WARRANTY THAT THE USE OF THIS SOFTWARE WILL NOT INFRINGE ANY PATENT OR OTHER PROPRIETARY RIGHT.
+# By downloading this SOFTWARE, your Institution hereby indemnifies OICR against any loss, claim, damage or liability, of whatsoever kind or
+# nature, which may arise from your Institution's respective use, handling or storage of the SOFTWARE.
+# If publications result from research using this SOFTWARE, we ask that the Ontario Institute for Cancer Research be acknowledged and/or
+# credit be given to OICR scientists, as scientifically appropriate.
+
 ### FUNCTION TO DRAW VENN DIAGRAM WITH TWO SETS ###################################################
-draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), euler.d = TRUE, scaled = TRUE, inverted = FALSE, ext.text = TRUE, ext.percent = rep(0.05, 3), lwd = rep(2, 2), lty = rep("solid", 2), col = rep("black", 2), fill = NULL, alpha = rep(0.5, 2), label.col = rep("black", 3), cex = rep(1, 3), fontface = rep("plain", 3), fontfamily = rep("serif", 3), cat.pos = c(-50, 50), cat.dist = rep(0.025, 2), cat.cex = rep(1, 2), cat.col = rep("black", 2), cat.fontface = rep("plain", 2), cat.fontfamily = rep("serif", 2), cat.just = rep(list(c(0.5, 0.5)), 2), cat.default.pos = "outer", cat.prompts = FALSE, ext.pos = rep(0, 2), ext.dist = rep(0, 2), ext.line.lty = "solid", ext.length = rep(0.95, 2), ext.line.lwd = 1, rotation.degree = 0, rotation.centre = c(0.5, 0.5), ind = TRUE, sep.dist = 0.05, offset = 0, ...) {
+draw.pairwise.venn <- function(
+	area1,
+	area2,
+	cross.area,
+	category = rep("", 2),
+	euler.d = TRUE,
+	scaled = TRUE,
+	inverted = FALSE,
+	ext.text = TRUE,
+	ext.percent = rep(0.05, 3),
+	lwd = rep(2, 2),
+	lty = rep("solid", 2),
+	col = rep("black", 2),
+	fill = NULL,
+	alpha = rep(0.5, 2),
+	label.col = rep("black", 3),
+	cex = rep(1, 3),
+	fontface = rep("plain", 3),
+	fontfamily = rep("serif", 3),
+	cat.pos = c(-50, 50),
+	cat.dist = rep(0.025, 2),
+	cat.cex = rep(1, 2),
+	cat.col = rep("black", 2),
+	cat.fontface = rep("plain", 2),
+	cat.fontfamily = rep("serif", 2),
+	cat.just = rep(list(c(0.5, 0.5)), 2),
+	cat.default.pos = "outer",
+	cat.prompts = FALSE,
+	ext.pos = rep(0, 2),
+	ext.dist = rep(0, 2),
+	ext.line.lty = "solid",
+	ext.length = rep(0.95, 2),
+	ext.line.lwd = 1,
+	rotation.degree = 0,
+	rotation.centre = c(0.5, 0.5),
+	ind = TRUE,
+	sep.dist = 0.05,
+	offset = 0,
+	...
+	) {
 
 	# area1 > area2 OR area1 < area2 plots the same Venn diagram.  Invert using the "inverted" argument.
 	# check parameter lengths and plausibility of Venn diagram
-	if (length(category) == 1) {category <- rep(category, 2)}
-	if (length(category) != 1 & length(category) != 2) { stop("Unexpected parameter length for 'category'") }
-	if (length(ext.percent) == 1) {ext.percent <- rep(ext.percent, 3)}
-	if (length(ext.percent) != 3) { stop("Unexpected parameter length for 'ext.percent'") }
-	if (length(ext.pos) == 1) {ext.pos <- rep(ext.pos, 2)}
-	if (length(ext.pos) != 1 & length(ext.pos) != 2) { stop("Unexpected parameter length for 'ext.pos'") }
-	if (length(ext.dist) == 1) {ext.dist <- rep(ext.dist, 2)}
-	if (length(ext.dist) != 1 & length(ext.dist) != 2) { stop("Unexpected parameter length for 'ext.dist'") }
-	if (length(ext.length) == 1) {ext.length <- rep(ext.length, 2)}
-	if (length(ext.length) != 1 & length(ext.length) != 2) { stop("Unexpected parameter length for 'ext.length'") }
-	if (length(lwd) == 1) {lwd <- rep(lwd, 2)}
-	if (length(lwd) != 1 & length(lwd) != 2) { stop("Unexpected parameter length for 'lwd'") }
-	if (length(lty) == 1) {lty <- rep(lty, 2)}
-	if (length(lty) != 1 & length(lty) != 2) { stop("Unexpected parameter length for 'lty'") }
-	if (length(col) == 1) {col <- rep(col, 2)}
-	if (length(col) != 1 & length(col) != 2) { stop("Unexpected parameter length for 'col'") }
-	if (length(label.col) == 1) {label.col <- rep(label.col, 3)}
-	if (length(label.col) != 1 & length(label.col) != 3) { stop("Unexpected parameter length for 'label.col'") }
-	if (length(cex) == 1) {cex <- rep(cex, 3)}
-	if (length(cex) != 1 & length(cex) != 3) { stop("Unexpected parameter length for 'cex'") }
-	if (length(fontface) == 1) {fontface <- rep(fontface, 3)}
-	if (length(fontface) != 1 & length(fontface) != 3) { stop("Unexpected parameter length for 'fontface'") }
-	if (length(fontfamily) == 1) {fontfamily <- rep(fontfamily, 3)}
-	if (length(fontfamily) != 1 & length(fontfamily) != 3) { stop("Unexpected parameter length for 'fontfamily'") }
-	if (length(fill) == 1) {fill <- rep(fill, 2)}
-	if (length(fill) != 1 & length(fill) != 2 & length(fill) != 0) { stop("Unexpected parameter length for 'fill'") }
-	if (length(alpha) == 1) {alpha <- rep(alpha, 2)}
-	if (length(alpha) != 1 & length(alpha) != 2 & length(alpha) != 0) { stop("Unexpected parameter length for 'alpha'") }
-	if (length(ext.line.lwd) != 1) { stop("Unexpected parameter length for 'ext.line.lwd'") }
-	if (length(cat.pos) == 1) {cat.pos <- rep(cat.pos, 2)}
-	if (length(cat.pos) != 1 & length(cat.pos) != 2 ) { stop("Unexpected parameter length for 'cat.pos'") }
-	if (length(cat.dist) == 1) {cat.dist <- rep(cat.dist, 2)}
-	if (length(cat.dist) != 1 & length(cat.dist) != 2) { stop("Unexpected parameter length for 'cat.dist'") }
-	if (length(cat.col) == 1) {cat.col <- rep(cat.col, 2)}
-	if (length(cat.col) != 1 & length(cat.col) != 2) { stop("Unexpected parameter length for 'cat.col'") }
-	if (length(cat.cex) == 1) {cat.cex <- rep(cat.cex, 2)}
-	if (length(cat.cex) != 1 & length(cat.cex) != 2) { stop("Unexpected parameter length for 'cat.cex'") }
-	if (length(cat.fontface) == 1) {cat.fontface <- rep(cat.fontface, 2)}
-	if (length(cat.fontface) != 1 & length(cat.fontface) != 2) { stop("Unexpected parameter length for 'cat.fontface'") }
-	if (length(cat.fontfamily) == 1) {cat.fontfamily <- rep(cat.fontfamily, 2)}
-	if (length(cat.fontfamily) != 1 & length(cat.fontfamily) != 2) { stop("Unexpected parameter length for 'cat.fontfamily'") }
-	if (length(offset) != 1) { stop("Unexpected parameter length for 'offset'. Try using 'rotation.degree' to achieve non-vertical offsets") }
-	if (!(class(cat.just) == "list" & length(cat.just) == 2 & length(cat.just[[1]]) == 2 & length(cat.just[[2]]) == 2)) { stop("Unexpected parameter format for 'cat.just'") }
-	
+	if (length(category) == 1) { category <- rep(category, 2); }
+	else if (length(category) != 2) { stop("Unexpected parameter length for 'category'"); }
+
+	if (length(ext.percent) == 1) { ext.percent <- rep(ext.percent, 3); }
+	else if (length(ext.percent) != 3) { stop("Unexpected parameter length for 'ext.percent'"); }
+
+	if (length(ext.pos) == 1) { ext.pos <- rep(ext.pos, 2); }
+	else if (length(ext.pos) != 2) { stop("Unexpected parameter length for 'ext.pos'"); }
+
+	if (length(ext.dist) == 1) { ext.dist <- rep(ext.dist, 2); }
+	else if (length(ext.dist) != 2) { stop("Unexpected parameter length for 'ext.dist'"); }
+
+	if (length(ext.length) == 1) { ext.length <- rep(ext.length, 2); }
+	else if (length(ext.length) != 2) { stop("Unexpected parameter length for 'ext.length'"); }
+
+	if (length(lwd) == 1) { lwd <- rep(lwd, 2); }
+	else if (length(lwd) != 2) { stop("Unexpected parameter length for 'lwd'"); }
+
+	if (length(lty) == 1) { lty <- rep(lty, 2); }
+	else if (length(lty) != 2) { stop("Unexpected parameter length for 'lty'"); }
+
+	if (length(col) == 1) { col <- rep(col, 2); }
+	else if (length(col) != 2) { stop("Unexpected parameter length for 'col'"); }
+
+	if (length(label.col) == 1) { label.col <- rep(label.col, 3); }
+	else if (length(label.col) != 3) { stop("Unexpected parameter length for 'label.col'"); }
+
+	if (length(cex) == 1) { cex <- rep(cex, 3); }
+	else if (length(cex) != 3) { stop("Unexpected parameter length for 'cex'"); }
+
+	if (length(fontface) == 1) { fontface <- rep(fontface, 3); }
+	else if (length(fontface) != 3) { stop("Unexpected parameter length for 'fontface'"); }
+
+	if (length(fontfamily) == 1) { fontfamily <- rep(fontfamily, 3); }
+	else if (length(fontfamily) != 3) { stop("Unexpected parameter length for 'fontfamily'"); }
+
+	if (length(fill) == 1) { fill <- rep(fill, 2); }
+	else if (length(fill) != 2 & length(fill) != 0) { stop("Unexpected parameter length for 'fill'"); }
+
+	if (length(alpha) == 1) { alpha <- rep(alpha, 2); }
+	else if (length(alpha) != 2 & length(alpha) != 0) { stop("Unexpected parameter length for 'alpha'"); }
+
+	if (length(ext.line.lwd) != 1) { stop("Unexpected parameter length for 'ext.line.lwd'"); }
+
+	if (length(cat.pos) == 1) { cat.pos <- rep(cat.pos, 2); }
+	else if (length(cat.pos) != 2) { stop("Unexpected parameter length for 'cat.pos'"); }
+
+	if (length(cat.dist) == 1) { cat.dist <- rep(cat.dist, 2); }
+	else if (length(cat.dist) != 2) { stop("Unexpected parameter length for 'cat.dist'"); }
+
+	if (length(cat.col) == 1) { cat.col <- rep(cat.col, 2); }
+	else if (length(cat.col) != 2) { stop("Unexpected parameter length for 'cat.col'"); }
+
+	if (length(cat.cex) == 1) { cat.cex <- rep(cat.cex, 2); }
+	else if (length(cat.cex) != 2) { stop("Unexpected parameter length for 'cat.cex'"); }
+
+	if (length(cat.fontface) == 1) { cat.fontface <- rep(cat.fontface, 2); }
+	else if (length(cat.fontface) != 2) { stop("Unexpected parameter length for 'cat.fontface'"); }
+
+	if (length(cat.fontfamily) == 1) { cat.fontfamily <- rep(cat.fontfamily, 2); }
+	else if (length(cat.fontfamily) != 2) { stop("Unexpected parameter length for 'cat.fontfamily'"); }
+
+	if (length(offset) != 1) { stop("Unexpected parameter length for 'offset'. Try using 'rotation.degree' to achieve non-vertical offsets"); }
+
+	if (!(class(cat.just) == "list" & length(cat.just) == 2 & length(cat.just[[1]]) == 2 & length(cat.just[[2]]) == 2)) {
+		stop("Unexpected parameter format for 'cat.just'");
+		}
+
 	# check uninterpretable parameters
 	if (!euler.d & scaled) {
 		stop("Uninterpretable parameter combination\nPlease set both euler.d = FALSE and scaled = FALSE to force Venn diagrams.");
@@ -54,12 +128,13 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 	if (offset > 1 | offset < 0) {
 		stop("'Offset' must be between 0 and 1.  Try using 'rotation.degree = 180' to achieve offsets in the opposite direction.");
 		}
-	
-	if (cross.area > area1 | cross.area > area2) { stop("Impossible: cross section area too large.") }
+
+	if (cross.area > area1 | cross.area > area2) { stop("Impossible: cross section area too large."); }
 	cat.pos <- cat.pos + rotation.degree;
-	
+
 	# check category label defaults
-	if (((cat.default.pos != 'outer') & (cat.default.pos != "text")) & cat.prompts) { # PHH: removed this check from the if, so that code works with expressions: & isTRUE(category != rep("", 2))
+	if (((cat.default.pos != 'outer') & (cat.default.pos != "text")) & cat.prompts) {
+	# PHH: removed this check from the if, so that code works with expressions: & isTRUE(category != rep("", 2))
 		print("No default location recognized.  Automatically changing to 'outer'");
 		cat.default.pos <- 'outer';
 		}
@@ -73,13 +148,14 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 		print(paste("Current 'cat.pos':", cat.pos[1], "degrees,", cat.pos[2], "degrees"));
 		print(paste("Current 'cat.dist':", cat.dist[1], ",", cat.dist[2]));
 		}
-		
+
 	max.circle.size = 0.2;
 
 	# initialize logical variables to hold special conditions
 	special.coincidental <- FALSE;
 	special.inclusion <- FALSE;
 	special.exclusion <- FALSE;
+	list.switch <- FALSE;
 
 	# initialize gList to hold all Grobs generated
 	grob.list <- gList();
@@ -87,6 +163,7 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 	if (!inverted) {
 		tmp1 <- max(area1, area2);
 		tmp2 <- min(area1, area2);
+		if (tmp1 != area1) { list.switch <- TRUE; }
 		area1 <- tmp1;
 		area2 <- tmp2;
 		r1 <- sqrt(area1 / pi);
@@ -96,14 +173,17 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 	else {
 		tmp1 <- min(area1, area2);
 		tmp2 <- max(area1, area2);
+		if (tmp1 != area1) { list.switch <- TRUE; }
 		area1 <- tmp1;
 		area2 <- tmp2;
-		category <- rev(category);
-		
 		r1 <- sqrt(area1 / pi);
 		r2 <- sqrt(area2 / pi);
 		shrink.factor <- max.circle.size / r2;
-		
+		}
+
+	# reverse the list if the order is backwards OR inverted is called (both just reverts to normal)
+	if (xor(list.switch, inverted)) {
+		category <- rev(category);
 		ext.pos <- rev(ext.pos);
 		ext.dist <- rev(ext.dist);
 		lwd <- rev(lwd);
@@ -120,7 +200,7 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 		cat.fontfamily <- rev(cat.fontfamily);
 		fill <- rev(fill);
 		alpha <- rev(alpha);
-		}	
+		}
 
 	# convert radii to Grid dimensions
 	r1 <- r1 * shrink.factor;
@@ -132,17 +212,22 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 	if (0 == cross.area) { special.exclusion <- TRUE; }
 
 	# plot scaled, generic pairwise Venn diagram with or without external texts
+	# ALL OF THE BELOW SECTIONS HAVE A SIMILAR STRUCTURE TO THIS IF BRACKET
+	# IF YOU ARE TRYING TO FIGURE OUT WHAT A CERTAIN SECTION DOES, REFER TO THE ANALOGOUS SECTION INSIDE THIS IF BRACKET
 	if (scaled & !special.inclusion & !special.exclusion & !special.coincidental) {
 
+		# calculate centres of circles
 		d <- find.dist(area1, area2, cross.area, inverted = inverted);
 		d <- d * shrink.factor;
 		x.centre.1 <- (1 + r1 - r2 - d) / 2;
 		x.centre.2 <- x.centre.1 + d;
 
-		tmp <- circle(
-			x = x.centre.1, 
-			y = 0.5, 
-			r = r1,
+		# draw both circles and their borders
+		tmp <- VennDiagram::ellipse(
+			x = x.centre.1,
+			y = 0.5,
+			a = r1,
+			b = r1,
 			gp = gpar(
 				lty = 0,
 				fill = fill[1],
@@ -151,22 +236,24 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 			);
 		grob.list <- gList(grob.list, tmp);
 
-		tmp <- circle(
-			x = x.centre.2, 
-			y = 0.5, 
-			r = r2,
+		tmp <- VennDiagram::ellipse(
+			x = x.centre.2,
+			y = 0.5,
+			a = r2,
+			b = r2,
 			gp = gpar(
 				lty = 0,
 				fill = fill[2],
 				alpha = alpha[2]
 				)
-			); 
+			);
 		grob.list <- gList(grob.list, tmp);
 
-		tmp <- circle(
-			x = x.centre.1, 
-			y = 0.5, 
-			r = r1,
+		tmp <- VennDiagram::ellipse(
+			x = x.centre.1,
+			y = 0.5,
+			a = r1,
+			b = r1,
 			gp = gpar(
 				lwd = lwd[1],
 				lty = lty[1],
@@ -176,26 +263,31 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 			);
 		grob.list <- gList(grob.list, tmp);
 
-		tmp <- circle(
-			x = x.centre.2, 
-			y = 0.5, 
-			r = r2,
+		tmp <- VennDiagram::ellipse(
+			x = x.centre.2,
+			y = 0.5,
+			a = r2,
+			b = r2,
 			gp = gpar(
 				lwd = lwd[2],
 				lty = lty[2],
 				col = col[2],
 				fill = 'transparent'
 				)
-			); 
+			);
 		grob.list <- gList(grob.list, tmp);
-		
+
+		# if labels are to be placed outside circles
 		if (ext.text) {
-			if ( (area1 - cross.area) / area1 > ext.percent[1] & (area1 - cross.area) / area2 > ext.percent[1]) { 
-				area.1.pos <- x.centre.1 - r1 + ( (2 * r1 - (r1 + r2 - d)) / 2);
+			area.1.pos <- x.centre.1 - r1 + ( (2 * r1 - (r1 + r2 - d)) / 2);
+			area.2.pos <- x.centre.2 + r2 - ( (2 * r2 - (r1 + r2 - d)) / 2);
+			# distinct area1 is more than the given percentage (label stays inside circle)
+			if ( (area1 - cross.area) / area1 > ext.percent[1] & (area1 - cross.area) / area2 > ext.percent[1]) {
+				# draw label normally
 				tmp <- textGrob(
-					label = area1 - cross.area, 
-					x = area.1.pos, 
-					y = 0.5, 
+					label = area1 - cross.area,
+					x = area.1.pos,
+					y = 0.5,
 					gp = gpar(
 						col = label.col[1],
 						cex = cex[1],
@@ -205,15 +297,16 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 					);
 				grob.list <- gList(grob.list, tmp);
 				}
-			else { 
-				area.1.pos <- x.centre.1 - r1 + ( (2 * r1 - (r1 + r2 - d)) / 2)
+			# percentage is small enough to move label outside circle
+			else {
 				label.pos <- find.cat.pos(area.1.pos, 0.5, ext.pos[1], ext.dist[1], r1);
 				area.1.xpos <- label.pos$x;
 				area.1.ypos <- label.pos$y
+				# draw label outside
 				tmp <- textGrob(
-					label = area1 - cross.area, 
-					x = area.1.xpos, 
-					y = area.1.ypos, 
+					label = area1 - cross.area,
+					x = area.1.xpos,
+					y = area.1.ypos,
 					gp = gpar(
 						col = label.col[1],
 						cex = cex[1],
@@ -222,8 +315,9 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 						)
 					);
 				grob.list <- gList(grob.list, tmp);
+				# draw line from circle to label
 				tmp <- linesGrob(
-					x = c(area.1.pos + ext.length[1] * (area.1.xpos - area.1.pos), area.1.pos), 
+					x = c(area.1.pos + ext.length[1] * (area.1.xpos - area.1.pos), area.1.pos),
 					y = c(0.5 + ext.length[1] * (area.1.ypos - 0.5), 0.5),
 					gp = gpar(
 						col = label.col[1],
@@ -234,12 +328,13 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 				grob.list <- gList(grob.list, tmp);
 				}
 
-			if ( (area2 - cross.area) / area2 > ext.percent[2] & (area2 - cross.area) / area1 > ext.percent[2]) { 
-				area.2.pos <- x.centre.2 + r2 - ( (2 * r2 - (r1 + r2 - d)) / 2);
+			# distinct area2 is more than the given percentage (label stays inside the circle)
+			if ((area2 - cross.area) / area2 > ext.percent[2] & (area2 - cross.area) / area1 > ext.percent[2]) {
+				# draw label normally
 				tmp <- textGrob(
-					label = area2 - cross.area, 
-					x = area.2.pos, 
-					y = 0.5, 
+					label = area2 - cross.area,
+					x = area.2.pos,
+					y = 0.5,
 					gp = gpar(
 						col = label.col[3],
 						cex = cex[3],
@@ -249,15 +344,16 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 					);
 				grob.list <- gList(grob.list, tmp);
 				}
-			else { 
-				area.2.pos <- x.centre.2 + r2 - ( (2 * r2 - (r1 + r2 - d)) / 2);
+			# percentage is small enough to move label outside circle
+			else {
 				label.pos <- find.cat.pos(area.2.pos, 0.5, ext.pos[2], ext.dist[2], r2);
 				area.2.xpos <- label.pos$x;
 				area.2.ypos <- label.pos$y;
+				# draw label outside
 				tmp <- textGrob(
-					label = area2 - cross.area, 
-					x = area.2.xpos, 
-					y = area.2.ypos, 
+					label = area2 - cross.area,
+					x = area.2.xpos,
+					y = area.2.ypos,
 					gp = gpar(
 						col = label.col[3],
 						cex = cex[3],
@@ -266,9 +362,10 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 						)
 					);
 				grob.list <- gList(grob.list, tmp);
+				# draw line from circle to label
 				tmp <- linesGrob(
-					x = c(area.2.pos + ext.length[1] * (area.2.xpos - area.2.pos), area.2.pos), 
-					y = c(0.5 + ext.length[1] * (area.2.ypos - 0.5), 0.5), 
+					x = c(area.2.pos + ext.length[1] * (area.2.xpos - area.2.pos), area.2.pos),
+					y = c(0.5 + ext.length[1] * (area.2.ypos - 0.5), 0.5),
 					gp = gpar(
 						col = label.col[3],
 						lwd = ext.line.lwd,
@@ -278,11 +375,13 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 				grob.list <- gList(grob.list, tmp);
 				}
 
-			if ( cross.area / area2 > ext.percent[3] & cross.area / area1 > ext.percent[3]) { 
+			# if intersect area is more than the given percentage (label stays inside area)
+			if (cross.area / area2 > ext.percent[3] & cross.area / area1 > ext.percent[3]) {
+				# draw label normally
 				tmp <- textGrob(
-					label = cross.area, 
-					x = x.centre.1 + (d - r2) + (r1 + r2 - d) / 2, 
-					y = 0.5, 
+					label = cross.area,
+					x = x.centre.1 + (d - r2) + (r1 + r2 - d) / 2,
+					y = 0.5,
 					gp = gpar(
 						col = label.col[2],
 						cex = cex[2],
@@ -292,15 +391,17 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 					);
 				grob.list <- gList(grob.list, tmp);
 				}
+			# percentage is small enough to move label outside area
 			else {
 				cross.area.pos <- x.centre.1 + (d - r2) + (r1 + r2 - d) / 2;
 				cross.pos <- find.cat.pos(cross.area.pos, 0.5, ext.pos[1], ext.dist[1], r1 + r2);
 				cross.area.xpos <- cross.pos$x;
 				cross.area.ypos <- cross.pos$y
+				# draw label outside
 				tmp <- textGrob(
-					label = cross.area, 
-					x = cross.area.xpos, 
-					y = cross.area.ypos, 
+					label = cross.area,
+					x = cross.area.xpos,
+					y = cross.area.ypos,
 					gp = gpar(
 						col = label.col[1],
 						cex = cex[1],
@@ -309,9 +410,10 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 						)
 					);
 				grob.list <- gList(grob.list, tmp);
+				# draw line from area to label
 				tmp <- linesGrob(
-					x = c(cross.area.pos + ext.length[2] * (cross.area.xpos - cross.area.pos), cross.area.pos), 
-					y = c(0.5 + ext.length[2] * (cross.area.ypos - 0.5), 0.5), 
+					x = c(cross.area.pos + ext.length[2] * (cross.area.xpos - cross.area.pos), cross.area.pos),
+					y = c(0.5 + ext.length[2] * (cross.area.ypos - 0.5), 0.5),
 					gp = gpar(
 						col = label.col[1],
 						lwd = ext.line.lwd,
@@ -322,12 +424,13 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 				}
 			}
 
-		if (!ext.text) {
+		# if the labels are not to be extended, draw them in their usual locations
+		else {
 			area.1.pos <-  x.centre.1 - r1 + ( (2 * r1 - (r1 + r2 - d)) / 2);
 			tmp <- textGrob(
-				label = area1 - cross.area, 
-				x = area.1.pos, 
-				y = 0.5, 
+				label = area1 - cross.area,
+				x = area.1.pos,
+				y = 0.5,
 				gp = gpar(
 					col = label.col[1],
 					cex = cex[1],
@@ -338,9 +441,9 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 			grob.list <- gList(grob.list, tmp);
 			area.2.pos <- x.centre.2 + r2 - ( (2 * r2 - (r1 + r2 - d)) / 2)
 			tmp <- textGrob(
-				label = area2 - cross.area, 
-				x = area.2.pos, 
-				y = 0.5, 
+				label = area2 - cross.area,
+				x = area.2.pos,
+				y = 0.5,
 				gp = gpar(
 					col = label.col[3],
 					cex = cex[3],
@@ -350,9 +453,9 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 				);
 			grob.list <- gList(grob.list, tmp);
 			tmp <- textGrob(
-				label = cross.area, 
-				x = x.centre.1 + (d - r2) + (r1 + r2 - d) / 2, 
-				y = 0.5, 
+				label = cross.area,
+				x = x.centre.1 + (d - r2) + (r1 + r2 - d) / 2,
+				y = 0.5,
 				gp = gpar(
 					col = label.col[2],
 					cex = cex[2],
@@ -361,14 +464,14 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 					)
 				);
 			grob.list <- gList(grob.list, tmp);
-			}	
+			}
 
 		# find the location of the category labels
-		if (cat.default.pos == 'outer') {
+		if ('outer' == cat.default.pos) {
 			cat.pos.1 <- find.cat.pos(x.centre.1, 0.5, cat.pos[1], cat.dist[1], r1);
 			cat.pos.2 <- find.cat.pos(x.centre.2, 0.5, cat.pos[2], cat.dist[2], r2);
 			}
-		else if (cat.default.pos == 'text') {
+		else if ('text' == cat.default.pos) {
 			cat.pos.1 <- find.cat.pos(area.1.pos, 0.5, cat.pos[1], cat.dist[1]);
 			cat.pos.2 <- find.cat.pos(area.2.pos, 0.5, cat.pos[2], cat.dist[2]);
 			}
@@ -376,6 +479,7 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 			stop("Invalid value for 'cat.default.pos', should be either 'outer' or 'text'");
 			}
 
+		# draw category labels
 		tmp <- textGrob(
 			label = category[1],
 			x = cat.pos.1$x,
@@ -389,7 +493,7 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
-		
+
 		tmp <- textGrob(
 			label = category[2],
 			x = cat.pos.2$x,
@@ -403,34 +507,35 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
-
 		}
 
-	# plot scaled Venn diagram when one set is completely included in (but not exactly coincidental with) the other set 
+	# plot scaled Venn diagram when one set is completely included in (but not exactly coincidental with) the other set
 	# with or without external texts
 	if (euler.d & special.inclusion & !special.coincidental) {
-	
+
 		if (inverted) {
 			tmp1 <- area1;
 			tmp2 <- area2;
 			area1 <- tmp2;
 			area2 <- tmp1;
 			}
-	
+
 		if (!scaled & !inverted) {
 			r1 <- 0.4;
 			r2 <- 0.2;
 			}
-			
+
 		if (!scaled & inverted) {
 			r1 <- 0.2;
 			r2 <- 0.4;
 			}
-			
-		tmp <- circle(
-			x = 0.5, 
-			y = 0.5, 
-			r = r1,
+
+		# draw circles and their borders
+		tmp <- VennDiagram::ellipse(
+			x = 0.5,
+			y = 0.5,
+			a = r1,
+			b = r1,
 			gp = gpar(
 				lty = 0,
 				fill = fill[1],
@@ -439,10 +544,11 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 			);
 		grob.list <- gList(grob.list, tmp);
 
-		tmp <- circle(
-			x = 0.5 - offset * (r1 - r2), 
-			y = 0.5, 
-			r = r2,
+		tmp <- VennDiagram::ellipse(
+			x = 0.5 - offset * (r1 - r2),
+			y = 0.5,
+			a = r2,
+			b = r2,
 			gp = gpar(
 				lty = 0,
 				fill = fill[2],
@@ -451,10 +557,11 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 			);
 		grob.list <- gList(grob.list, tmp);
 
-		tmp <- circle(
-			x = 0.5, 
-			y = 0.5, 
-			r = r1,
+		tmp <- VennDiagram::ellipse(
+			x = 0.5,
+			y = 0.5,
+			a = r1,
+			b = r1,
 			gp = gpar(
 				lwd = lwd[1],
 				lty = lty[1],
@@ -464,10 +571,11 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 			);
 		grob.list <- gList(grob.list, tmp);
 
-		tmp <- circle(
-			x = 0.5 - offset * (r1 - r2), 
-			y = 0.5, 
-			r = r2,
+		tmp <- VennDiagram::ellipse(
+			x = 0.5 - offset * (r1 - r2),
+			y = 0.5,
+			a = r2,
+			b = r2,
 			gp = gpar(
 				lwd = lwd[2],
 				lty = lty[2],
@@ -477,11 +585,12 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 			);
 		grob.list <- gList(grob.list, tmp);
 
+		# draw area labels in appropriate locations
 		area.2.pos <- 0.5 - offset * (r1 - r2);
 		tmp <- textGrob(
-			label = area2, 
-			x = area.2.pos, 
-			y = 0.5, 
+			label = area2,
+			x = area.2.pos,
+			y = 0.5,
 			gp = gpar(
 				col = label.col[2],
 				cex = cex[2],
@@ -494,9 +603,9 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 		if (!ext.text | !scaled) {
 			area.1.pos <- (1 + r1 + r2 - offset * (r1 - r2)) / 2;
 			tmp <- textGrob(
-				label = area1 - area2, 
-				x = area.1.pos, 
-				y = 0.5, 
+				label = area1 - area2,
+				x = area.1.pos,
+				y = 0.5,
 				gp = gpar(
 					col = label.col[1],
 					cex = cex[1],
@@ -508,15 +617,16 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 			}
 
 		if (ext.text & scaled) {
+			# draw labels and lines if text is to be extended from areas
 			if (area2 / area1 > 0.5) {
 				area.1.pos <- (1 + r1 + r2 - offset * (r1 - r2)) / 2;
 				area.pos <- find.cat.pos(area.1.pos, 0.5, ext.pos[1], ext.dist[1], r1);
 				area.1.xpos <- area.pos$x;
 				area.1.ypos <- area.pos$y;
 				tmp <- textGrob(
-					label = area1 - area2, 
-					x = area.1.xpos, 
-					y = area.1.ypos, 
+					label = area1 - area2,
+					x = area.1.xpos,
+					y = area.1.ypos,
 					gp = gpar(
 						col = label.col[1],
 						cex = cex[1],
@@ -526,7 +636,7 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 					);
 				grob.list <- gList(grob.list, tmp);
 				tmp <- linesGrob(
-					x = c(area.1.pos + ext.length * (area.1.xpos - area.1.pos), area.1.pos), 
+					x = c(area.1.pos + ext.length * (area.1.xpos - area.1.pos), area.1.pos),
 					y = c(0.5 + ext.length * (area.1.ypos - 0.5), 0.5),
 					gp = gpar(
 						col = label.col[1],
@@ -539,9 +649,9 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 			else {
 				area.1.pos <- (1 + r1 + r2 - offset * (r1 - r2)) / 2;
 				tmp <- textGrob(
-					label = area1 - area2, 
-					x = area.1.pos, 
-					y = 0.5, 
+					label = area1 - area2,
+					x = area.1.pos,
+					y = 0.5,
 					gp = gpar(
 						col = label.col[1],
 						cex = cex[1],
@@ -552,7 +662,8 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 				grob.list <- gList(grob.list, tmp);
 				}
 			}
-		
+
+		# find the correct position of categories given default position and areas
 		if (cat.default.pos == 'outer') {
 			cat.pos.1 <- find.cat.pos(0.5, 0.5, cat.pos[1], cat.dist[1], r1);
 			cat.pos.2 <- find.cat.pos(0.5 - offset * (r1 - r2), 0.5, cat.pos[2], cat.dist[2], r2);
@@ -565,6 +676,7 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 			stop("Invalid value for 'cat.default.pos', should be either 'outer' or 'text'");
 			}
 
+		# add category labels
 		tmp <- textGrob(
 			label = category[1],
 			x = cat.pos.1$x,
@@ -592,42 +704,45 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
-	
 		}
 
 	# plot scaled Venn diagrams when the two sets are coincidental
 	if (euler.d & special.coincidental) {
 
-		tmp <- circle(
-			x = 0.5, 
-			y = 0.5, 
-			r = max.circle.size,
+		# draw the one circle and its border
+		tmp <- VennDiagram::ellipse(
+			x = 0.5,
+			y = 0.5,
+			a = max.circle.size,
+			b = max.circle.size,
 			gp = gpar(
-				lty = 0, 
+				lty = 0,
 				fill = fill[1],
 				alpha = alpha[1]
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
 
-		tmp <- circle(
-			x = 0.5, 
-			y = 0.5, 
-			r = max.circle.size,
+		tmp <- VennDiagram::ellipse(
+			x = 0.5,
+			y = 0.5,
+			a = max.circle.size,
+			b = max.circle.size,
 			gp = gpar(
 				lwd = lwd[1],
-				lty = lty[1], 
+				lty = lty[1],
 				col = col[1],
 				fill = 'transparent'
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
 
+		# draw labels on the same circle
 		area.1.pos <- 0.46;
 		tmp <- textGrob(
-			label = area1, 
-			x = area.1.pos, 
-			y = 0.5, 
+			label = area1,
+			x = area.1.pos,
+			y = 0.5,
 			gp = gpar(
 				col = label.col[2],
 				cex = cex[2],
@@ -639,9 +754,9 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 
 		area.2.pos <- 0.54;
 		tmp <- textGrob(
-			label = area2, 
-			x = area.2.pos, 
-			y = 0.5, 
+			label = area2,
+			x = area.2.pos,
+			y = 0.5,
 			gp = gpar(
 				col = label.col[2],
 				cex = cex[2],
@@ -652,9 +767,9 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 		grob.list <- gList(grob.list, tmp);
 
 		tmp <- textGrob(
-			label = '(Coincidental)', 
-			x = 0.5, 
-			y = 0.45, 
+			label = '(Coincidental)',
+			x = 0.5,
+			y = 0.45,
 			gp = gpar(
 				col = label.col[2],
 				cex = cex[2],
@@ -663,7 +778,7 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
-		
+
 		if (cat.default.pos == "outer") {
 			cat.pos.1 <- find.cat.pos(0.5, 0.5, cat.pos[1], cat.dist[1], max.circle.size);
 			cat.pos.2 <- find.cat.pos(0.5, 0.5, cat.pos[2], cat.dist[2], max.circle.size);
@@ -689,7 +804,7 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
-		
+
 		tmp <- textGrob(
 			label = category[2],
 			x = cat.pos.2$x,
@@ -703,22 +818,23 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
-	
 		}
 
 	# plot scaled Venn diagrams when the two sets are mutually exclusive
 	if (euler.d & special.exclusion) {
-	
+
 		if (!scaled) {
 			r1 <- 0.2;
 			r2 <- 0.2;
 			}
-	
+
+		# determine centres of exclusive circles and draw them
 		x.centre.1 <- (1 - 2 * (r1 + r2)) / 2 + r1 - sep.dist / 2;
-		tmp <- circle(
-			x = x.centre.1, 
-			y = 0.5, 
-			r = r1, 
+		tmp <- VennDiagram::ellipse(
+			x = x.centre.1,
+			y = 0.5,
+			a = r1,
+			b = r1,
 			gp = gpar(
 				lty = 0,
 				fill = fill[1],
@@ -728,22 +844,24 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 		grob.list <- gList(grob.list, tmp);
 
 		x.centre.2 <- 1 - (1 - 2 * (r1 + r2)) / 2 - r2 + sep.dist / 2;
-		tmp <- circle(
-			x = x.centre.2, 
-			y = 0.5, 
-			r = r2,
+		tmp <- VennDiagram::ellipse(
+			x = x.centre.2,
+			y = 0.5,
+			a = r2,
+			b = r2,
 			gp = gpar(
-				lty = 0, 
+				lty = 0,
 				fill = fill[2],
 				alpha = alpha[2]
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
 
-		tmp <- circle(
-			x = x.centre.1, 
-			y = 0.5, 
-			r = r1, 
+		tmp <- VennDiagram::ellipse(
+			x = x.centre.1,
+			y = 0.5,
+			a = r1,
+			b = r1,
 			gp = gpar(
 				lwd = lwd[1],
 				lty = lty[1],
@@ -753,24 +871,26 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 			);
 		grob.list <- gList(grob.list, tmp);
 
-		tmp <- circle(
-			x = x.centre.2, 
-			y = 0.5, 
-			r = r2,
+		tmp <- VennDiagram::ellipse(
+			x = x.centre.2,
+			y = 0.5,
+			a = r2,
+			b = r2,
 			gp = gpar(
 				lwd = lwd[2],
-				lty = lty[2], 
+				lty = lty[2],
 				col = col[2],
 				fill = 'transparent'
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
 
+		# draw area and category labels
 		area.1.pos <- x.centre.1;
 		tmp <- textGrob(
-			label = area1, 
-			x = area.1.pos, 
-			y = 0.5, 
+			label = area1,
+			x = area.1.pos,
+			y = 0.5,
 			gp = gpar(
 				col = label.col[1],
 				cex = cex[1],
@@ -782,9 +902,9 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 
 		area.2.pos <- x.centre.2;
 		tmp <- textGrob(
-			label = area2, 
-			x = area.2.pos, 
-			y = 0.5, 
+			label = area2,
+			x = area.2.pos,
+			y = 0.5,
 			gp = gpar(
 				col = label.col[3],
 				cex = cex[3],
@@ -793,7 +913,7 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
-		
+
 		if (cat.default.pos == 'outer') {
 			cat.pos.1 <- find.cat.pos(x.centre.1, 0.5, cat.pos[1], cat.dist[1], r1);
 			cat.pos.2 <- find.cat.pos(x.centre.2, 0.5, cat.pos[2], cat.dist[2], r2);
@@ -833,16 +953,16 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
-	
 		}
 
 	# plot non-scaled Venn diagram
 	if ((!scaled & !euler.d) | (!scaled & euler.d & !special.inclusion & !special.exclusion & !special.coincidental)) {
 
-		tmp <- circle(
-			x = 0.4, 
-			y = 0.5, 
-			r = max.circle.size,
+		tmp <- VennDiagram::ellipse(
+			x = 0.4,
+			y = 0.5,
+			a = max.circle.size,
+			b = max.circle.size,
 			gp = gpar(
 				lty = 0,
 				fill = fill[1],
@@ -851,10 +971,11 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 			);
 		grob.list <- gList(grob.list, tmp);
 
-		tmp <- circle(
-			x = 0.6, 
-			y = 0.5, 
-			r = max.circle.size,
+		tmp <- VennDiagram::ellipse(
+			x = 0.6,
+			y = 0.5,
+			a = max.circle.size,
+			b = max.circle.size,
 			gp = gpar(
 				lty = 0,
 				fill = fill[2],
@@ -863,10 +984,11 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 			);
 		grob.list <- gList(grob.list, tmp);
 
-		tmp <- circle(
-			x = 0.4, 
-			y = 0.5, 
-			r = max.circle.size,
+		tmp <- VennDiagram::ellipse(
+			x = 0.4,
+			y = 0.5,
+			a = max.circle.size,
+			b = max.circle.size,
 			gp = gpar(
 				lwd = lwd[1],
 				lty = lty[1],
@@ -876,10 +998,11 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 			);
 		grob.list <- gList(grob.list, tmp);
 
-		tmp <- circle(
-			x = 0.6, 
-			y = 0.5, 
-			r = max.circle.size,
+		tmp <- VennDiagram::ellipse(
+			x = 0.6,
+			y = 0.5,
+			a = max.circle.size,
+			b = max.circle.size,
 			gp = gpar(
 				lwd = lwd[2],
 				lty = lty[2],
@@ -890,9 +1013,9 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 		grob.list <- gList(grob.list, tmp);
 
 		tmp <- textGrob(
-			label = area1 - cross.area, 
-			x = 0.3, 
-			y = 0.5, 
+			label = area1 - cross.area,
+			x = 0.3,
+			y = 0.5,
 			gp = gpar(
 				col = label.col[1],
 				cex = cex[1],
@@ -903,9 +1026,9 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 		grob.list <- gList(grob.list, tmp);
 
 		tmp <- textGrob(
-			label = area2 - cross.area, 
-			x = 0.7, 
-			y = 0.5, 
+			label = area2 - cross.area,
+			x = 0.7,
+			y = 0.5,
 			gp = gpar(
 				col = label.col[3],
 				cex = cex[3],
@@ -916,9 +1039,9 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 		grob.list <- gList(grob.list, tmp);
 
 		tmp <- textGrob(
-			label = cross.area, 
-			x = 0.5, 
-			y = 0.5, 
+			label = cross.area,
+			x = 0.5,
+			y = 0.5,
 			gp = gpar(
 				col = label.col[2],
 				cex = cex[2],
@@ -927,7 +1050,7 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
-		
+
 		if (cat.default.pos == 'outer') {
 			cat.pos.1 <- find.cat.pos(0.4, 0.5, cat.pos[1], cat.dist[1], max.circle.size);
 			cat.pos.2 <- find.cat.pos(0.6, 0.5, cat.pos[2], cat.dist[2], max.circle.size);
@@ -967,11 +1090,11 @@ draw.pairwise.venn <- function(area1, area2, cross.area, category = rep("", 2), 
 				)
 			);
 		grob.list <- gList(grob.list, tmp);
-
 		}
 
+	# rorate Venn if necessary and add other adjustments to plot
 	grob.list <- adjust.venn(rotate.venn.degrees(grob.list, rotation.degree, rotation.centre[1], rotation.centre[2]), ...);
+	# draw the plot before returning the grob if specified
 	if (ind) { grid.draw(grob.list); }
 	return(grob.list);
-
 	}
