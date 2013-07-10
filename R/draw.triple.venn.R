@@ -120,11 +120,12 @@ draw.triple.venn <- function(
 	a5 <- n123;
 	a6 <- n23 - n123;
 	a7 <- area3 - n13 - n23 + n123;
+	areas <- c(a1, a2, a3, a4, a5, a6, a7);
 
 	# check for special cases and if necessary process them
 	if (euler.d) {
 
-		special.code <- VennDiagram::decide.special.case(a1, a2, a3, a4, a5, a6, a7);
+		special.code <- VennDiagram::decide.special.case(areas);
 
 		# and convert into a proper function name
 		function.name <- paste('draw.', special.code, sep = '');
@@ -136,14 +137,20 @@ draw.triple.venn <- function(
 			f1 <- get(function.name);
 
 			# run it
+			####### TO GREATLY IMPROVE THIS CODE #######
+			# all of the draw.'code'.R files have nearly identical structure, so the code is extremely repetitive and redundant
+			# if someone is working to improve the package, it would greatly improve the clarity, brevity, and ease of management to take the time, and try to
+			# combine all of those files into a single function by vectorizing the areas, creating a single 'if bracket' to determine the proper radii, centres, etc,
+			# so that a single change in that function does not need to take place in 19 different files
+			############################################
 			rst <- f1(
-				a1 = a1,
-				a2 = a2,
-				a3 = a3,
-				a4 = a4,
-				a5 = a5,
-				a6 = a6,
-				a7 = a7,
+				a1 = areas[1],
+				a2 = areas[2],
+				a3 = areas[3],
+				a4 = areas[4],
+				a5 = areas[5],
+				a6 = areas[6],
+				a7 = areas[7],
 				category = category,
 				reverse = reverse,
 				cat.default.pos = cat.default.pos,
@@ -187,7 +194,7 @@ draw.triple.venn <- function(
 		}
 
 	rotated <- VennDiagram::rotate(
-		c(a1, a2, a3, a4, a5, a6, a7),
+		areas,
 		category,
 		lwd,
 		lty,
@@ -205,13 +212,9 @@ draw.triple.venn <- function(
 		reverse,
 		fill
 		);
-	a1 <- rotated[[1]][1];
-	a2 <- rotated[[1]][2];
-	a3 <- rotated[[1]][3];
-	a4 <- rotated[[1]][4];
-	a5 <- rotated[[1]][5];
-	a6 <- rotated[[1]][6];
-	a7 <- rotated[[1]][7];
+	for (i in 1:length(areas)) {
+		areas[i] <- rotated[[1]][i];
+		}
 	category <- rotated[[2]];
 
 	lwd <- rotated$lwd;
@@ -229,8 +232,25 @@ draw.triple.venn <- function(
 	alpha <- rotated$alpha
 
 	# check plausibility and 0 partial areas
-	if (any(a1 < 0, a2 < 0, a3 < 0, a4 < 0, a5 < 0, a6 < 0, a7 < 0)) { stop("Impossible: partial areas negative") }
-	if (any(a1 == 0, a2 == 0, a3 == 0, a4 == 0, a5 == 0, a6 == 0, a7 == 0)) { scaled <- FALSE; }
+	areas.error <- c(
+		"a1 <- area1 - n12 - n13 + n123",
+		"a2 <- n12 - n123",
+		"a3 <- area2 - n12 - n23 + n123",
+		"a4 <- n13 - n123",
+		"a5 <- n123",
+		"a6 <- n23 - n123",
+		"a7 <- area3 - n13 - n23 + n123"
+		);
+	for (i in 1:length(areas)) {
+		if (areas[i] < 0) {
+			stop(paste("Impossible:", areas.error[i], "produces negative area"));
+			}
+		}
+	for (i in 1:length(areas)) {
+		if (areas[i]) {
+			scaled <- FALSE;
+			}
+		}
 
 	# check if defaults are being used
 	is.defaults <- TRUE;
@@ -339,7 +359,7 @@ draw.triple.venn <- function(
 	# calculate the location of the text labels
 	new.x.centres <- vector(mode = 'numeric', length = 3);
 	new.y.centres <- vector(mode = 'numeric', length = 3);
-	cell.labels <- c(a1, a2, a3, a4, a5, a6, a7);
+	cell.labels <- areas;
 	cell.x <- vector(mode = 'numeric', length = 7);
 	cell.y <- vector(mode = 'numeric', length = 7);
 

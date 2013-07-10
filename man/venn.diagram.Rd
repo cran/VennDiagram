@@ -3,9 +3,12 @@
 \title{Make a Venn Diagram}
 \description{This function takes a list and creates a publication-quality TIFF Venn Diagram}
 \usage{
-venn.diagram(x, filename, height = 3000, width = 3000, resolution = 500, units = "px", compression = "lzw", na = "stop", main = "", sub = "",
-	main.pos = c(0.5, 1.05), main.fontface = "plain", main.fontfamily = "serif", main.col = "black", main.cex = 1, main.just = c(0.5, 1),
-	sub.pos = c(0.5, 1.05), sub.fontface = "plain", sub.fontfamily = "serif", sub.col = "black", sub.cex = 1, sub.just = c(0.5, 1),
+venn.diagram(x, filename, height = 3000, width = 3000, resolution = 500,
+units = "px", compression = "lzw", na = "stop", main = "", sub = "",
+	main.pos = c(0.5, 1.05), main.fontface = "plain", main.fontfamily = "serif",
+	main.col = "black", main.cex = 1, main.just = c(0.5, 1),
+	sub.pos = c(0.5, 1.05), sub.fontface = "plain", sub.fontfamily = "serif",
+	sub.col = "black", sub.cex = 1, sub.just = c(0.5, 1),
 	category.names = names(x), force.unique = TRUE, ...);
 }
 \arguments{
@@ -78,9 +81,13 @@ venn.diagram(x, filename, height = 3000, width = 3000, resolution = 500, units =
 \code{\link{draw.single.venn}}, \code{\link{draw.pairwise.venn}}, \code{\link{draw.triple.venn}}, \code{\link{draw.quad.venn}}, \code{\link{draw.quintuple.venn}}
 }
 \examples{
+# Note: most examples are listed as dontrun to meet CRAN requirements, but all should work as-is!
+
 # compact and minimal notation
+\dontrun{
 venn.plot <- venn.diagram(list(A = 1:150, B = 121:170), "Venn_2set_simple.tiff");
 venn.plot <- venn.diagram(list(A = 1:150, B = 121:170, C = 101:200), "Venn_3set_simple.tiff");
+}
 
 # a more elaborate two-set Venn diagram with title and subtitle
 venn.plot <- venn.diagram(
@@ -105,6 +112,7 @@ venn.plot <- venn.diagram(
 	sub.cex = 1
 	);
 
+\dontrun{
 # sample three-set Euler diagram
 venn.plot <- venn.diagram(
 	x = list(
@@ -133,6 +141,7 @@ venn.plot <- venn.diagram(
 	cat.cex = 2.5,
 	cat.pos = 0
 	);
+}
 
 # sample four-set Venn Diagram
 A <- sample(1:1000, 400, replace = FALSE);
@@ -152,7 +161,9 @@ venn.plot <- venn.diagram(
 	col = "transparent",
 	fill = c("cornflowerblue", "green", "yellow", "darkorchid1"),
 	alpha = 0.50,
-	label.col = c("orange", "white", "darkorchid4", "white", "white", "white", "white", "white", "darkblue", "white", "white", "white", "white", "darkgreen", "white"),
+	label.col = c("orange", "white", "darkorchid4", "white", 
+	"white", "white", "white", "white", "darkblue", "white", 
+	"white", "white", "white", "darkgreen", "white"),
 	cex = 1.5,
 	fontfamily = "serif",
 	fontface = "bold",
@@ -178,7 +189,8 @@ venn.plot <- venn.diagram(
 	col = "black",
 	fill = c("dodgerblue", "goldenrod1", "darkorange1", "seagreen3", "orchid3"),
 	alpha = 0.50,
-	cex = c(1.5, 1.5, 1.5, 1.5, 1.5, 1, 0.8, 1, 0.8, 1, 0.8, 1, 0.8, 1, 0.8, 1, 0.55, 1, 0.55, 1, 0.55, 1, 0.55, 1, 0.55, 1, 1, 1, 1, 1, 1.5),
+	cex = c(1.5, 1.5, 1.5, 1.5, 1.5, 1, 0.8, 1, 0.8, 1, 0.8, 1, 0.8,
+	 1, 0.8, 1, 0.55, 1, 0.55, 1, 0.55, 1, 0.55, 1, 0.55, 1, 1, 1, 1, 1, 1.5),
 	cat.col = c("dodgerblue", "goldenrod1", "darkorange1", "seagreen3", "orchid3"),
 	cat.cex = 1.5,
 	cat.fontface = "bold",
@@ -249,12 +261,26 @@ venn.plot <- venn.diagram(
 		filename = NULL
 		);
 
+# Save picture to non-TIFF file type
+# currently working on adding this functionality directly into venn.diagram
+venn.plot <- venn.diagram(
+	x = list (
+		A = 1:10,
+		B = 6:25
+		),
+	filename = NULL
+	);
+
+jpeg("venn_jpeg.jpg");
+grid.draw(venn.plot);
+dev.off();
+
 }
 
 #dontrun-starts-here
 ### NB: All figures from the paper can be run, but are turned off from
 ###     automatic execution to reduce burden on CRAN computing resources.
-
+\dontrun{
 # Figure 1A
 venn.plot <- venn.diagram(
 	x = list(
@@ -304,7 +330,8 @@ venn.plot <- venn.diagram(
 	col = "transparent",
 	fill = c("red", "blue", "green"),
 	alpha = 0.5,
-	label.col = c("darkred", "white", "darkblue", "white", "white", "white", "darkgreen"),
+	label.col = c("darkred", "white", "darkblue", "white",
+	 "white", "white", "darkgreen"),
 	cex = 2.5,
 	fontfamily = "serif",
 	fontface = "bold",
@@ -330,7 +357,9 @@ venn.plot <- venn.diagram(
 	lwd = 4,
 	fill = c("cornflowerblue", "green", "yellow", "darkorchid1"),
 	alpha = 0.50,
-	label.col = c("orange", "white", "darkorchid4", "white", "white", "white", "white", "white", "darkblue", "white", "white", "white", "white", "darkgreen", "white"),
+	label.col = c("orange", "white", "darkorchid4", "white", "white", "white",
+	 "white", "white", "darkblue", "white",
+	  "white", "white", "white", "darkgreen", "white"),
 	cex = 2.5,
 	fontfamily = "serif",
 	fontface = "bold",
@@ -465,5 +494,6 @@ venn.plot <- venn.diagram(
 	);
 
 #dontrun-ends-here
+}
 }
 \keyword{hplot}

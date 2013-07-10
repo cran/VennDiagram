@@ -1,3 +1,22 @@
+VennDiagram 1.6.4 2013-07-10
+---------------------------------------------------------------------------------------------------
+MINOR UPDATES
+* reduce line-widths of documentation to 90 characters to meet a new CRAN policy (NOT enforced in R v3.0.1, only in R-patched)
+* made even more examples \dontrun{} to accommodate CRAN requests
+
+
+VennDiagram 1.6.3 2013-07-05
+---------------------------------------------------------------------------------------------------
+MINOR UPDATES
+* bug-fix in draw.010 that was not updating empty overlap regions properly after rotation
+
+VennDiagram 1.6.1 2013-05-20
+---------------------------------------------------------------------------------------------------
+MINOR UPDATES
+* Triple, Quadruple, and Quintuple plots now notify what areas are negative
+* bug-fix in draw.022AA00 that was preventing properly scaled diagrams
+
+
 VennDiagram 1.6.0 2013-04-12
 ---------------------------------------------------------------------------------------------------
 MINOR UPDATES

@@ -10,7 +10,7 @@
 # credit be given to OICR scientists, as scientifically appropriate.
 
 ### FUNCTION TO DECIDE TRIPLE SET SPECIAL CASES (EULER DIAGRAMS) ##################################
-decide.special.case <- function(a1, a2, a3, a4, a5, a6, a7) {
+decide.special.case <- function(areas) {
 	# returns a code of the form \d{3}\w{0,4} (I'm using Perl regex here for clarity)
 	# first digit is 1 if the overlap is missing (a5 = 0), 0 if it is there (a5 > 0)
 	# second digit is how many double overlaps are missing (determined by a2, a4, a6)
@@ -30,11 +30,11 @@ decide.special.case <- function(a1, a2, a3, a4, a5, a6, a7) {
 	ao.7 <- c('N', 'O', 'N', 'A', 'N', 'A', 'N');
 	ao.matrix <- rbind(ao.1, ao.2, ao.3, ao.4, ao.5, ao.6, ao.7);
 
-	vector.137 <- c(a1, a3, a7);
-	vector.246 <- c(a2, a4, a6);
+	vector.137 <- c(areas[1], areas[3], areas[7]);
+	vector.246 <- c(areas[2], areas[4], areas[6]);
 
 	# determine what overlaps occur in the Venn
-	first.pos <- length(c(a5)[c(a5) == 0]);
+	first.pos <- length(c(areas[5])[c(areas[5]) == 0]);
 	second.pos <- length(vector.246[vector.246 == 0]);
 	third.pos <- length(vector.137[vector.137 == 0]);
 	fourth.vector <- c('');

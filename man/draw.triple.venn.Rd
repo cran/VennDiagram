@@ -3,12 +3,18 @@
 \title{Draw a Venn Diagram with Three Sets}
 \description{Creates a Venn diagram with three sets.  Creates Euler diagrams when the dataset meets certain conditions.}
 \usage{
-draw.triple.venn(area1, area2, area3, n12, n23, n13, n123, category = rep("", 3), rotation = 1, reverse = FALSE, euler.d = TRUE, scaled = TRUE,
-	lwd = rep(2, 3), lty = rep("solid", 3), col = rep("black", 3), fill = NULL, alpha = rep(0.5, 3), label.col = rep("black", 7), cex = rep(1, 7),
-	fontface = rep("plain", 7), fontfamily = rep("serif", 7), cat.pos = c(-40, 40, 180), cat.dist = c(0.05, 0.05, 0.025), cat.col = rep("black", 3),
-	cat.cex = rep(1, 3), cat.fontface = rep("plain", 3), cat.fontfamily = rep("serif", 3), cat.just = list(c(0.5, 1), c(0.5, 1), c(0.5, 0)),
-	cat.default.pos = "outer", cat.prompts = FALSE, rotation.degree = 0, rotation.centre = c(0.5, 0.5), ind = TRUE, sep.dist = 0.05, offset = 0,
-	...)
+draw.triple.venn(area1, area2, area3, n12, n23, n13, n123,
+	category = rep("", 3), rotation = 1, reverse = FALSE, euler.d = TRUE,
+	scaled = TRUE, lwd = rep(2, 3), lty = rep("solid", 3),
+	col = rep("black", 3), fill = NULL, alpha = rep(0.5, 3),
+	label.col = rep("black", 7), cex = rep(1, 7), fontface = rep("plain", 7),
+	fontfamily = rep("serif", 7), cat.pos = c(-40, 40, 180),
+	cat.dist = c(0.05, 0.05, 0.025), cat.col = rep("black", 3),
+	cat.cex = rep(1, 3), cat.fontface = rep("plain", 3),
+	cat.fontfamily = rep("serif", 3),
+	cat.just = list(c(0.5, 1), c(0.5, 1), c(0.5, 0)), cat.default.pos = "outer",
+	cat.prompts = FALSE, rotation.degree = 0, rotation.centre = c(0.5, 0.5),
+	ind = TRUE, sep.dist = 0.05, offset = 0, ...)
 }
 \arguments{
   \item{area1}{The size of the first set}
@@ -60,7 +66,8 @@ Grid::grid.draw can be used to draw the gList object in a graphical device.
 \author{Hanbo Chen}
 \examples{
 # A simple three-set diagram
-venn.plot <- draw.triple.venn(65, 75, 85, 35, 15, 25, 5, c("First", "Second", "Third"));
+venn.plot <- draw.triple.venn(65, 75, 85,
+ 35, 15, 25, 5, c("First", "Second", "Third"));
 grid.draw(venn.plot);
 grid.newpage();
 
@@ -84,7 +91,8 @@ grid.draw(venn.plot);
 grid.newpage();
 
 # Demonstrating an Euler diagram
-venn.plot <- draw.triple.venn(20, 40, 60, 0, 0, 0, 0, c("First", "Second", "Third"), sep.dist = 0.1, rotation.degree = 30);
+venn.plot <- draw.triple.venn(20, 40, 60, 0, 0, 0, 0,
+ c("First", "Second", "Third"), sep.dist = 0.1, rotation.degree = 30);
 
 # Writing to file
 tiff(filename = "Triple_Venn_diagram.tiff", compression = "lzw");

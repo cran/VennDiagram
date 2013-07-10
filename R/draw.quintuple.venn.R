@@ -152,8 +152,44 @@ draw.quintuple.venn <- function(
 	a1 <- area1 - a7 - a8 - a18 - a17 - a19 - a9 - a27 - a28 - a31 - a20 - a30 - a29 - a22 - a23 - a12;
 
 	# check plausibility and 0 partial areas
-	if (any(a1 < 0, a2 < 0, a3 < 0, a4 < 0, a5 < 0, a6 < 0, a7 < 0, a8 < 0, a9 < 0, a10 < 0, a11 < 0, a12 < 0, a13 < 0, a14 < 0, a15 < 0, a16 < 0, a17 < 0, a18 < 0, a19 < 0, a20 < 0, a21 < 0, a22 < 0, a23 < 0, a24 < 0, a25 < 0, a26 < 0, a27 < 0, a28 < 0, a29 < 0, a30 < 0, a31 < 0)) {
-		stop("Impossible: partial areas negative")
+	areas <- c(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31);
+	areas.error <- c(
+		"a1 <- area1 - a7 - a8 - a18 - a17 - a19 - a9 - a27 - a28 - a31 - a20 - a30 - a29 - a22 - a23 - a12",
+		"a2 <- area2 - a9 - a10 - a19 - a20 - a21 - a11 - a28 - a29 - a31 - a22 - a30 - a26 - a25 - a24 - a14",
+		"a3 <- area3 - a21 - a11 - a12 - a13 - a29 - a22 - a23 - a24 - a30 - a31 - a26 - a27 - a16 - a6 - a17",
+		"a4 <- area4 - a13 - a14 - a15 - a16 - a23 - a24 - a25 - a26 - a27 - a28 - a31 - a18 - a19 - a8 - a30",
+		"a5 <- area5 - a6 - a7 - a15 - a16 - a17 - a18 - a25 - a26 - a27 - a28 - a31 - a20 - a29 - a21 - a10",
+		"a6 <- n35 - a16 - a17 - a21 - a26 - a27 - a29 - a31",
+		"a7 <- n15 - a17 - a18 - a20 - a27 - a28 - a29 - a31",
+		"a8 <- n14 - a18 - a19 - a23 - a27 - a28 - a30 - a31",
+		"a9 <- n12 - a19 - a20 - a22 - a28 - a29 - a30 - a31",
+		"a10 <- n25 - a20 - a21 - a25 - a26 - a28 - a29 - a31",
+		"a11 <- n23 - a21 - a22 - a24 - a26 - a29 - a30 - a31",
+		"a12 <- n13 - a17 - a22 - a23 - a27 - a29 - a30 - a31",
+		"a13 <- n34 - a16 - a23 - a24 - a26 - a27 - a30 - a31",
+		"a14 <- n24 - a19 - a24 - a25 - a30 - a28 - a26 - a31",
+		"a15 <- n45 - a18 - a25 - a16 - a28 - a27 - a26 - a31",
+		"a16 <- n345 - a26 - a27 - a31",
+		"a17 <- n135 - a27 - a29 - a31",
+		"a18 <- n145 - a27 - a28 - a31",
+		"a19 <- n124 - a28 - a30 - a31",
+		"a20 <- n125 - a28 - a29 - a31",
+		"a21 <- n235 - a26 - a29 - a31",
+		"a22 <- n123 - a29 - a30 - a31",
+		"a23 <- n134 - a27 - a30 - a31",
+		"a24 <- n234 - a26 - a30 - a31",
+		"a25 <- n245 - a26 - a28 - a31",
+		"a26 <- n2345 - a31",
+		"a27 <- n1345 - a31",
+		"a28 <- n1245 - a31",
+		"a29 <- n1235 - a31",
+		"a30 <- n1234 - a31",
+		"a31 <- n12345"
+		);
+	for (i in 1:length(areas)) {
+		if (areas[i] < 0) {
+			stop(paste("Impossible:", areas.error[i], "produces negative area"));
+			}
 		}
 
 	# initialize gList to hold all Grobs generated

@@ -85,6 +85,7 @@ draw.022AAOO <- function(
 		r1 <- r1 * shrink.factor;
 		r2 <- r2 * shrink.factor;
 		r3 <- r3 * shrink.factor;
+		d <- d * shrink.factor;
 		}
 	else {
 		r1 <- 0.2;

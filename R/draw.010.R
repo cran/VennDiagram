@@ -45,13 +45,13 @@ draw.010 <- function(
 		tmp <- VennDiagram::rotate.sp(c(a1, a2, a3, a4, a5, a6, a7), i, reverse);
 		if (0 == tmp$areas[2]) { break; }
 		}
-
 	a1 <- tmp$areas[1];
 	a2 <- tmp$areas[2];
 	a3 <- tmp$areas[3];
 	a4 <- tmp$areas[4];
 	a5 <- tmp$areas[5];
 	a6 <- tmp$areas[6];
+	a7 <- tmp$areas[7];
 
 	# 3-vector rotations
 	fill <- fill[tmp$o3];

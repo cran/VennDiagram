@@ -3,11 +3,16 @@
 \title{Draw a Venn Diagram with Five Sets}
 \description{Creates a Venn diagram with five sets.}
 \usage{
-draw.quintuple.venn(area1, area2, area3, area4, area5, n12, n13, n14, n15, n23, n24, n25, n34, n35, n45, n123, n124, n125, n134, n135, n145, n234, n235,
-	n245, n345, n1234, n1235, n1245, n1345, n2345, n12345, category = rep("", 5), lwd = rep(2, 5), lty = rep("solid", 5), col = rep("black", 5),
-	fill = NULL, alpha = rep(0.5, 5), label.col = rep("black", 31), cex = rep(1, 31), fontface = rep("plain", 31), fontfamily = rep("serif", 31),
-	cat.pos = c(0, 287.5, 215, 145, 70), cat.dist = rep(0.2, 5), cat.col = rep("black", 5), cat.cex = rep(1, 5), cat.fontface = rep("plain", 5),
-	cat.fontfamily = rep("serif", 5), cat.just = rep(list(c(0.5, 0.5)), 5), rotation.degree = 0, rotation.centre = c(0.5, 0.5), ind = TRUE, ...)
+draw.quintuple.venn(area1, area2, area3, area4, area5, n12, n13, n14, n15, n23, n24, n25,
+	n34, n35, n45, n123, n124, n125, n134, n135, n145, n234, n235, n245, n345, n1234,
+	n1235, n1245, n1345, n2345, n12345, category = rep("", 5), lwd = rep(2, 5),
+	lty = rep("solid", 5), col = rep("black", 5), fill = NULL, alpha = rep(0.5, 5),
+	label.col = rep("black", 31), cex = rep(1, 31), fontface = rep("plain", 31),
+	fontfamily = rep("serif", 31), cat.pos = c(0, 287.5, 215, 145, 70),
+	cat.dist = rep(0.2, 5), cat.col = rep("black", 5), cat.cex = rep(1, 5),
+	cat.fontface = rep("plain", 5), cat.fontfamily = rep("serif", 5),
+	cat.just = rep(list(c(0.5, 0.5)), 5), rotation.degree = 0,
+	rotation.centre = c(0.5, 0.5), ind = TRUE, ...)
 }
 \arguments{
   \item{area1}{The size of the first set}
@@ -111,7 +116,8 @@ venn.plot <- draw.quintuple.venn(
 	cat.col = c("dodgerblue", "goldenrod1", "darkorange1", "seagreen3", "orchid3"),
 	cat.cex = 2,
 	margin = 0.05,
-	cex = c(1.5, 1.5, 1.5, 1.5, 1.5, 1, 0.8, 1, 0.8, 1, 0.8, 1, 0.8, 1, 0.8, 1, 0.55, 1, 0.55, 1, 0.55, 1, 0.55, 1, 0.55, 1, 1, 1, 1, 1, 1.5),
+	cex = c(1.5, 1.5, 1.5, 1.5, 1.5, 1, 0.8, 1, 0.8, 1, 0.8, 1, 0.8, 1, 0.8, 
+	1, 0.55, 1, 0.55, 1, 0.55, 1, 0.55, 1, 0.55, 1, 1, 1, 1, 1, 1.5),
 	ind = TRUE
 	);
 

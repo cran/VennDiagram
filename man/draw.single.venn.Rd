@@ -3,9 +3,13 @@
 \title{Draw a Venn Diagram with a Single Set}
 \description{Creates a Venn diagram with a single set.}
 \usage{
-draw.single.venn(area, category = "", lwd = 2, lty = "solid", col = "black", fill = NULL, alpha = 0.5, label.col = "black", cex = 1,
-	fontface = "plain", fontfamily = "serif", cat.pos = 0, cat.dist = 0.025, cat.cex = 1, cat.col = "black", cat.fontface = "plain",
-	cat.fontfamily = "serif", cat.just = list(c(0.5, 0.5)), cat.default.pos = "outer", cat.prompts = FALSE, rotation.degree = 0,
+draw.single.venn(area, category = "", lwd = 2, lty = "solid", col = "black", fill = NULL,
+	alpha = 0.5, label.col = "black", cex = 1, 
+	fontface = "plain", fontfamily = "serif",
+	cat.pos = 0, cat.dist = 0.025, cat.cex = 1, cat.col = "black",
+	cat.fontface = "plain", cat.fontfamily = "serif",
+	cat.just = list(c(0.5, 0.5)),
+	cat.default.pos = "outer", cat.prompts = FALSE, rotation.degree = 0,
 	rotation.centre = c(0.5, 0.5), ind = TRUE, ...)
 }
 \arguments{

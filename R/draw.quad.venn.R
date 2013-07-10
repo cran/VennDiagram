@@ -120,8 +120,28 @@ draw.quad.venn <- function(
 	a3  <- area4 - a2 - a5 - a6 - a7 - a8 - a10 - a11;
 
 	# check plausibility and 0 partial areas
-	if (any(a1 < 0, a2 < 0, a3 < 0, a4 < 0, a5 < 0, a6 < 0, a7 < 0, a8 < 0, a9 < 0, a10 < 0, a11 < 0, a12 < 0, a13 < 0, a14 < 0, a15 < 0)) {
-		stop("Impossible: partial areas negative")
+	areas <- c(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
+	areas.error <- c(
+		"a1  <- area3 - a2 - a4 - a5 - a6 - a7 - a12 - a13",
+		"a2  <- n34 - a6 - a5 - a7",
+		"a3  <- area4 - a2 - a5 - a6 - a7 - a8 - a10 - a11",
+		"a4  <- n13 - a6 - a5 - a12",
+		"a5  <- n134 - a6",
+		"a6  <- n1234",
+		"a7  <- n234 - a6",
+		"a8  <- n24 - a6 - a7 - a11",
+		"a9  <- area1 - a4 - a5 - a6 - a10 - a11 - a12 - a15",
+		"a10 <- n14 - a6 - a5 - a11",
+		"a11 <- n124 - a6",
+		"a12 <- n123 - a6",
+		"a15 <- n12 - a6 - a11 - a12",
+		"a13 <- n23 - a6 - a7 - a12",
+		"a14 <- area2 - a6 - a7 - a8 - a11 - a12 - a13 - a15"
+		);
+	for (i in 1:length(areas)) {
+		if (areas[i] < 0) {
+			stop(paste("Impossible:", areas.error[i], "produces negative area"));
+			}
 		}
 
 	# initialize gList to hold all Grobs generated
