@@ -54,6 +54,7 @@ draw.032 <- function(
 	a4 <- tmp$areas[4];
 	a5 <- tmp$areas[5];
 	a6 <- tmp$areas[6];
+	a7 <- tmp$areas[7];
 
 	# 3-vector rotations
 	fill <- fill[tmp$o3];
