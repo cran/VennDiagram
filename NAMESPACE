@@ -38,3 +38,4 @@ export(
 	rotate.venn.degrees,
 	venn.diagram
 	)
+import(grid)

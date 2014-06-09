@@ -4,6 +4,7 @@ Known Bugs:
 venn.diagram(list(A=c(5,45,46,57), B=c(42), C=c(4,42,56,63)), filename = 'x.tiff');
 
 Improvements to make:
+* Flag to plot percentages instead of actual overlap count
 * Refactoring all of the draw.'code'.R files to condense them down into a few select files, or even a single one
 * COMMENT COMMENT COMMENT
 * Structure the various functions so that they have identical parameter structures where possible

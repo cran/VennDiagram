@@ -172,8 +172,8 @@ draw.pairwise.venn <- function(
 		shrink.factor <- max.circle.size / r1;
 		}
 	else {
-		tmp1 <- min(area1, area2);
-		tmp2 <- max(area1, area2);
+		tmp1 <- max(area1, area2);
+		tmp2 <- min(area1, area2);
 		if (tmp1 != area1) { list.switch <- TRUE; }
 		area1 <- tmp1;
 		area2 <- tmp2;
@@ -186,22 +186,25 @@ draw.pairwise.venn <- function(
 	# reverse the list if the order is backwards OR inverted is called (both just reverts to normal)
 	if (xor(list.switch, inverted)) {
 		category <- rev(category);
-		ext.pos <- rev(ext.pos);
-		ext.dist <- rev(ext.dist);
 		lwd <- rev(lwd);
 		lty <- rev(lty);
 		col <- rev(col);
+		fill <- rev(fill);
+		alpha <- rev(alpha);
 		label.col <- rev(label.col);
 		cex <- rev(cex);
 		fontface <- rev(fontface);
 		fontfamily <- rev(fontfamily);
+		cat.pos <- rev(cat.pos);
 		cat.dist <- rev(cat.dist);
 		cat.col <- rev(cat.col);
 		cat.cex <- rev(cat.cex);
 		cat.fontface <- rev(cat.fontface);
 		cat.fontfamily <- rev(cat.fontfamily);
-		fill <- rev(fill);
-		alpha <- rev(alpha);
+		cat.just <- rev(cat.just);
+		ext.pos <- rev(ext.pos);
+		#ext.dist <- rev(ext.dist); # ext.dist intentionally not swapped
+		ext.length <- rev(ext.length);
 		}
 
 	# convert radii to Grid dimensions
@@ -228,8 +231,8 @@ draw.pairwise.venn <- function(
 		tmp <- VennDiagram::ellipse(
 			x = x.centre.1,
 			y = 0.5,
-			a = r1,
-			b = r1,
+			a = ifelse(!inverted, r1, r2),
+			b = ifelse(!inverted, r1, r2),
 			gp = gpar(
 				lty = 0,
 				fill = fill[1],
@@ -241,8 +244,8 @@ draw.pairwise.venn <- function(
 		tmp <- VennDiagram::ellipse(
 			x = x.centre.2,
 			y = 0.5,
-			a = r2,
-			b = r2,
+			a = ifelse(inverted, r1, r2),
+			b = ifelse(inverted, r1, r2),
 			gp = gpar(
 				lty = 0,
 				fill = fill[2],
@@ -254,8 +257,8 @@ draw.pairwise.venn <- function(
 		tmp <- VennDiagram::ellipse(
 			x = x.centre.1,
 			y = 0.5,
-			a = r1,
-			b = r1,
+			a = ifelse(!inverted, r1, r2),
+			b = ifelse(!inverted, r1, r2),
 			gp = gpar(
 				lwd = lwd[1],
 				lty = lty[1],
@@ -268,8 +271,8 @@ draw.pairwise.venn <- function(
 		tmp <- VennDiagram::ellipse(
 			x = x.centre.2,
 			y = 0.5,
-			a = r2,
-			b = r2,
+			a = ifelse(inverted, r1, r2),
+			b = ifelse(inverted, r1, r2),
 			gp = gpar(
 				lwd = lwd[2],
 				lty = lty[2],
@@ -281,13 +284,13 @@ draw.pairwise.venn <- function(
 
 		# if labels are to be placed outside circles
 		if (ext.text) {
-			area.1.pos <- x.centre.1 - r1 + ( (2 * r1 - (r1 + r2 - d)) / 2);
-			area.2.pos <- x.centre.2 + r2 - ( (2 * r2 - (r1 + r2 - d)) / 2);
+			area.1.pos <- x.centre.1 + ifelse(!inverted, -r1 + ( (2 * r1 - (r1 + r2 - d)) / 2), -r2 + ( (2 * r2 - (r2 + r1 - d)) / 2));
+			area.2.pos <- x.centre.2 + ifelse(!inverted, r2 - ( (2 * r2 - (r1 + r2 - d)) / 2), r1 - ( (2 * r1 - (r2 + r1 - d)) / 2));
 			# distinct area1 is more than the given percentage (label stays inside circle)
 			if ( (area1 - cross.area) / area1 > ext.percent[1] & (area1 - cross.area) / area2 > ext.percent[1]) {
 				# draw label normally
 				tmp <- textGrob(
-					label = area1 - cross.area,
+					label = ifelse(!inverted, area1, area2) - cross.area,
 					x = area.1.pos,
 					y = 0.5,
 					gp = gpar(
@@ -306,7 +309,7 @@ draw.pairwise.venn <- function(
 				area.1.ypos <- label.pos$y
 				# draw label outside
 				tmp <- textGrob(
-					label = area1 - cross.area,
+					label = ifelse(!inverted, area1, area2) - cross.area,
 					x = area.1.xpos,
 					y = area.1.ypos,
 					gp = gpar(
@@ -334,7 +337,7 @@ draw.pairwise.venn <- function(
 			if ((area2 - cross.area) / area2 > ext.percent[2] & (area2 - cross.area) / area1 > ext.percent[2]) {
 				# draw label normally
 				tmp <- textGrob(
-					label = area2 - cross.area,
+					label = ifelse(inverted, area1, area2) - cross.area,
 					x = area.2.pos,
 					y = 0.5,
 					gp = gpar(
@@ -353,7 +356,7 @@ draw.pairwise.venn <- function(
 				area.2.ypos <- label.pos$y;
 				# draw label outside
 				tmp <- textGrob(
-					label = area2 - cross.area,
+					label = ifelse(inverted, area1, area2) - cross.area,
 					x = area.2.xpos,
 					y = area.2.ypos,
 					gp = gpar(
@@ -382,7 +385,7 @@ draw.pairwise.venn <- function(
 				# draw label normally
 				tmp <- textGrob(
 					label = cross.area,
-					x = x.centre.1 + (d - r2) + (r1 + r2 - d) / 2,
+					x = x.centre.1 + (d - ifelse(!inverted, r2, r1)) + (r1 + r2 - d) / 2,
 					y = 0.5,
 					gp = gpar(
 						col = label.col[2],
@@ -428,9 +431,9 @@ draw.pairwise.venn <- function(
 
 		# if the labels are not to be extended, draw them in their usual locations
 		else {
-			area.1.pos <-  x.centre.1 - r1 + ( (2 * r1 - (r1 + r2 - d)) / 2);
+			area.1.pos <-  x.centre.1 + ifelse(!inverted, -r1 + ( (2 * r1 - (r1 + r2 - d)) / 2), -r2 + ( (2 * r2 - (r2 + r1 - d)) / 2));
 			tmp <- textGrob(
-				label = area1 - cross.area,
+				label = ifelse(!inverted, area1, area2) - cross.area,
 				x = area.1.pos,
 				y = 0.5,
 				gp = gpar(
@@ -441,9 +444,9 @@ draw.pairwise.venn <- function(
 					)
 				);
 			grob.list <- gList(grob.list, tmp);
-			area.2.pos <- x.centre.2 + r2 - ( (2 * r2 - (r1 + r2 - d)) / 2)
+			area.2.pos <- x.centre.2 + ifelse(!inverted, r2 - ( (2 * r2 - (r1 + r2 - d)) / 2), r1 - ( (2 * r1 - (r2 + r1 - d)) / 2));
 			tmp <- textGrob(
-				label = area2 - cross.area,
+				label = ifelse(inverted, area1, area2) - cross.area,
 				x = area.2.pos,
 				y = 0.5,
 				gp = gpar(
@@ -456,7 +459,7 @@ draw.pairwise.venn <- function(
 			grob.list <- gList(grob.list, tmp);
 			tmp <- textGrob(
 				label = cross.area,
-				x = x.centre.1 + (d - r2) + (r1 + r2 - d) / 2,
+				x = x.centre.1 + (d - ifelse(!inverted, r2, r1)) + (r1 + r2 - d) / 2,
 				y = 0.5,
 				gp = gpar(
 					col = label.col[2],
@@ -470,8 +473,8 @@ draw.pairwise.venn <- function(
 
 		# find the location of the category labels
 		if ('outer' == cat.default.pos) {
-			cat.pos.1 <- find.cat.pos(x.centre.1, 0.5, cat.pos[1], cat.dist[1], r1);
-			cat.pos.2 <- find.cat.pos(x.centre.2, 0.5, cat.pos[2], cat.dist[2], r2);
+			cat.pos.1 <- find.cat.pos(x.centre.1, 0.5, ifelse(!inverted, cat.pos[1], (cat.pos[2] + 180) %% 360), cat.dist[1], ifelse(!inverted, r1, r2));
+			cat.pos.2 <- find.cat.pos(x.centre.2, 0.5, ifelse(!inverted, cat.pos[2], (cat.pos[1] + 180) %% 360), cat.dist[2], ifelse(!inverted, r2, r1));
 			}
 		else if ('text' == cat.default.pos) {
 			cat.pos.1 <- find.cat.pos(area.1.pos, 0.5, cat.pos[1], cat.dist[1]);
