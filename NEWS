@@ -1,3 +1,13 @@
+VennDiagram 1.6.9 2014-09-24 (clalansingh)
+---------------------------------------------------------------------------------------------------
+BUG FIXES
+* correctly handles a corner case of pairwise venn diagrams where only the values and labels are specified
+
+VennDiagram 1.6.8 2014-09-11 (clalansingh)
+---------------------------------------------------------------------------------------------------
+BUG FIXES
+* correctly handle inversions of pairwise venn diagrams with correct labelling and positioning of ellipses
+
 VennDiagram 1.6.7 2014-06-25 (rsun)
 ---------------------------------------------------------------------------------------------------
 BUG FIXES

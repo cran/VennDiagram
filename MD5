@@ -1,6 +1,6 @@
-27f5e21f2b2563ad0eb271713a7d582e *DESCRIPTION
+35df41ccaee00109d553cfdf9055e13c *DESCRIPTION
 19fbade59d43dde2cf9050c0a35a39e2 *NAMESPACE
-4781fa58f4f7d947a496d1f09111ffe8 *NEWS
+fd939ce2e943d529cb94469b59a61cec *NEWS
 7d07e26bc6d9226b7763d02c00f28d4f *R/add.title.R
 f023207e1e2c0fa75dccaa14ba91141d *R/adjust.venn.R
 48e2785326d4ea72a047efdfb5166a4d *R/decide.special.case.R
@@ -23,7 +23,7 @@ a74ec2be26752a6ae0ea9c4ba7456f28 *R/draw.112AA.R
 537e472a22b39d4019b8933be6dda368 *R/draw.121AO.R
 612e5b027a97ad96f0c5ead59ce4c199 *R/draw.122AAOO.R
 73ef6a534ff94c4e791526a5d71ccb61 *R/draw.130.R
-4def932dfd7f59f86adf17a06a764800 *R/draw.pairwise.venn.R
+8429a8d06b4d722e2a5c4b03b1bbd9e2 *R/draw.pairwise.venn.R
 d6da4d89054e6a59df3394f25e1ceadc *R/draw.quad.venn.R
 3929687a1648c393bdf18fcb52de79c3 *R/draw.quintuple.venn.R
 85bf7483bc07d8fc0384dbf722444736 *R/draw.single.venn.R

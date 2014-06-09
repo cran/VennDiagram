@@ -473,8 +473,8 @@ draw.pairwise.venn <- function(
 
 		# find the location of the category labels
 		if ('outer' == cat.default.pos) {
-			cat.pos.1 <- find.cat.pos(x.centre.1, 0.5, ifelse(!inverted, cat.pos[1], (cat.pos[2] + 180) %% 360), cat.dist[1], ifelse(!inverted, r1, r2));
-			cat.pos.2 <- find.cat.pos(x.centre.2, 0.5, ifelse(!inverted, cat.pos[2], (cat.pos[1] + 180) %% 360), cat.dist[2], ifelse(!inverted, r2, r1));
+			cat.pos.1 <- find.cat.pos(x.centre.1, 0.5, (ifelse(!inverted, cat.pos[1], cat.pos[2]) + ifelse(xor(list.switch, inverted), 180, 0)) %% 360, cat.dist[1], ifelse(!inverted, r1, r2));
+			cat.pos.2 <- find.cat.pos(x.centre.2, 0.5, (ifelse(!inverted, cat.pos[2], cat.pos[1]) + ifelse(xor(list.switch, inverted), 180, 0)) %% 360, cat.dist[2], ifelse(!inverted, r2, r1));
 			}
 		else if ('text' == cat.default.pos) {
 			cat.pos.1 <- find.cat.pos(area.1.pos, 0.5, cat.pos[1], cat.dist[1]);

@@ -1,5 +1,5 @@
 Package: VennDiagram
-Version: 1.6.8
+Version: 1.6.9
 Type: Package
 Title: Generate high-resolution Venn and Euler plots
 Date: 2014-06-09
@@ -9,7 +9,7 @@ Depends: R (>= 2.14.1), grid (>= 2.14.1)
 Description: A set of functions to generate high-resolution Venn and Euler plots. Includes handling for several special cases, including two-case scaling, and extensive customization of plot shape and structure.
 License: GPL-2
 LazyLoad: yes
-Packaged: 2014-09-11 18:11:07 UTC; clalansingh
+Packaged: 2014-09-24 20:23:00 UTC; pboutros
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2014-09-11 21:02:28
+Date/Publication: 2014-09-24 23:18:41
