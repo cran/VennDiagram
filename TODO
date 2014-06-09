@@ -11,3 +11,4 @@ Improvements to make:
 * Add functionality into the venn.diagram function so that it will save in a specific file type given an appropriate file extension (BoutrosLab.plotting.general has a good solution)
 * There may be a non-unique solution to the triple-Venn scaling problem as implemented in Vennerable (https://r-forge.r-project.org/projects/vennerable/)
 * Allow returning of a data-structure giving the overlaps in each category
+* Weirdness in venn.diagram help in the PDF version with lack of wrapping in the parameter-table

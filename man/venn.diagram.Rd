@@ -1,22 +1,24 @@
 \name{venn.diagram}
 \alias{venn.diagram}
 \title{Make a Venn Diagram}
-\description{This function takes a list and creates a publication-quality TIFF Venn Diagram}
+\description{This function takes a list and creates a publication-quality TIFF Venn 
+Diagram}
 \usage{
-venn.diagram(x, filename, height = 3000, width = 3000, resolution = 500,
-units = "px", compression = "lzw", na = "stop", main = "", sub = "",
-	main.pos = c(0.5, 1.05), main.fontface = "plain", main.fontfamily = "serif",
-	main.col = "black", main.cex = 1, main.just = c(0.5, 1),
-	sub.pos = c(0.5, 1.05), sub.fontface = "plain", sub.fontfamily = "serif",
-	sub.col = "black", sub.cex = 1, sub.just = c(0.5, 1),
-	category.names = names(x), force.unique = TRUE, ...);
+venn.diagram(x, filename, height = 3000, width = 3000, resolution = 500, 
+imagetype = "tiff", units = "px", compression = "lzw", na = "stop", main = "", sub = "", 
+main.pos = c(0.5, 1.05), main.fontface = "plain", main.fontfamily = "serif", 
+main.col = "black", main.cex = 1, main.just = c(0.5, 1), sub.pos = c(0.5, 1.05), 
+sub.fontface = "plain", sub.fontfamily = "serif", sub.col = "black", sub.cex = 1, 
+sub.just = c(0.5, 1), category.names = names(x), force.unique = TRUE, ...);
 }
 \arguments{
-  \item{x}{A list of vectors (e.g., integers, chars), with each component corresponding to a separate circle in the Venn diagram}
-  \item{filename}{Filename for tiff output, or if NULL returns the grid object itself}
+  \item{x}{A list of vectors (e.g., integers, chars), with each component corresponding 
+  to a separate circle in the Venn diagram}
+  \item{filename}{Filename for image output, or if NULL returns the grid object itself}
   \item{height}{Integer giving the height of the output figure in units}
   \item{width}{Integer giving the width of the output figure in units}
   \item{resolution}{Resolution of the final figure in DPI}
+  \item{imagetype}{Specification of the image format (e.g. tiff, png or svg)}
   \item{units}{Size-units to use for the final figure}
   \item{compression}{What compression algorithm should be applied to the final tiff}
   \item{na}{Missing value handling method: "none", "stop", "remove"}
@@ -27,66 +29,131 @@ units = "px", compression = "lzw", na = "stop", main = "", sub = "",
   \item{main.fontfamily}{Character giving the fontfamily (font type) of the main title}
   \item{main.col}{Character giving the colour of the main title}
   \item{main.cex}{Number giving the cex (font size) of the main title}
-  \item{main.just}{Vector of length 2 indicating horizontal and vertical justification of the main title}
+  \item{main.just}{Vector of length 2 indicating horizontal and vertical justification 
+  of the main title}
   \item{sub.pos}{Vector of length 2 indicating (x,y) of the subtitle}
   \item{sub.fontface}{Character giving the fontface (font style) of the subtitle}
   \item{sub.fontfamily}{Character giving the fontfamily (font type) of the subtitle}
   \item{sub.col}{Character Colour of the subtitle}
   \item{sub.cex}{Number giving the cex (font size) of the subtitle}
-  \item{sub.just}{Vector of length 2 indicating horizontal and vertical justification of the subtitle}
+  \item{sub.just}{Vector of length 2 indicating horizontal and vertical justification of 
+  the subtitle}
   \item{category.names}{Allow specification of category names using plotmath syntax}
-  \item{force.unique}{Logical specifying whether to use only unique elements in each item of the input list or use all elements. Defaults to FALSE}
+  \item{force.unique}{Logical specifying whether to use only unique elements in each item
+   of the input list or use all elements. Defaults to FALSE}
   \item{...}{A series of graphical parameters tweaking the plot. See below for details}
   }
 \details{
 \tabular{cccl}{
-  \bold{Argument}       \tab \bold{Venn Sizes} \tab \bold{Class}    \tab \bold{Description}\cr
-  \code{lwd}            \tab 1,2,3,4,5           \tab \var{numeric}   \tab Vector giving the width of each circle's circumference\cr
-  \code{lty}            \tab 1,2,3,4,5           \tab \var{numeric}   \tab Vector giving the dash pattern of each circle's circumference\cr
-  \code{col}            \tab 1,2,3,4,5           \tab \var{character} \tab Vector giving the colour of each circle's circumference\cr
-  \code{fill}           \tab 1,2,3,4,5           \tab \var{character} \tab Vector giving the colour of each circle's area\cr
-  \code{alpha}          \tab 1,2,3,4,5           \tab \var{numeric}   \tab Vector giving the alpha transparency of each circle's area\cr
-  \code{label.col}      \tab 1,2,3,4,5           \tab \var{character} \tab Vector giving the colour for each area label (length = 1/3/7/15 based on set-number)\cr
-  \code{cex}            \tab 1,2,3,4,5           \tab \var{numeric}   \tab Vector giving the size for each area label (length = 1/3/7/15 based on set-number)\cr
-  \code{fontface}       \tab 1,2,3,4,5           \tab \var{character} \tab Vector giving the fontface for each area label (length = 1/3/7/15 based on set-number)\cr
-  \code{fontfamily}     \tab 1,2,3,4,5           \tab \var{character} \tab Vector giving the fontfamily for each area label (length = 1/3/7/15 based on set-number)\cr
-  \code{cat.pos}        \tab 1,2,3,4,5           \tab \var{numeric}   \tab Vector giving the position (in degrees) of each category name along the circle, with 0 at 12 o'clock\cr
-  \code{cat.dist}       \tab 1,2,3,4,5           \tab \var{numeric}   \tab Vector giving the distance (in npc units) of each category name from the edge of the circle (can be negative)\cr
-  \code{cat.cex}        \tab 1,2,3,4,5           \tab \var{numeric}   \tab Vector giving the size for each category name\cr
-  \code{cat.col}        \tab 1,2,3,4,5           \tab \var{character} \tab Vector giving the colour for each category name\cr
-  \code{cat.fontface}   \tab 1,2,3,4,5           \tab \var{character} \tab Vector giving the fontface for each category name\cr
-  \code{cat.fontfamily} \tab 1,2,3,4,5           \tab \var{character} \tab Vector giving the fontfamily for each category name\cr
-  \code{cat.just}       \tab 1,2,3,4,5           \tab \var{numeric}   \tab List (length = 1/2/3/4 based on set number) of Vectors of length 2 indicating horizontal and vertical justification for each category name\cr
-  \code{cat.default.pos}\tab 1,2,3               \tab \var{character} \tab One of c('outer', 'text') to specify the default location of category names (cat.pos and cat.dist are handled differently)\cr
-  \code{margin}         \tab 1,2,3,4,5           \tab \var{numeric}   \tab Number giving the amount of whitespace around the diagram in grid units\cr
-  \code{rotation.degree}\tab 1,2,3,4,5           \tab \var{numeric}   \tab Number of degrees to rotate the entire diagram\cr
-  \code{rotation.centre}\tab 1,2,3,4,5           \tab \var{numeric}   \tab Vector of length 2 indicating (x,y) of the rotation centre\cr
-  \code{rotation}       \tab 3                   \tab \var{numeric}   \tab Number giving the clockwise rotation of a three-set Venn diagram (1, 2, or 3)\cr
-  \code{reverse}        \tab 3                   \tab \var{logical}   \tab Reflect the three-set Venn diagram along its central vertical axis of symmetry.  Use in combination with \code{rotation} to generate all possible set orders\cr
-  \code{euler.d}        \tab 2, 3                \tab \var{logical}   \tab Enable Euler diagrams for two-set and three-set Venn diagrams (Venn Diagrams with moveable circles)\cr
-  \code{scaled}         \tab 2, 3                \tab \var{logical}   \tab Enable scaling for two-set and certain three-set Euler diagrams. (euler.d must be true to enable this)\cr
-  \code{sep.dist}       \tab 2, 3                \tab \var{numeric}   \tab Controls the separation between distinct circles in certain two-set or three-set Euler diagrams.\cr
-  \code{offset}         \tab 2, 3                \tab \var{numeric}   \tab Number between 0 and 1 giving the amount to offset the smaller circle by in the inclusion type of two-set Euler diagram and certain similar three-set Euler diagrams.\cr
-  \code{inverted}       \tab 2                   \tab \var{logical}   \tab Flip the two-set Venn diagram along its vertical axis (distinguished from \code{reverse})\cr
-  \code{ext.text}       \tab 2                   \tab \var{logical}   \tab Allow external text labels when areas are small\cr
-  \code{ext.percent}    \tab 2                   \tab \var{numeric}   \tab A vector (length 3) indicating the proportion that a partial area has to be smaller than to trigger external text placement.  The elements allow for individual control of the areas in the order of the first area, second area and intersection area.\cr
-  \code{ext.line.lwd}   \tab 2                   \tab \var{numeric}   \tab lwd of line connecting to \code{ext.text}\cr
-  \code{ext.dist}       \tab 2                   \tab \var{numeric}   \tab Vector of length 1 or 2 indicating length of external line (use negative values to shorten the line )\cr
-  \code{ext.length}     \tab 2                   \tab \var{numeric}   \tab Vector of length 1 or 2 indicating the proportion of the external line that is drawn from the anchor to the text\cr
+  \bold{Argument}       \tab \bold{Venn Sizes} \tab \bold{Class}    
+  \tab \bold{Description}\cr
+  \code{lwd}            \tab 1,2,3,4,5           \tab \var{numeric}   
+  \tab Vector giving the width of each circle's circumference\cr
+  \code{lty}            \tab 1,2,3,4,5           \tab \var{numeric}   
+  \tab Vector giving the dash pattern of each circle's circumference\cr
+  \code{col}            \tab 1,2,3,4,5           \tab \var{character} 
+  \tab Vector giving the colour of each circle's circumference\cr
+  \code{fill}           \tab 1,2,3,4,5           \tab \var{character} 
+  \tab Vector giving the colour of each circle's area\cr
+  \code{alpha}          \tab 1,2,3,4,5           \tab \var{numeric}   
+  \tab Vector giving the alpha transparency of each circle's area\cr
+  \code{label.col}      \tab 1,2,3,4,5           \tab \var{character} 
+  \tab Vector giving the colour for each area label (length = 1/3/7/15 based on 
+  set-number)\cr
+  \code{cex}            \tab 1,2,3,4,5           \tab \var{numeric}   
+  \tab Vector giving the size for each area label (length = 1/3/7/15 based on 
+  set-number)\cr
+  \code{fontface}       \tab 1,2,3,4,5           \tab \var{character} 
+  \tab Vector giving the fontface for each area label (length = 1/3/7/15 based on 
+  set-number)\cr
+  \code{fontfamily}     \tab 1,2,3,4,5           \tab \var{character} 
+  \tab Vector giving the fontfamily for each area label (length = 1/3/7/15 based on 
+  set-number)\cr
+  \code{cat.pos}        \tab 1,2,3,4,5           \tab \var{numeric}   
+  \tab Vector giving the position (in degrees) of each category name along the circle, 
+  with 0 at 12 o'clock\cr
+  \code{cat.dist}       \tab 1,2,3,4,5           \tab \var{numeric}   
+  \tab Vector giving the distance (in npc units) of each category name from the edge of 
+  the circle (can be negative)\cr
+  \code{cat.cex}        \tab 1,2,3,4,5           \tab \var{numeric}   
+  \tab Vector giving the size for each category name\cr
+  \code{cat.col}        \tab 1,2,3,4,5           \tab \var{character} 
+  \tab Vector giving the colour for each category name\cr
+  \code{cat.fontface}   \tab 1,2,3,4,5           \tab \var{character} 
+  \tab Vector giving the fontface for each category name\cr
+  \code{cat.fontfamily} \tab 1,2,3,4,5           \tab \var{character} 
+  \tab Vector giving the fontfamily for each category name\cr
+  \code{cat.just}       \tab 1,2,3,4,5           \tab \var{numeric}   
+  \tab List (length = 1/2/3/4 based on set number) of Vectors of length 2 indicating 
+  horizontal and vertical justification for each category name\cr
+  \code{cat.default.pos}\tab 1,2,3               \tab \var{character} 
+  \tab One of c('outer', 'text') to specify the default location of category names 
+  (cat.pos and cat.dist are handled differently)\cr
+  \code{margin}         \tab 1,2,3,4,5           \tab \var{numeric}   
+  \tab Number giving the amount of whitespace around the diagram in grid units\cr
+  \code{rotation.degree}\tab 1,2,3,4,5           \tab \var{numeric}   
+  \tab Number of degrees to rotate the entire diagram\cr
+  \code{rotation.centre}\tab 1,2,3,4,5           \tab \var{numeric}   
+  \tab Vector of length 2 indicating (x,y) of the rotation centre\cr
+  \code{rotation}       \tab 3                   \tab \var{numeric}   
+  \tab Number giving the clockwise rotation of a three-set Venn diagram (1, 2, or 3)\cr
+  \code{reverse}        \tab 3                   \tab \var{logical}   
+  \tab Reflect the three-set Venn diagram along its central vertical axis of symmetry.  
+  Use in combination with \code{rotation} to generate all possible set orders\cr
+  \code{euler.d}        \tab 2, 3                \tab \var{logical}   
+  \tab Enable Euler diagrams for two-set and three-set Venn diagrams 
+  (Venn Diagrams with moveable circles)\cr
+  \code{scaled}         \tab 2, 3                \tab \var{logical}   
+  \tab Enable scaling for two-set and certain three-set Euler diagrams. 
+  (euler.d must be true to enable this)\cr
+  \code{sep.dist}       \tab 2, 3                \tab \var{numeric}   
+  \tab Controls the separation between distinct circles in certain two-set or three-set 
+  Euler diagrams.\cr
+  \code{offset}         \tab 2, 3                \tab \var{numeric}   
+  \tab Number between 0 and 1 giving the amount to offset the smaller circle by in the 
+  inclusion type of two-set Euler diagram and certain similar three-set Euler 
+  diagrams.\cr
+  \code{inverted}       \tab 2                   \tab \var{logical}   
+  \tab Flip the two-set Venn diagram along its vertical axis (distinguished from 
+  \code{reverse})\cr
+  \code{ext.text}       \tab 2                   \tab \var{logical}   
+  \tab Allow external text labels when areas are small\cr
+  \code{ext.percent}    \tab 2                   \tab \var{numeric}   
+  \tab A vector (length 3) indicating the proportion that a partial area has to be 
+  smaller than to trigger external text placement.  The elements allow for individual 
+  control of the areas in the order of the first area, second area and intersection 
+  area.\cr
+  \code{ext.line.lwd}   \tab 2                   \tab \var{numeric}   
+  \tab lwd of line connecting to \code{ext.text}\cr
+  \code{ext.dist}       \tab 2                   \tab \var{numeric}   
+  \tab Vector of length 1 or 2 indicating length of external line (use negative values 
+  to shorten the line )\cr
+  \code{ext.length}     \tab 2                   \tab \var{numeric}   
+  \tab Vector of length 1 or 2 indicating the proportion of the external line that is 
+  drawn from the anchor to the text\cr
   }
 }
 \value{Plots a figure to the file given by the \var{filename} argument.}
 \author{Hanbo Chen}
 \seealso{
-\code{\link{draw.single.venn}}, \code{\link{draw.pairwise.venn}}, \code{\link{draw.triple.venn}}, \code{\link{draw.quad.venn}}, \code{\link{draw.quintuple.venn}}
+\code{\link{draw.single.venn}}, \code{\link{draw.pairwise.venn}}, 
+\code{\link{draw.triple.venn}}, \code{\link{draw.quad.venn}}, 
+\code{\link{draw.quintuple.venn}}
 }
 \examples{
-# Note: most examples are listed as dontrun to meet CRAN requirements, but all should work as-is!
+# Note: most examples are listed as dontrun to meet CRAN requirements, 
+# but all should work as-is!
 
 # compact and minimal notation
 \dontrun{
-venn.plot <- venn.diagram(list(A = 1:150, B = 121:170), "Venn_2set_simple.tiff");
-venn.plot <- venn.diagram(list(A = 1:150, B = 121:170, C = 101:200), "Venn_3set_simple.tiff");
+venn.plot <- venn.diagram(
+	list(A = 1:150, B = 121:170), 
+	"Venn_2set_simple.tiff"
+	);
+venn.plot <- venn.diagram(
+	list(A = 1:150, B = 121:170, C = 101:200), 
+	"Venn_3set_simple.tiff"
+	);
 }
 
 # a more elaborate two-set Venn diagram with title and subtitle
@@ -200,9 +267,12 @@ venn.plot <- venn.diagram(
 # Complex three-way Venn with labels & sub-/super-scripts	
 venn.plot <- venn.diagram(
 	x = list(
-		I = c(1:60, 61:105, 106:140, 141:160, 166:175, 176:180, 181:205, 206:220),
-		II = c(531:605, 476:530, 336:375, 376:405, 181:205, 206:220, 166:175, 176:180),
-		III = c(61:105, 106:140, 181:205, 206:220, 221:285, 286:335, 336:375, 376:405)
+		I = c(1:60, 61:105, 106:140, 141:160, 166:175, 176:180, 181:205, 
+		206:220),
+		II = c(531:605, 476:530, 336:375, 376:405, 181:205, 206:220, 166:175, 
+		176:180),
+		III = c(61:105, 106:140, 181:205, 206:220, 221:285, 286:335, 336:375, 
+		376:405)
 		),
 	category.names = c(
 		expression( bold('A'['1: subscript']) ),
@@ -346,10 +416,14 @@ venn.plot <- venn.diagram(
 # Figure 1D
 venn.plot <- venn.diagram(
 	x = list(
-		I = c(1:60, 61:105, 106:140, 141:160, 166:175, 176:180, 181:205, 206:220),
-		IV = c(531:605, 476:530, 336:375, 376:405, 181:205, 206:220, 166:175, 176:180),
-		II = c(61:105, 106:140, 181:205, 206:220, 221:285, 286:335, 336:375, 376:405),
-		III = c(406:475, 286:335, 106:140, 141:160, 166:175, 181:205, 336:375, 476:530)
+		I = c(1:60, 61:105, 106:140, 141:160, 166:175, 176:180, 181:205, 
+		206:220),
+		IV = c(531:605, 476:530, 336:375, 376:405, 181:205, 206:220, 166:175, 
+		176:180),
+		II = c(61:105, 106:140, 181:205, 206:220, 221:285, 286:335, 336:375, 
+		376:405),
+		III = c(406:475, 286:335, 106:140, 141:160, 166:175, 181:205, 336:375, 
+		476:530)
 		),
 	filename = "1D-quadruple_Venn.tiff",
 	col = "black",

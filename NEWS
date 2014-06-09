@@ -1,26 +1,36 @@
-VennDiagram 1.6.5 2013-08-21
+VennDiagram 1.6.7 2014-06-25 (rsun)
+---------------------------------------------------------------------------------------------------
+BUG FIXES
+* correctly handle NULLs passed to draw.pairwise.venn (either directly or through venn.diagram)
+
+VennDiagram 1.6.6 2013-09-05 (malbuquerque)
+---------------------------------------------------------------------------------------------------
+MINOR UPDATES
+* new argument added, 'imagetype', which allows for the specification of the image format (tiff, png or svg)
+
+VennDiagram 1.6.5 2013-08-21 (pboutros)
 ---------------------------------------------------------------------------------------------------
 BUG FIXES
 * element a7 not updated after rotations in all special-case ternary drawing functions
 
-VennDiagram 1.6.4 2013-07-10
+VennDiagram 1.6.4 2013-07-10 (pboutros)
 ---------------------------------------------------------------------------------------------------
 MINOR UPDATES
 * reduce line-widths of documentation to 90 characters to meet a new CRAN policy (NOT enforced in R v3.0.1, only in R-patched)
 * made even more examples \dontrun{} to accommodate CRAN requests
 
-VennDiagram 1.6.3 2013-07-05
+VennDiagram 1.6.3 2013-07-05 (pboutros)
 ---------------------------------------------------------------------------------------------------
 MINOR UPDATES
 * bug-fix in draw.010 that was not updating empty overlap regions properly after rotation
 
-VennDiagram 1.6.1 2013-05-20
+VennDiagram 1.6.1 2013-05-20 (jhawley)
 ---------------------------------------------------------------------------------------------------
 MINOR UPDATES
 * Triple, Quadruple, and Quintuple plots now notify what areas are negative
 * bug-fix in draw.022AA00 that was preventing properly scaled diagrams
 
-VennDiagram 1.6.0 2013-04-12
+VennDiagram 1.6.0 2013-04-12 (jhawley)
 ---------------------------------------------------------------------------------------------------
 MINOR UPDATES
 * Removed 'list.order' as an argument for draw.triple.venn and implicitly mapped ordering for triple and double plots

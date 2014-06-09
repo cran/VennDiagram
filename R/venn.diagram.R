@@ -16,6 +16,7 @@ venn.diagram <- function(
 	height = 3000,
 	width = 3000,
 	resolution = 500,
+	imagetype = 'tiff',
 	units = 'px',
 	compression = 'lzw',
 	na = 'stop',
@@ -275,7 +276,7 @@ venn.diagram <- function(
 			);
 		}
 
-	# if a filename is given, write a TIFF
+	# if a filename is given, write a desired image type, TIFF default
 	if (!is.null(filename)) {
 
 		# set the graphics driver
@@ -286,15 +287,43 @@ venn.diagram <- function(
 		else {
 			options(bitmapType = 'cairo');
 			}
+		
+		# TIFF image type specified
+		if('tiff' == imagetype) {
+			tiff(
+				filename = filename,
+				height = height,
+				width = width,
+				units = units,
+				res = resolution,
+				compression = compression
+				);
+			}
+		
+		# PNG image type specified
+		else if('png' == imagetype) {
+			png(
+				filename = filename,
+				height = height,
+				width = width,
+				units = units,
+				res = resolution
+				);
+			}
 
-		tiff(
-			filename = filename,
-			height = height,
-			width = width,
-			units = units,
-			res = resolution,
-			compression = compression
-			);
+		# SVG image type specified
+   		else if('svg' == imagetype) {
+			svg(
+				filename = filename,
+				height = height,
+				width = width
+   				);
+			}
+		
+		# Invalid imagetype specified
+		else {
+			stop("You have misspelled your 'imagetype', please try again");
+			}
 
 		grid.draw(grob.list);
 		dev.off();

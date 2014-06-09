@@ -1,6 +1,6 @@
-71853d9f862c7e27d0e85ee7f4b7123f *DESCRIPTION
+92fcecaee2902d18794b611e39f77fcd *DESCRIPTION
 1c3b39a45a0f9b2b60793cd00c6c6ca1 *NAMESPACE
-874ecdca7cddca76004c0bfcc3a3a753 *NEWS
+4781fa58f4f7d947a496d1f09111ffe8 *NEWS
 7d07e26bc6d9226b7763d02c00f28d4f *R/add.title.R
 f023207e1e2c0fa75dccaa14ba91141d *R/adjust.venn.R
 48e2785326d4ea72a047efdfb5166a4d *R/decide.special.case.R
@@ -23,7 +23,7 @@ a74ec2be26752a6ae0ea9c4ba7456f28 *R/draw.112AA.R
 537e472a22b39d4019b8933be6dda368 *R/draw.121AO.R
 612e5b027a97ad96f0c5ead59ce4c199 *R/draw.122AAOO.R
 73ef6a534ff94c4e791526a5d71ccb61 *R/draw.130.R
-2d9f1ea40105751bb1a0e41bb4fafedc *R/draw.pairwise.venn.R
+f4896757f3c58f1dfc7d398765373b2e *R/draw.pairwise.venn.R
 d6da4d89054e6a59df3394f25e1ceadc *R/draw.quad.venn.R
 3929687a1648c393bdf18fcb52de79c3 *R/draw.quintuple.venn.R
 85bf7483bc07d8fc0384dbf722444736 *R/draw.single.venn.R
@@ -38,8 +38,8 @@ becdc11665ed203066a86696804989e3 *R/flip.venn.R
 dc098d80dbacc74292a1d9829136f529 *R/rotate.R
 d8fdac4bbbe53d0759fccbf6755e6f45 *R/rotate.sp.R
 f95ef3429ff4605c5e1ea9583ff04451 *R/rotate.venn.degrees.R
-21d1c8cc6bdd9e67a52fded08fba683b *R/venn.diagram.R
-ab9159f8583be297cbfacb9c460abea9 *TODO
+e401d59109eb63a44eaa4d9ebd3b6135 *R/venn.diagram.R
+baf49eeeb27ebecd338de2ce9c433b3c *TODO
 c0f7c97f5090870733c5353833d4847d *man/VennDiagram-internal.Rd
 72c6e71ddd2d6f74b40f520301ae3317 *man/VennDiagram-package.Rd
 f537c454fc3b6a34c40717774e8542f6 *man/draw.001.Rd
@@ -66,4 +66,4 @@ ee0ecc92112767ae0d84bc44cc70827b *man/draw.111A.Rd
 f6c442c8213536dc59d665e7d4831e7b *man/draw.quintuple.venn.Rd
 eca748b7e5d16eb4d02d5e0768d42d20 *man/draw.single.venn.Rd
 e3e9683700aa54e29347ac56cb91cf2e *man/draw.triple.venn.Rd
-6dc4926f4c94fe817aca08232f5c46e3 *man/venn.diagram.Rd
+a1f8431f9bc7bd754c62aa7512d79351 *man/venn.diagram.Rd

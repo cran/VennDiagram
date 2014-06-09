@@ -168,6 +168,7 @@ draw.pairwise.venn <- function(
 		area2 <- tmp2;
 		r1 <- sqrt(area1 / pi);
 		r2 <- sqrt(area2 / pi);
+		if (r2 == 0) {r2 <- 0.5*r1 }
 		shrink.factor <- max.circle.size / r1;
 		}
 	else {
@@ -178,6 +179,7 @@ draw.pairwise.venn <- function(
 		area2 <- tmp2;
 		r1 <- sqrt(area1 / pi);
 		r2 <- sqrt(area2 / pi);
+		if (r1 == 0) {r1 <- 0.5*r2 }
 		shrink.factor <- max.circle.size / r2;
 		}
 
@@ -208,7 +210,7 @@ draw.pairwise.venn <- function(
 
 	# check special conditions
 	if (area1 == area2 & area2 == cross.area) { special.coincidental <- TRUE; }
-	if (cross.area == area2 | cross.area == area1) { special.inclusion <- TRUE; }
+	if (cross.area != 0 & (cross.area == area2 | cross.area == area1)) { special.inclusion <- TRUE; }
 	if (0 == cross.area) { special.exclusion <- TRUE; }
 
 	# plot scaled, generic pairwise Venn diagram with or without external texts
