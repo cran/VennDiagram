@@ -1,3 +1,46 @@
+VennDiagram 1.6.15 2015-08-25 (Christopher Lalansingh)
+---------------------------------------------------------------------------------------------------
+MINOR UPDATES
+* Changed import calls to fix undefined globals due to new CRAN policies.
+
+VennDiagram 1.6.14 2015-05-27 (David Wang)
+---------------------------------------------------------------------------------------------------
+MINOR UPDATES
+* Added futile logger support. Currently outputs logs to console (using root logger). Replaced print()'s with flog.info and appended flog.error after the stop()'s.
+* By default outputs to file if you access it through the venn.diagram function
+* Also logs the arguments used in the venn.diagram call
+
+VennDiagram 1.6.13 2015-05-27 (David Wang)
+---------------------------------------------------------------------------------------------------
+MINOR UPDATES
+* Can print two fields for each bin. print.mode = c("raw","percent") prints the percent in brackets underneath the raw value. c("percent","raw") makes it print the raw number in brackets underneath the percent.
+* Can specify the number of significant digits in the percent by field sigdigs. Default is 3
+* Can enter area fields directly for the three, four and five category venn diagrams. Need to know which areas correspond to what in order to use this.
+* Added Richard Cotton's code for creating in text a table of the partitions of the Venn Diagram. Useful for viewing and obtaining the area of each piece for evaluation before creating the Venn Diagram. Can be useful in its own right to get the area of each partition.
+
+VennDiagram 1.6.12 2015-05-22 (David Wang)
+---------------------------------------------------------------------------------------------------
+MINOR UPDATES
+* Refactored the 19 three categroy special case drawing functions into 2 functions (in two files)
+* Streamlined rotate.sp.R file.
+
+VennDiagram 1.6.11 2015-05-08 (David Wang)
+---------------------------------------------------------------------------------------------------
+MINOR UPDATES
+* Fixed bug with draw.121AO.R. Need to try both forward and reverse rotations.
+* Added optional parameter field "percents" which defaults to FALSE. Prints percent of total area with 4 significant digits
+
+VennDiagram 1.6.11 2015-01-02 (Warren W. Kretzschmar)
+---------------------------------------------------------------------------------------------------
+MINOR UPDATES
+* Added cex.prop argument which can be a function or string used to scale the areas of the groups and labels in the diagram
+
+VennDiagram 1.6.10 2015-01-02 (vsabelnykova)
+---------------------------------------------------------------------------------------------------
+MINOR UPDATES
+* If filename = FALSE, then returns a list called overlap, which contains the user provided elements but split by areas in Venn diagram
+and the gList (graphics list) which can then be plotted separately.
+
 VennDiagram 1.6.9 2014-09-24 (clalansingh)
 ---------------------------------------------------------------------------------------------------
 BUG FIXES

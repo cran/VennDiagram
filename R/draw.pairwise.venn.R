@@ -48,105 +48,134 @@ draw.pairwise.venn <- function(
 	ind = TRUE,
 	sep.dist = 0.05,
 	offset = 0,
+    cex.prop=NULL,
+    print.mode = "raw",
+    sigdigs=3,
 	...
 	) {
 
 	# area1 > area2 OR area1 < area2 plots the same Venn diagram.  Invert using the "inverted" argument.
 	# check parameter lengths and plausibility of Venn diagram
 	if (length(category) == 1) { category <- rep(category, 2); }
-	else if (length(category) != 2) { stop("Unexpected parameter length for 'category'"); }
+	else if (length(category) != 2) { flog.error("Unexpected parameter length for 'category'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'category'"); }
 
 	if (length(ext.percent) == 1) { ext.percent <- rep(ext.percent, 3); }
-	else if (length(ext.percent) != 3) { stop("Unexpected parameter length for 'ext.percent'"); }
+	else if (length(ext.percent) != 3) { flog.error("Unexpected parameter length for 'ext.percent'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'ext.percent'"); }
 
 	if (length(ext.pos) == 1) { ext.pos <- rep(ext.pos, 2); }
-	else if (length(ext.pos) != 2) { stop("Unexpected parameter length for 'ext.pos'"); }
+	else if (length(ext.pos) != 2) { flog.error("Unexpected parameter length for 'ext.pos'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'ext.pos'"); }
 
 	if (length(ext.dist) == 1) { ext.dist <- rep(ext.dist, 2); }
-	else if (length(ext.dist) != 2) { stop("Unexpected parameter length for 'ext.dist'"); }
+	else if (length(ext.dist) != 2) { flog.error("Unexpected parameter length for 'ext.dist'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'ext.dist'"); }
 
 	if (length(ext.length) == 1) { ext.length <- rep(ext.length, 2); }
-	else if (length(ext.length) != 2) { stop("Unexpected parameter length for 'ext.length'"); }
+	else if (length(ext.length) != 2) { flog.error("Unexpected parameter length for 'ext.length'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'ext.length'"); }
 
 	if (length(lwd) == 1) { lwd <- rep(lwd, 2); }
-	else if (length(lwd) != 2) { stop("Unexpected parameter length for 'lwd'"); }
+	else if (length(lwd) != 2) { flog.error("Unexpected parameter length for 'lwd'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'lwd'"); }
 
 	if (length(lty) == 1) { lty <- rep(lty, 2); }
-	else if (length(lty) != 2) { stop("Unexpected parameter length for 'lty'"); }
+	else if (length(lty) != 2) { flog.error("Unexpected parameter length for 'lty'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'lty'"); }
 
 	if (length(col) == 1) { col <- rep(col, 2); }
-	else if (length(col) != 2) { stop("Unexpected parameter length for 'col'"); }
+	else if (length(col) != 2) { flog.error("Unexpected parameter length for 'col'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'col'"); }
 
 	if (length(label.col) == 1) { label.col <- rep(label.col, 3); }
-	else if (length(label.col) != 3) { stop("Unexpected parameter length for 'label.col'"); }
+	else if (length(label.col) != 3) { flog.error("Unexpected parameter length for 'label.col'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'label.col'"); }
 
 	if (length(cex) == 1) { cex <- rep(cex, 3); }
-	else if (length(cex) != 3) { stop("Unexpected parameter length for 'cex'"); }
+	else if (length(cex) != 3) { flog.error("Unexpected parameter length for 'cex'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'cex'"); }
 
 	if (length(fontface) == 1) { fontface <- rep(fontface, 3); }
-	else if (length(fontface) != 3) { stop("Unexpected parameter length for 'fontface'"); }
+	else if (length(fontface) != 3) { flog.error("Unexpected parameter length for 'fontface'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'fontface'"); }
 
 	if (length(fontfamily) == 1) { fontfamily <- rep(fontfamily, 3); }
-	else if (length(fontfamily) != 3) { stop("Unexpected parameter length for 'fontfamily'"); }
+	else if (length(fontfamily) != 3) { flog.error("Unexpected parameter length for 'fontfamily'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'fontfamily'"); }
 
 	if (length(fill) == 1) { fill <- rep(fill, 2); }
-	else if (length(fill) != 2 & length(fill) != 0) { stop("Unexpected parameter length for 'fill'"); }
+	else if (length(fill) != 2 & length(fill) != 0) { flog.error("Unexpected parameter length for 'fill'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'fill'"); }
 
 	if (length(alpha) == 1) { alpha <- rep(alpha, 2); }
-	else if (length(alpha) != 2 & length(alpha) != 0) { stop("Unexpected parameter length for 'alpha'"); }
+	else if (length(alpha) != 2 & length(alpha) != 0) { flog.error("Unexpected parameter length for 'alpha'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'alpha'"); }
 
-	if (length(ext.line.lwd) != 1) { stop("Unexpected parameter length for 'ext.line.lwd'"); }
+	if (length(ext.line.lwd) != 1) { flog.error("Unexpected parameter length for 'ext.line.lwd'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'ext.line.lwd'"); }
 
 	if (length(cat.pos) == 1) { cat.pos <- rep(cat.pos, 2); }
-	else if (length(cat.pos) != 2) { stop("Unexpected parameter length for 'cat.pos'"); }
+	else if (length(cat.pos) != 2) { flog.error("Unexpected parameter length for 'cat.pos'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'cat.pos'"); }
 
 	if (length(cat.dist) == 1) { cat.dist <- rep(cat.dist, 2); }
-	else if (length(cat.dist) != 2) { stop("Unexpected parameter length for 'cat.dist'"); }
+	else if (length(cat.dist) != 2) { flog.error("Unexpected parameter length for 'cat.dist'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'cat.dist'"); }
 
 	if (length(cat.col) == 1) { cat.col <- rep(cat.col, 2); }
-	else if (length(cat.col) != 2) { stop("Unexpected parameter length for 'cat.col'"); }
+	else if (length(cat.col) != 2) { flog.error("Unexpected parameter length for 'cat.col'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'cat.col'"); }
 
 	if (length(cat.cex) == 1) { cat.cex <- rep(cat.cex, 2); }
-	else if (length(cat.cex) != 2) { stop("Unexpected parameter length for 'cat.cex'"); }
+	else if (length(cat.cex) != 2) { flog.error("Unexpected parameter length for 'cat.cex'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'cat.cex'"); }
 
 	if (length(cat.fontface) == 1) { cat.fontface <- rep(cat.fontface, 2); }
-	else if (length(cat.fontface) != 2) { stop("Unexpected parameter length for 'cat.fontface'"); }
+	else if (length(cat.fontface) != 2) { flog.error("Unexpected parameter length for 'cat.fontface'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'cat.fontface'"); }
 
 	if (length(cat.fontfamily) == 1) { cat.fontfamily <- rep(cat.fontfamily, 2); }
-	else if (length(cat.fontfamily) != 2) { stop("Unexpected parameter length for 'cat.fontfamily'"); }
+	else if (length(cat.fontfamily) != 2) { flog.error("Unexpected parameter length for 'cat.fontfamily'",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'cat.fontfamily'"); }
 
-	if (length(offset) != 1) { stop("Unexpected parameter length for 'offset'. Try using 'rotation.degree' to achieve non-vertical offsets"); }
+	if (length(offset) != 1) { flog.error("Unexpected parameter length for 'offset'. Try using 'rotation.degree' to achieve non-vertical offsets",name="VennDiagramLogger")
+stop("Unexpected parameter length for 'offset'. Try using 'rotation.degree' to achieve non-vertical offsets"); }
 
 	if (!(class(cat.just) == "list" & length(cat.just) == 2 & length(cat.just[[1]]) == 2 & length(cat.just[[2]]) == 2)) {
-		stop("Unexpected parameter format for 'cat.just'");
+		flog.error("Unexpected parameter format for 'cat.just'",name="VennDiagramLogger")
+stop("Unexpected parameter format for 'cat.just'");
 		}
 
 	# check uninterpretable parameters
 	if (!euler.d & scaled) {
-		stop("Uninterpretable parameter combination\nPlease set both euler.d = FALSE and scaled = FALSE to force Venn diagrams.");
+		flog.error("Uninterpretable parameter combination\nPlease set both euler.d = FALSE and scaled = FALSE to force Venn diagrams.",name="VennDiagramLogger")
+stop("Uninterpretable parameter combination\nPlease set both euler.d = FALSE and scaled = FALSE to force Venn diagrams.");
 		}
 	if (offset > 1 | offset < 0) {
-		stop("'Offset' must be between 0 and 1.  Try using 'rotation.degree = 180' to achieve offsets in the opposite direction.");
+		flog.error("'Offset' must be between 0 and 1.  Try using 'rotation.degree = 180' to achieve offsets in the opposite direction.",name="VennDiagramLogger")
+stop("'Offset' must be between 0 and 1.  Try using 'rotation.degree = 180' to achieve offsets in the opposite direction.");
 		}
 
-	if (cross.area > area1 | cross.area > area2) { stop("Impossible: cross section area too large."); }
+	if (cross.area > area1 | cross.area > area2) { flog.error("Impossible: cross section area too large.",name="VennDiagramLogger")
+stop("Impossible: cross section area too large."); }
 	cat.pos <- cat.pos + rotation.degree;
 
 	# check category label defaults
 	if (((cat.default.pos != 'outer') & (cat.default.pos != "text")) & cat.prompts) {
 	# PHH: removed this check from the if, so that code works with expressions: & isTRUE(category != rep("", 2))
-		print("No default location recognized.  Automatically changing to 'outer'");
+		flog.info("No default location recognized.  Automatically changing to 'outer'",name="VennDiagramLogger");
 		cat.default.pos <- 'outer';
 		}
 	if ((cat.default.pos == 'outer') & cat.prompts) {
-		print("Placing category labels at default outer locations.  Use 'cat.pos' and 'cat.dist' to modify location.");
-		print(paste("Current 'cat.pos':", cat.pos[1], "degrees,", cat.pos[2], "degrees"));
-		print(paste("Current 'cat.dist':", cat.dist[1], ",", cat.dist[2]));
+		flog.info("Placing category labels at default outer locations.  Use 'cat.pos' and 'cat.dist' to modify location.",name="VennDiagramLogger");
+		flog.info(paste("Current 'cat.pos':", cat.pos[1], "degrees,", cat.pos[2], "degrees"),name="VennDiagramLogger");
+		flog.info(paste("Current 'cat.dist':", cat.dist[1], ",", cat.dist[2]),name="VennDiagramLogger");
 		}
 	if ((cat.default.pos == 'text') & cat.prompts) {
-		print("Placing category labels at default text locations.  Use 'cat.pos' and 'cat.dist' to modify location.");
-		print(paste("Current 'cat.pos':", cat.pos[1], "degrees,", cat.pos[2], "degrees"));
-		print(paste("Current 'cat.dist':", cat.dist[1], ",", cat.dist[2]));
+		flog.info("Placing category labels at default text locations.  Use 'cat.pos' and 'cat.dist' to modify location.",name="VennDiagramLogger");
+		flog.info(paste("Current 'cat.pos':", cat.pos[1], "degrees,", cat.pos[2], "degrees"),name="VennDiagramLogger");
+		flog.info(paste("Current 'cat.dist':", cat.dist[1], ",", cat.dist[2]),name="VennDiagramLogger");
 		}
 
 	max.circle.size = 0.2;
@@ -215,6 +244,52 @@ draw.pairwise.venn <- function(
 	if (area1 == area2 & area2 == cross.area) { special.coincidental <- TRUE; }
 	if (cross.area != 0 & (cross.area == area2 | cross.area == area1)) { special.inclusion <- TRUE; }
 	if (0 == cross.area) { special.exclusion <- TRUE; }
+	
+	denom <- area1+area2-cross.area;
+	
+	wrapLab <- function(num){
+		stri = "";
+		if(print.mode[1] == "percent"){
+			stri <- paste(signif(num*100/denom,digits=sigdigs),"%",sep="");
+			if(isTRUE(print.mode[2] == "raw"))
+			{
+				stri <- paste(stri,"\n(",num,")",sep="");
+			}
+		}
+		if(print.mode[1] == "raw")
+		{
+			stri <- num;
+			if(isTRUE(print.mode[2] == "percent"))
+			{
+				stri <- paste(stri,"\n(",paste(signif(num*100/denom,digits=sigdigs),"%)",sep=""),sep="");
+			}
+		}
+		return(stri);
+	}
+	
+#	flog.info(c(area1,area2,cross.area),name="VennDiagramLogger");
+	
+#	altCross <- cross.area;
+#	altArea1 <- area1;
+#	altArea2 <- area2;
+	
+#	#Do processing on the areas and the cross.area to turn them into the required numbers for printing
+#	if(print.mode[1] == "percent")
+#	{
+#		denom <- area1+area2-cross.area;
+#		area1 <- area1*100/denom;
+#		area2 <- area2*100/denom;
+#		cross.area <- cross.area*100/denom;
+#	}
+#	else #print.mode[1] == "raw"
+#	{
+#		denom <- area1+area2-cross.area;
+#		altArea1 <- area1*100/denom;
+#		altArea2 <- area2*100/denom;
+#		altCross <- cross.area*100/denom;
+#	}
+	
+#	flog.info(c(area1,area2,cross.area),name="VennDiagramLogger");
 
 	# plot scaled, generic pairwise Venn diagram with or without external texts
 	# ALL OF THE BELOW SECTIONS HAVE A SIMILAR STRUCTURE TO THIS IF BRACKET
@@ -282,6 +357,37 @@ draw.pairwise.venn <- function(
 			);
 		grob.list <- gList(grob.list, tmp);
 
+
+                ## rescaling area labels to be proportional to area
+                if(length(cex.prop) > 0){
+
+                    if(length(cex.prop) != 1) flog.error("Value passed to cex.prop is not length 1",name="VennDiagramLogger")
+stop("Value passed to cex.prop is not length 1")
+
+                    ## figure out what function to use
+                    func = cex.prop
+                    if(class(cex.prop) != "function"){
+                        if(cex.prop == "lin"){
+                            func = function(x) x
+                        }
+                        else if(cex.prop == "log10"){
+                            func = log10
+                        }
+                        else flog.error(paste0("Unknown value passed to cex.prop: ", cex.prop),name="VennDiagramLogger")
+stop(paste0("Unknown value passed to cex.prop: ", cex.prop))
+                    }
+
+                    ## rescale areas
+                    areas = c(area1 - cross.area, cross.area, area2 - cross.area)
+                    maxArea = max(areas)            
+                    for(i in 1:length(areas)){                
+                        cex[i] = cex[i] * func(areas[i]) / func(maxArea)
+                        if(cex[i] <= 0) stop(paste0("Error in rescaling of area labels: the label of area ",
+                                  i, " is less than or equal to zero"))
+                    }
+                }
+
+                
 		# if labels are to be placed outside circles
 		if (ext.text) {
 			area.1.pos <- x.centre.1 + ifelse(!inverted, -r1 + ( (2 * r1 - (r1 + r2 - d)) / 2), -r2 + ( (2 * r2 - (r2 + r1 - d)) / 2));
@@ -290,7 +396,7 @@ draw.pairwise.venn <- function(
 			if ( (area1 - cross.area) / area1 > ext.percent[1] & (area1 - cross.area) / area2 > ext.percent[1]) {
 				# draw label normally
 				tmp <- textGrob(
-					label = ifelse(!inverted, area1, area2) - cross.area,
+					label = wrapLab(ifelse(!inverted, area1, area2) - cross.area),
 					x = area.1.pos,
 					y = 0.5,
 					gp = gpar(
@@ -309,7 +415,7 @@ draw.pairwise.venn <- function(
 				area.1.ypos <- label.pos$y
 				# draw label outside
 				tmp <- textGrob(
-					label = ifelse(!inverted, area1, area2) - cross.area,
+					label = wrapLab(ifelse(!inverted, area1, area2) - cross.area),
 					x = area.1.xpos,
 					y = area.1.ypos,
 					gp = gpar(
@@ -337,7 +443,7 @@ draw.pairwise.venn <- function(
 			if ((area2 - cross.area) / area2 > ext.percent[2] & (area2 - cross.area) / area1 > ext.percent[2]) {
 				# draw label normally
 				tmp <- textGrob(
-					label = ifelse(inverted, area1, area2) - cross.area,
+					label = wrapLab(ifelse(inverted, area1, area2) - cross.area),
 					x = area.2.pos,
 					y = 0.5,
 					gp = gpar(
@@ -356,7 +462,7 @@ draw.pairwise.venn <- function(
 				area.2.ypos <- label.pos$y;
 				# draw label outside
 				tmp <- textGrob(
-					label = ifelse(inverted, area1, area2) - cross.area,
+					label = wrapLab(ifelse(inverted, area1, area2) - cross.area),
 					x = area.2.xpos,
 					y = area.2.ypos,
 					gp = gpar(
@@ -384,7 +490,7 @@ draw.pairwise.venn <- function(
 			if (cross.area / area2 > ext.percent[3] & cross.area / area1 > ext.percent[3]) {
 				# draw label normally
 				tmp <- textGrob(
-					label = cross.area,
+					label = wrapLab(cross.area),
 					x = x.centre.1 + (d - ifelse(!inverted, r2, r1)) + (r1 + r2 - d) / 2,
 					y = 0.5,
 					gp = gpar(
@@ -404,7 +510,7 @@ draw.pairwise.venn <- function(
 				cross.area.ypos <- cross.pos$y
 				# draw label outside
 				tmp <- textGrob(
-					label = cross.area,
+					label = wrapLab(cross.area),
 					x = cross.area.xpos,
 					y = cross.area.ypos,
 					gp = gpar(
@@ -433,7 +539,7 @@ draw.pairwise.venn <- function(
 		else {
 			area.1.pos <-  x.centre.1 + ifelse(!inverted, -r1 + ( (2 * r1 - (r1 + r2 - d)) / 2), -r2 + ( (2 * r2 - (r2 + r1 - d)) / 2));
 			tmp <- textGrob(
-				label = ifelse(!inverted, area1, area2) - cross.area,
+				label = wrapLab(ifelse(!inverted, area1, area2) - cross.area),
 				x = area.1.pos,
 				y = 0.5,
 				gp = gpar(
@@ -446,7 +552,7 @@ draw.pairwise.venn <- function(
 			grob.list <- gList(grob.list, tmp);
 			area.2.pos <- x.centre.2 + ifelse(!inverted, r2 - ( (2 * r2 - (r1 + r2 - d)) / 2), r1 - ( (2 * r1 - (r2 + r1 - d)) / 2));
 			tmp <- textGrob(
-				label = ifelse(inverted, area1, area2) - cross.area,
+				label = wrapLab(ifelse(inverted, area1, area2) - cross.area),
 				x = area.2.pos,
 				y = 0.5,
 				gp = gpar(
@@ -458,7 +564,7 @@ draw.pairwise.venn <- function(
 				);
 			grob.list <- gList(grob.list, tmp);
 			tmp <- textGrob(
-				label = cross.area,
+				label = wrapLab(cross.area),
 				x = x.centre.1 + (d - ifelse(!inverted, r2, r1)) + (r1 + r2 - d) / 2,
 				y = 0.5,
 				gp = gpar(
@@ -481,7 +587,8 @@ draw.pairwise.venn <- function(
 			cat.pos.2 <- find.cat.pos(area.2.pos, 0.5, cat.pos[2], cat.dist[2]);
 			}
 		else {
-			stop("Invalid value for 'cat.default.pos', should be either 'outer' or 'text'");
+			flog.error("Invalid value for 'cat.default.pos', should be either 'outer' or 'text'",name="VennDiagramLogger")
+stop("Invalid value for 'cat.default.pos', should be either 'outer' or 'text'");
 			}
 
 		# draw category labels
@@ -593,7 +700,7 @@ draw.pairwise.venn <- function(
 		# draw area labels in appropriate locations
 		area.2.pos <- 0.5 - offset * (r1 - r2);
 		tmp <- textGrob(
-			label = area2,
+			label = wrapLab(area2),
 			x = area.2.pos,
 			y = 0.5,
 			gp = gpar(
@@ -608,7 +715,7 @@ draw.pairwise.venn <- function(
 		if (!ext.text | !scaled) {
 			area.1.pos <- (1 + r1 + r2 - offset * (r1 - r2)) / 2;
 			tmp <- textGrob(
-				label = area1 - area2,
+				label = wrapLab(area1 - area2),
 				x = area.1.pos,
 				y = 0.5,
 				gp = gpar(
@@ -629,7 +736,7 @@ draw.pairwise.venn <- function(
 				area.1.xpos <- area.pos$x;
 				area.1.ypos <- area.pos$y;
 				tmp <- textGrob(
-					label = area1 - area2,
+					label = wrapLab(area1 - area2),
 					x = area.1.xpos,
 					y = area.1.ypos,
 					gp = gpar(
@@ -654,7 +761,7 @@ draw.pairwise.venn <- function(
 			else {
 				area.1.pos <- (1 + r1 + r2 - offset * (r1 - r2)) / 2;
 				tmp <- textGrob(
-					label = area1 - area2,
+					label = wrapLab(area1 - area2),
 					x = area.1.pos,
 					y = 0.5,
 					gp = gpar(
@@ -678,7 +785,8 @@ draw.pairwise.venn <- function(
 			cat.pos.2 <- find.cat.pos(area.2.pos, 0.5, cat.pos[2], cat.dist[2]);
 			}
 		else {
-			stop("Invalid value for 'cat.default.pos', should be either 'outer' or 'text'");
+			flog.error("Invalid value for 'cat.default.pos', should be either 'outer' or 'text'",name="VennDiagramLogger")
+stop("Invalid value for 'cat.default.pos', should be either 'outer' or 'text'");
 			}
 
 		# add category labels
@@ -745,7 +853,7 @@ draw.pairwise.venn <- function(
 		# draw labels on the same circle
 		area.1.pos <- 0.46;
 		tmp <- textGrob(
-			label = area1,
+			label = wrapLab(area1),
 			x = area.1.pos,
 			y = 0.5,
 			gp = gpar(
@@ -759,7 +867,7 @@ draw.pairwise.venn <- function(
 
 		area.2.pos <- 0.54;
 		tmp <- textGrob(
-			label = area2,
+			label = wrapLab(area2),
 			x = area.2.pos,
 			y = 0.5,
 			gp = gpar(
@@ -793,7 +901,8 @@ draw.pairwise.venn <- function(
 			cat.pos.2 <- find.cat.pos(area.2.pos, 0.5, cat.pos[2], cat.dist[2]);
 			}
 		else {
-			stop("Invalid value for 'cat.default.pos', should be either 'outer' or 'text'");
+			flog.error("Invalid value for 'cat.default.pos', should be either 'outer' or 'text'",name="VennDiagramLogger")
+stop("Invalid value for 'cat.default.pos', should be either 'outer' or 'text'");
 			}
 
 		tmp <- textGrob(
@@ -893,7 +1002,7 @@ draw.pairwise.venn <- function(
 		# draw area and category labels
 		area.1.pos <- x.centre.1;
 		tmp <- textGrob(
-			label = area1,
+			label = wrapLab(area1),
 			x = area.1.pos,
 			y = 0.5,
 			gp = gpar(
@@ -907,7 +1016,7 @@ draw.pairwise.venn <- function(
 
 		area.2.pos <- x.centre.2;
 		tmp <- textGrob(
-			label = area2,
+			label = wrapLab(area2),
 			x = area.2.pos,
 			y = 0.5,
 			gp = gpar(
@@ -928,7 +1037,8 @@ draw.pairwise.venn <- function(
 			cat.pos.2 <- find.cat.pos(area.2.pos, 0.5, cat.pos[2], cat.dist[2]);
 			}
 		else {
-			stop("Invalid value for 'cat.default.pos', should be either 'outer' or 'text'");
+			flog.error("Invalid value for 'cat.default.pos', should be either 'outer' or 'text'",name="VennDiagramLogger")
+stop("Invalid value for 'cat.default.pos', should be either 'outer' or 'text'");
 			}
 
 		tmp <- textGrob(
@@ -1018,7 +1128,7 @@ draw.pairwise.venn <- function(
 		grob.list <- gList(grob.list, tmp);
 
 		tmp <- textGrob(
-			label = area1 - cross.area,
+			label = wrapLab(area1 - cross.area),
 			x = 0.3,
 			y = 0.5,
 			gp = gpar(
@@ -1031,7 +1141,7 @@ draw.pairwise.venn <- function(
 		grob.list <- gList(grob.list, tmp);
 
 		tmp <- textGrob(
-			label = area2 - cross.area,
+			label = wrapLab(area2 - cross.area),
 			x = 0.7,
 			y = 0.5,
 			gp = gpar(
@@ -1044,7 +1154,7 @@ draw.pairwise.venn <- function(
 		grob.list <- gList(grob.list, tmp);
 
 		tmp <- textGrob(
-			label = cross.area,
+			label = wrapLab(cross.area),
 			x = 0.5,
 			y = 0.5,
 			gp = gpar(
@@ -1065,7 +1175,8 @@ draw.pairwise.venn <- function(
 			cat.pos.2 <- find.cat.pos(0.7, 0.5, cat.pos[2], cat.dist[2]);
 			}
 		else {
-			stop("Invalid value for 'cat.default.pos', should be either 'outer' or 'text'");
+			flog.error("Invalid value for 'cat.default.pos', should be either 'outer' or 'text'",name="VennDiagramLogger")
+stop("Invalid value for 'cat.default.pos', should be either 'outer' or 'text'");
 			}
 
 		tmp <- textGrob(
