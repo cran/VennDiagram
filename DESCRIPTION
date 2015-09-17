@@ -1,5 +1,5 @@
 Package: VennDiagram
-Version: 1.6.15
+Version: 1.6.16
 Type: Package
 Title: Generate High-Resolution Venn and Euler Plots
 Date: 2015-08-28
@@ -11,6 +11,6 @@ License: GPL-2
 LazyLoad: yes
 Suggests: testthat
 NeedsCompilation: no
-Packaged: 2015-08-28 18:42:05 UTC; clalansingh
+Packaged: 2015-09-10 20:59:45 UTC; clalansingh
 Repository: CRAN
-Date/Publication: 2015-09-09 09:17:00
+Date/Publication: 2015-09-17 07:51:02
