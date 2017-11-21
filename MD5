@@ -1,11 +1,11 @@
-f323c67f604721f349cee8e01a281f72 *DESCRIPTION
+6e6f5bb37f89c0fb04a0ecc5fdf2f175 *DESCRIPTION
 6b6b355b2c0fbc837adfb57c0ab31639 *NAMESPACE
-b924aec8010a66604a213c1cb638f1d2 *NEWS
+d74a4344a2c21de68b4f35229fc4129b *NEWS
 7d07e26bc6d9226b7763d02c00f28d4f *R/add.title.R
 f023207e1e2c0fa75dccaa14ba91141d *R/adjust.venn.R
 48e2785326d4ea72a047efdfb5166a4d *R/decide.special.case.R
 035fefabf56d070bfb5844a890a877d2 *R/draw.pairwise.venn.R
-dbcb5f8bc8db107c3b814de0bb338b7c *R/draw.quad.venn.R
+1766472a8b0f57e1f79211606ca63b7b *R/draw.quad.venn.R
 278c885eba46ba968f703a1ffd5afe3b *R/draw.quintuple.venn.R
 749c5f9a801f6d2c7187e9d3741c6c75 *R/draw.single.venn.R
 b8b14cf2772920bbfc4a1eb522c33993 *R/draw.sp.case.R
@@ -23,7 +23,7 @@ f9e10f1ec7d5fc723e2a73fbe2ef61ad *R/partitionText.R
 dc098d80dbacc74292a1d9829136f529 *R/rotate.R
 dc85db2cf1cae8d857114194bae75a2e *R/rotate.sp.R
 f95ef3429ff4605c5e1ea9583ff04451 *R/rotate.venn.degrees.R
-44a547c02b2339218cf69efd6af5a569 *R/venn.diagram.R
+fa4e0f511ca70e4434c6c5ced5598590 *R/venn.diagram.R
 c566b78b4e913495ac8ec76a43c9e967 *TODO
 d40053b44527933778d4cf635dc31367 *data/plotsFive.rda
 c598318113da985ae0f52a8bcf24b2d5 *data/plotsFour.rda
@@ -53,9 +53,8 @@ eca748b7e5d16eb4d02d5e0768d42d20 *man/draw.single.venn.Rd
 b2d23acbe812200c17c4cde074297ab2 *man/draw.triple.venn.Rd
 d21801e738df025dd1381df1370f0914 *man/get.venn.partitions.Rd
 e5af72d5b1a7bb6d53992fd5a4c11c68 *man/make.truth.table.Rd
-a926c6c138c7a97f17f3ebb3a58d2053 *man/venn.diagram.Rd
+01d828e796f7347f01e5e44f21aac583 *man/venn.diagram.Rd
 1d67a318b8c15143a35988cf5110333b *man/venn.plot.Rd
-ebc6c12a50cef9a1019929e1f2fe6ec7 *tests/Rplots.pdf
 404d73973eccc85a7a4c25c7eb2cb428 *tests/test-all.R
 00664a20ce741fe09e05a4387cc37030 *tests/testthat/Rplots.pdf
 d40053b44527933778d4cf635dc31367 *tests/testthat/data/plotsFive.rda
