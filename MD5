@@ -1,10 +1,10 @@
-0b49ff48629ebfffb7d573fc6e47f26e *DESCRIPTION
+71f0c143a64e60abd4ef19a5fa0c53e5 *DESCRIPTION
 6b6b355b2c0fbc837adfb57c0ab31639 *NAMESPACE
-c7ad96248485649606ceb154a8311cb9 *NEWS
+abede8cb44a3b5164e0c5cd204924aa1 *NEWS
 7d07e26bc6d9226b7763d02c00f28d4f *R/add.title.R
 f023207e1e2c0fa75dccaa14ba91141d *R/adjust.venn.R
 48e2785326d4ea72a047efdfb5166a4d *R/decide.special.case.R
-f5af431b2cc39d6e1239310d01f6a9d5 *R/draw.pairwise.venn.R
+b79886bdaec33823786dce49571ac31c *R/draw.pairwise.venn.R
 931da5ddee55c1c9fd2d7ee68b80dc93 *R/draw.quad.venn.R
 9181e4a5cac47a545b03f76bd80d914d *R/draw.quintuple.venn.R
 749c5f9a801f6d2c7187e9d3741c6c75 *R/draw.single.venn.R

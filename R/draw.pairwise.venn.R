@@ -516,10 +516,10 @@ stop(paste0("Unknown value passed to cex.prop: ", cex.prop))
 					x = cross.area.xpos,
 					y = cross.area.ypos,
 					gp = gpar(
-						col = label.col[1],
-						cex = cex[1],
-						fontface = fontface[1],
-						fontfamily = fontfamily[1]
+						col = label.col[2],
+						cex = cex[2],
+						fontface = fontface[2],
+						fontfamily = fontfamily[2]
 						)
 					);
 				grob.list <- gList(grob.list, tmp);
@@ -528,7 +528,7 @@ stop(paste0("Unknown value passed to cex.prop: ", cex.prop))
 					x = c(cross.area.pos + ext.length[2] * (cross.area.xpos - cross.area.pos), cross.area.pos),
 					y = c(0.5 + ext.length[2] * (cross.area.ypos - 0.5), 0.5),
 					gp = gpar(
-						col = label.col[1],
+						col = label.col[2],
 						lwd = ext.line.lwd,
 						lty = ext.line.lty
 						)
