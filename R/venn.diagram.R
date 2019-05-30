@@ -485,6 +485,14 @@ stop('Invalid size of input object');
    				);
 			}
 		
+		# PDF image type specified
+		else if('pdf' == imagetype) {
+			pdf(
+				file = filename,
+				height = height,
+				width = width
+			);
+		}
 		# Invalid imagetype specified
 		else {
 			flog.error("You have misspelled your 'imagetype', please try again",name="VennDiagramLogger")
