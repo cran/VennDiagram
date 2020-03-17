@@ -24,7 +24,7 @@ venn.diagram(x, filename, height = 3000, width = 3000, resolution =
   \item{height}{Integer giving the height of the output figure in units}
   \item{width}{Integer giving the width of the output figure in units}
   \item{resolution}{Resolution of the final figure in DPI}
-  \item{imagetype}{Specification of the image format (e.g. tiff, png or svg)}
+  \item{imagetype}{Specification of the image format: tiff, png, svg, pdf}
   \item{units}{Size-units to use for the final figure}
   \item{compression}{What compression algorithm should be applied to the final tiff}
   \item{na}{Missing value handling method: "none", "stop", "remove"}

@@ -23,7 +23,7 @@ export(
 	calculate.overlap,
 	get.venn.partitions
 	)
-importFrom("grDevices", "dev.off", "png", "svg", "tiff")
+importFrom("grDevices", "dev.off", "png", "svg", "tiff", "pdf")
 importFrom("stats", "aggregate", "setNames", "phyper")
 importFrom("utils", "capture.output", "combn")
 import(grid,
