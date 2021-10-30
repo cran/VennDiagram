@@ -2,13 +2,13 @@
 library(testthat)
 
 #Get the testing function applied to compare the two venn diagram objects
-source("testFunction.R");
+source('testFunction.R');
 
 #load in the reference plot data
-load("data/plotsFive.rda");
+load('data/plotsFive.rda');
 
 #Suppress plotting for sanity
-options(device=pdf());
+options(device=pdf(file = NULL));
 
 #initialize the testing list of venn diagrams
 venn.test <- list();
@@ -47,9 +47,9 @@ venn.test <- c(venn.test,list(draw.quintuple.venn(
     n1345 = 58,
     n2345 = 57,
     n12345 = 31,
-    category = c("A", "B", "C", "D", "E"),
-    fill = c("dodgerblue", "goldenrod1", "darkorange1", "seagreen3", "orchid3"),
-    cat.col = c("dodgerblue", "goldenrod1", "darkorange1", "seagreen3", "orchid3"),
+    category = c('A', 'B', 'C', 'D', 'E'),
+    fill = c('dodgerblue', 'goldenrod1', 'darkorange1', 'seagreen3', 'orchid3'),
+    cat.col = c('dodgerblue', 'goldenrod1', 'darkorange1', 'seagreen3', 'orchid3'),
     cat.cex = 2,
     margin = 0.05,
     cex = c(1.5, 1.5, 1.5, 1.5, 1.5, 1, 0.8, 1, 0.8, 1, 0.8, 1, 0.8, 1, 0.8, 
@@ -63,7 +63,7 @@ testNames <- c('colour');
 
 for(i in 1:length(venn.test)){
 	for(j in 1:length(venn.test[[i]])){
-		if(class(venn.test[[i]][[j]])[1] == "polygon"){
+		if(class(venn.test[[i]][[j]])[1] == 'polygon'){
 			venn.test[[i]][[j]]$x <- NULL;
 			venn.test[[i]][[j]]$y <- NULL;
 		}
@@ -71,14 +71,18 @@ for(i in 1:length(venn.test)){
 }
 
 #Loop over all of the test cases
-for(i in 1:length(venn.test)){
-	test_that(paste("Case",testNames[i],"of five categories"),
-	{
-		for(j in 1:length(venn.test[[i]])){
-			expect_that(venn.test[[i]][[j]],is_identical_without_name(venn.plot[[i]][[j]],maxLength=3));
-		}
-	})
-}
-
-#Reaches here only if error is not thrown beforehand
-print("Five category tests complete. No discrepancies found");
+for (i in 1:length(venn.test)) {
+	test_that(
+	    paste('Case',testNames[i],'of five categories'), {
+    		for (j in 1:length(venn.test[[i]])) {
+    			expect_true(
+    			    is_identical_without_name(
+    			        venn.test[[i]][[j]],
+    			        venn.plot[[i]][[j]],
+    			        maxLength=3
+    			        )
+    			    );
+    		    }
+	        }
+	    );
+    }

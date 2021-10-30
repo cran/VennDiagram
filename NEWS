@@ -1,3 +1,23 @@
+VennDiagram 1.7.0 2021-10-18 (Dan Knight)
+---------------------------------------------------------------------------------------------------
+MINOR UPDATES
+* Added option to disable .log file output and print to console instead
+* Updated coding style to current lab standards
+    - Changed double quotes to single quotes
+
+BUG
+* Changed example output to avoid creating new image and log files in the package directory
+
+VennDiagram 1.6.22 2018-08-13 (Christopher Lalansingh)
+---------------------------------------------------------------------------------------------------
+MINOR UPDATES
+* A table in the latex documentation was poorly formatted and extended beyond the width of the page, now resolved
+
+VennDiagram 1.6.21 2018-06-04 (Jeffrey Green)
+---------------------------------------------------------------------------------------------------
+MINOR UPDATES
+* fixed bug with pairwise where inverted would mess up labels
+
 VennDiagram 1.6.20 2018-03-28 (Jeffrey Green)
 ---------------------------------------------------------------------------------------------------
 MINOR UPDATES

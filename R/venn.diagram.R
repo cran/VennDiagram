@@ -13,6 +13,7 @@
 venn.diagram <- function(
 	x,
 	filename,
+	disable.logging = FALSE,
 	height = 3000,
 	width = 3000,
 	resolution = 500,
@@ -36,7 +37,7 @@ venn.diagram <- function(
 	sub.just = c(0.5, 1),
 	category.names = names(x),
 	force.unique = TRUE,
-	print.mode = "raw",
+	print.mode = 'raw',
 	sigdigs = 3,
 	direct.area = FALSE,
 	area.vector = 0,
@@ -47,15 +48,17 @@ venn.diagram <- function(
 	) {
 	
 	#Create a string to capture the date and the time of day
-	time.string = gsub(":", "-", gsub(" ", "_", as.character(Sys.time())))
+	time.string = gsub(':', '-', gsub(' ', '_', as.character(Sys.time())))
 	
 	#Initialize the logger to output to file
-	if(!is.null(filename)){
-		flog.appender(appender.file(paste0(filename,".",time.string,".log")), name='VennDiagramLogger')
-	}
-	else{
-		flog.appender(appender.file(paste0("VennDiagram",time.string,".log")), name='VennDiagramLogger')
-	}
+	if (disable.logging) {
+	    flog.appender(appender.console(), name = 'VennDiagramLogger');
+    	} else {
+    	    flog.appender(appender.file(
+    	        paste0(if (!is.null(filename)) filename else 'VennDiagram', '.', time.string, '.log')),
+    	        name = 'VennDiagramLogger'
+    	    );
+    	}
 	
 	#Log the parameters the function was called with
 	out.list = as.list(sys.call())
@@ -193,7 +196,7 @@ venn.diagram <- function(
 			for (i in 1:length(x)) {
 				# stop if there are any NAs in this vector
 				if (any(is.na(x[[i]]))) {
-					flog.error('NAs in dataset', call. = FALSE,name="VennDiagramLogger")
+					flog.error('NAs in dataset', call. = FALSE,name='VennDiagramLogger')
 stop('NAs in dataset', call. = FALSE);
 					}
 				}
@@ -202,13 +205,13 @@ stop('NAs in dataset', call. = FALSE);
 			for (i in 1:length(x)) { x[[i]] <- x[[i]][!is.na(x[[i]])]; }
 			}
 		else {
-			flog.error('Invalid na option: valid options are "none", "stop", and "remove"',name="VennDiagramLogger")
+			flog.error('Invalid na option: valid options are "none", "stop", and "remove"',name='VennDiagramLogger')
 stop('Invalid na option: valid options are "none", "stop", and "remove"');
 			}
 
 		# check the length of the given list
 		if (0 == length(x) | length(x) > 5) {
-			flog.error('Incorrect number of elements.', call. = FALSE,name="VennDiagramLogger")
+			flog.error('Incorrect number of elements.', call. = FALSE,name='VennDiagramLogger')
 stop('Incorrect number of elements.', call. = FALSE);
 			}
 
@@ -398,7 +401,7 @@ stop('Incorrect number of elements.', call. = FALSE);
 
 		# this should never happen because of the previous check
 		else {
-			flog.error('Invalid size of input object',name="VennDiagramLogger")
+			flog.error('Invalid size of input object',name='VennDiagramLogger')
 stop('Invalid size of input object');
 			}
 		}
@@ -409,9 +412,9 @@ stop('Invalid size of input object');
 	if (length(x) == 2 & !is.null(total.population) & hyper.test){
 		val.p = calculate.overlap.and.pvalue(x[[1]],x[[2]],total.population, lower.tail = lower.tail);
 		if(is.null(sub)){
-			sub = paste0("p = ",signif(val.p[3],digits=2))
+			sub = paste0('p = ',signif(val.p[3],digits=2))
 		}else{
-			sub = paste0(sub,", p = ",signif(val.p[3],digits=2))
+			sub = paste0(sub,', p = ',signif(val.p[3],digits=2))
 		}
 	}
 	
@@ -487,8 +490,8 @@ stop('Invalid size of input object');
 		
 		# Invalid imagetype specified
 		else {
-			flog.error("You have misspelled your 'imagetype', please try again",name="VennDiagramLogger")
-stop("You have misspelled your 'imagetype', please try again");
+			flog.error('You have misspelled your "imagetype", please try again',name='VennDiagramLogger')
+stop('You have misspelled your "imagetype", please try again');
 			}
 
 		grid.draw(grob.list);
@@ -714,10 +717,9 @@ calculate.overlap <- function(x) {
 			a1 = a1
 			);
 		}
-
 	# this should never happen because of the previous check
 	else {
-		flog.error('Invalid size of input object',name="VennDiagramLogger")
+		flog.error('Invalid size of input object',name='VennDiagramLogger')
 stop('Invalid size of input object');
 		}
 	}
